@@ -76,22 +76,22 @@ def quantize_model_pipeline(
 ) -> PreTrainedModel:
 
     template = LLMTemplate(
-        model_type="qwen3_5",
+        model_type="qwen3_6",
         kv_layers_name=["*k_proj", "*v_proj"],
         q_layer_name="*q_proj",
         exclude_layers_name=["lm_head"],
     )
 
     LLMTemplate.register_template(template)
-    template = LLMTemplate.get("qwen3_5")
+    template = LLMTemplate.get("qwen3_6")
     quant_config = template.get_config(scheme="fp8", kv_cache_scheme="fp8")
 
     quantizer = ModelQuantizer(quant_config, multi_device=True)
     quantized_model: PreTrainedModel = quantizer.quantize_model(model, calib_dataloader)
 
     print("[INFO] Export Quant Model.")
-    export_safetensors(model=quantized_model, output_dir="./Qwen3.5-4B_fp8")
-    tokenizer.save_pretrained("./Qwen3.5-4B_fp8")
+    export_safetensors(model=quantized_model, output_dir="./Qwen3.6-27B_fp8")
+    tokenizer.save_pretrained("./Qwen3.6-27B_fp8")
 
     return quantized_model
 
@@ -125,7 +125,7 @@ def ppl_eval(
     return ppl
 
 def run_quark_fp8_example() -> None:
-    model_id = "Qwen/Qwen3.5-4B"
+    model_id = "Qwen/Qwen3.6-27B"
     batch_size, seq_len = 4, 512
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
