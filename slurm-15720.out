@@ -1,372 +1,0 @@
-[aiter] import [module_aiter_core] under /shared/prerelease/home/cambridge/han/Projects/quark-quantisation/.venv/lib/python3.12/site-packages/aiter/jit/module_aiter_core.so
-[32m
-[QUARK-INFO]: C++ kernel loading check start.[0m
-[32m
-[QUARK-INFO]: Compiling stable ABI hw_emulation extension via JIT. First-time compilation may take a few minutes...[0m
-[92mSuccessfully preprocessed all matching files.[0m
-[32m
-[QUARK-INFO]: Stable ABI hw_emulation JIT compilation complete.[0m
-[32m
-[QUARK-INFO]: C++ kernel loading/compilation is complete. Total time: 1.3505 seconds[0m
-[transformers] The fast path is not available because one of the required library is not installed. Falling back to torch implementation. To install follow https://github.com/fla-org/flash-linear-attention#installation and https://github.com/Dao-AILab/causal-conv1d
-[INFO] Loading model: Qwen/Qwen3.5-4B
-Loading weights:   0%|          | 0/723 [00:00<?, ?it/s]Loading weights:   4%|▍         | 31/723 [00:00<00:02, 263.77it/s]Loading weights:   8%|▊         | 60/723 [00:00<00:02, 248.01it/s]Loading weights:  13%|█▎        | 96/723 [00:00<00:02, 276.05it/s]Loading weights:  20%|██        | 146/723 [00:00<00:01, 348.69it/s]Loading weights:  25%|██▌       | 182/723 [00:00<00:01, 336.26it/s]Loading weights:  30%|██▉       | 216/723 [00:00<00:01, 301.68it/s]Loading weights:  35%|███▌      | 254/723 [00:00<00:01, 316.26it/s]Loading weights:  40%|███▉      | 287/723 [00:00<00:01, 315.34it/s]Loading weights:  45%|████▍     | 324/723 [00:01<00:01, 307.21it/s]Loading weights:  50%|████▉     | 359/723 [00:01<00:01, 317.28it/s]Loading weights:  54%|█████▍    | 394/723 [00:01<00:01, 316.66it/s]Loading weights:  59%|█████▉    | 426/723 [00:01<00:00, 311.34it/s]Loading weights:  66%|██████▌   | 475/723 [00:01<00:00, 353.96it/s]Loading weights:  75%|███████▌  | 544/723 [00:01<00:00, 446.23it/s]Loading weights:  82%|████████▏ | 594/723 [00:01<00:00, 450.35it/s]Loading weights:  93%|█████████▎| 670/723 [00:01<00:00, 528.84it/s]Loading weights: 100%|██████████| 723/723 [00:01<00:00, 389.05it/s]
-[transformers] Token indices sequence length is longer than the specified maximum sequence length for this model (297193 > 512). Running this sequence through the model will result in indexing errors
-Initializing tokenizer from Qwen/Qwen3.5-4B
-  0%|          | 0/145 [00:00<?, ?it/s]  1%|          | 1/145 [00:32<1:18:59, 32.91s/it]  1%|▏         | 2/145 [00:37<38:10, 16.02s/it]    2%|▏         | 3/145 [00:41<25:09, 10.63s/it]  3%|▎         | 4/145 [00:45<19:03,  8.11s/it]  3%|▎         | 5/145 [00:49<15:39,  6.71s/it]  4%|▍         | 6/145 [00:54<13:35,  5.87s/it]  5%|▍         | 7/145 [00:58<12:16,  5.34s/it]  6%|▌         | 8/145 [01:02<11:22,  4.98s/it]  6%|▌         | 9/145 [01:06<10:45,  4.75s/it]  7%|▋         | 10/145 [01:11<10:22,  4.61s/it]  8%|▊         | 11/145 [01:15<10:05,  4.52s/it]  8%|▊         | 12/145 [01:19<09:52,  4.46s/it]  9%|▉         | 13/145 [01:23<09:41,  4.41s/it] 10%|▉         | 14/145 [01:28<09:33,  4.37s/it] 10%|█         | 15/145 [01:32<09:25,  4.35s/it] 11%|█         | 16/145 [01:36<09:18,  4.33s/it] 12%|█▏        | 17/145 [01:41<09:12,  4.32s/it] 12%|█▏        | 18/145 [01:45<09:06,  4.31s/it] 13%|█▎        | 19/145 [01:49<09:00,  4.29s/it] 14%|█▍        | 20/145 [01:53<08:53,  4.27s/it] 14%|█▍        | 21/145 [01:58<08:48,  4.26s/it] 15%|█▌        | 22/145 [02:02<08:43,  4.26s/it] 16%|█▌        | 23/145 [02:06<08:39,  4.25s/it] 17%|█▋        | 24/145 [02:10<08:34,  4.25s/it] 17%|█▋        | 25/145 [02:15<08:31,  4.26s/it] 18%|█▊        | 26/145 [02:19<08:26,  4.26s/it] 19%|█▊        | 27/145 [02:23<08:22,  4.26s/it] 19%|█▉        | 28/145 [02:27<08:17,  4.25s/it] 20%|██        | 29/145 [02:32<08:13,  4.25s/it] 21%|██        | 30/145 [02:36<08:09,  4.25s/it] 21%|██▏       | 31/145 [02:40<08:04,  4.25s/it] 22%|██▏       | 32/145 [02:44<08:00,  4.25s/it] 23%|██▎       | 33/145 [02:49<07:56,  4.25s/it] 23%|██▎       | 34/145 [02:53<07:51,  4.25s/it] 24%|██▍       | 35/145 [02:57<07:48,  4.26s/it] 25%|██▍       | 36/145 [03:01<07:45,  4.27s/it] 26%|██▌       | 37/145 [03:06<07:42,  4.28s/it] 26%|██▌       | 38/145 [03:10<07:38,  4.29s/it] 27%|██▋       | 39/145 [03:14<07:35,  4.30s/it] 28%|██▊       | 40/145 [03:19<07:31,  4.30s/it] 28%|██▊       | 41/145 [03:23<07:27,  4.30s/it] 29%|██▉       | 42/145 [03:27<07:23,  4.30s/it] 30%|██▉       | 43/145 [03:32<07:17,  4.29s/it] 30%|███       | 44/145 [03:36<07:11,  4.27s/it] 31%|███       | 45/145 [03:40<07:06,  4.27s/it] 32%|███▏      | 46/145 [03:44<07:02,  4.26s/it] 32%|███▏      | 47/145 [03:49<06:57,  4.26s/it] 33%|███▎      | 48/145 [03:53<06:54,  4.28s/it] 34%|███▍      | 49/145 [03:57<06:51,  4.28s/it] 34%|███▍      | 50/145 [04:01<06:47,  4.29s/it] 35%|███▌      | 51/145 [04:06<06:43,  4.29s/it] 36%|███▌      | 52/145 [04:10<06:39,  4.30s/it] 37%|███▋      | 53/145 [04:14<06:35,  4.30s/it] 37%|███▋      | 54/145 [04:19<06:32,  4.31s/it] 38%|███▊      | 55/145 [04:23<06:28,  4.31s/it] 39%|███▊      | 56/145 [04:27<06:23,  4.31s/it] 39%|███▉      | 57/145 [04:32<06:19,  4.31s/it] 40%|████      | 58/145 [04:36<06:15,  4.31s/it] 41%|████      | 59/145 [04:40<06:10,  4.31s/it] 41%|████▏     | 60/145 [04:45<06:06,  4.31s/it] 42%|████▏     | 61/145 [04:49<06:02,  4.31s/it] 43%|████▎     | 62/145 [04:53<05:56,  4.30s/it] 43%|████▎     | 63/145 [04:57<05:51,  4.29s/it] 44%|████▍     | 64/145 [05:02<05:47,  4.29s/it] 45%|████▍     | 65/145 [05:06<05:42,  4.29s/it] 46%|████▌     | 66/145 [05:10<05:38,  4.29s/it] 46%|████▌     | 67/145 [05:15<05:34,  4.29s/it] 47%|████▋     | 68/145 [05:19<05:30,  4.29s/it] 48%|████▊     | 69/145 [05:23<05:26,  4.30s/it] 48%|████▊     | 70/145 [05:28<05:21,  4.29s/it] 49%|████▉     | 71/145 [05:32<05:16,  4.28s/it] 50%|████▉     | 72/145 [05:36<05:12,  4.28s/it] 50%|█████     | 73/145 [05:40<05:07,  4.27s/it] 51%|█████     | 74/145 [05:45<05:03,  4.27s/it] 52%|█████▏    | 75/145 [05:49<04:59,  4.28s/it] 52%|█████▏    | 76/145 [05:53<04:55,  4.28s/it] 53%|█████▎    | 77/145 [05:57<04:51,  4.29s/it] 54%|█████▍    | 78/145 [06:02<04:47,  4.29s/it] 54%|█████▍    | 79/145 [06:06<04:44,  4.31s/it] 55%|█████▌    | 80/145 [06:10<04:40,  4.31s/it] 56%|█████▌    | 81/145 [06:15<04:35,  4.31s/it] 57%|█████▋    | 82/145 [06:19<04:31,  4.31s/it] 57%|█████▋    | 83/145 [06:23<04:26,  4.30s/it] 58%|█████▊    | 84/145 [06:28<04:23,  4.32s/it] 59%|█████▊    | 85/145 [06:32<04:18,  4.31s/it] 59%|█████▉    | 86/145 [06:36<04:14,  4.31s/it] 60%|██████    | 87/145 [06:41<04:09,  4.31s/it] 61%|██████    | 88/145 [06:45<04:06,  4.32s/it] 61%|██████▏   | 89/145 [06:49<04:02,  4.33s/it] 62%|██████▏   | 90/145 [06:54<03:57,  4.32s/it] 63%|██████▎   | 91/145 [06:58<03:53,  4.32s/it] 63%|██████▎   | 92/145 [07:02<03:48,  4.32s/it] 64%|██████▍   | 93/145 [07:07<03:44,  4.32s/it] 65%|██████▍   | 94/145 [07:11<03:40,  4.32s/it] 66%|██████▌   | 95/145 [07:15<03:35,  4.32s/it] 66%|██████▌   | 96/145 [07:19<03:31,  4.32s/it] 67%|██████▋   | 97/145 [07:24<03:26,  4.31s/it] 68%|██████▊   | 98/145 [07:28<03:22,  4.31s/it] 68%|██████▊   | 99/145 [07:32<03:18,  4.31s/it] 69%|██████▉   | 100/145 [07:37<03:13,  4.30s/it] 70%|██████▉   | 101/145 [07:41<03:09,  4.31s/it] 70%|███████   | 102/145 [07:45<03:05,  4.30s/it] 71%|███████   | 103/145 [07:50<03:00,  4.30s/it] 72%|███████▏  | 104/145 [07:54<02:56,  4.30s/it] 72%|███████▏  | 105/145 [07:58<02:51,  4.30s/it] 73%|███████▎  | 106/145 [08:02<02:47,  4.29s/it] 74%|███████▍  | 107/145 [08:07<02:42,  4.27s/it] 74%|███████▍  | 108/145 [08:11<02:37,  4.27s/it] 75%|███████▌  | 109/145 [08:15<02:33,  4.26s/it] 76%|███████▌  | 110/145 [08:19<02:28,  4.26s/it] 77%|███████▋  | 111/145 [08:24<02:24,  4.25s/it] 77%|███████▋  | 112/145 [08:28<02:20,  4.25s/it] 78%|███████▊  | 113/145 [08:32<02:16,  4.25s/it] 79%|███████▊  | 114/145 [08:36<02:11,  4.25s/it] 79%|███████▉  | 115/145 [08:41<02:07,  4.26s/it] 80%|████████  | 116/145 [08:45<02:04,  4.28s/it] 81%|████████  | 117/145 [08:49<02:00,  4.29s/it] 81%|████████▏ | 118/145 [08:54<01:56,  4.30s/it] 82%|████████▏ | 119/145 [08:58<01:51,  4.30s/it] 83%|████████▎ | 120/145 [09:02<01:47,  4.28s/it] 83%|████████▎ | 121/145 [09:06<01:42,  4.27s/it] 84%|████████▍ | 122/145 [09:11<01:38,  4.27s/it] 85%|████████▍ | 123/145 [09:15<01:33,  4.27s/it] 86%|████████▌ | 124/145 [09:19<01:29,  4.28s/it] 86%|████████▌ | 125/145 [09:24<01:25,  4.28s/it] 87%|████████▋ | 126/145 [09:28<01:21,  4.28s/it] 88%|████████▊ | 127/145 [09:32<01:17,  4.28s/it] 88%|████████▊ | 128/145 [09:36<01:12,  4.29s/it] 89%|████████▉ | 129/145 [09:41<01:08,  4.29s/it] 90%|████████▉ | 130/145 [09:45<01:04,  4.27s/it] 90%|█████████ | 131/145 [09:49<00:59,  4.26s/it] 91%|█████████ | 132/145 [09:53<00:55,  4.26s/it] 92%|█████████▏| 133/145 [09:58<00:51,  4.25s/it] 92%|█████████▏| 134/145 [10:02<00:46,  4.25s/it] 93%|█████████▎| 135/145 [10:06<00:42,  4.25s/it] 94%|█████████▍| 136/145 [10:10<00:38,  4.25s/it] 94%|█████████▍| 137/145 [10:15<00:33,  4.25s/it] 95%|█████████▌| 138/145 [10:19<00:29,  4.25s/it] 96%|█████████▌| 139/145 [10:23<00:25,  4.24s/it] 97%|█████████▋| 140/145 [10:27<00:21,  4.24s/it] 97%|█████████▋| 141/145 [10:32<00:16,  4.25s/it] 98%|█████████▊| 142/145 [10:36<00:12,  4.26s/it] 99%|█████████▊| 143/145 [10:40<00:08,  4.27s/it] 99%|█████████▉| 144/145 [10:45<00:04,  4.28s/it]100%|██████████| 145/145 [10:49<00:00,  4.28s/it]100%|██████████| 145/145 [10:49<00:00,  4.48s/it]
-Repo card metadata block was not found. Setting CardData to empty.
-[33m
-[QUARK-WARNING]: Expanding exclude pattern ['lm_head'] to ['lm_head', 'lm_head.*'][0m
-[32m
-[QUARK-INFO]: Using weight quantization and activation static quantization.[0m
-[32m
-[QUARK-INFO]: Quantizing with the quantization configuration:
-QConfig(
-    global_quant_config=QLayerConfig(
-        input_tensors=QTensorConfig(
-            dtype=Dtype.fp8_e4m3,
-            observer_cls=<class 'quark.torch.quantization.observer.observer.PerTensorMinMaxObserver'>,
-            is_dynamic=False,
-            qscheme=QSchemeType.per_tensor,
-            ch_axis=None,
-            group_size=None,
-            block_size=None,
-            symmetric=True,
-            round_method=RoundType.half_even,
-            scale_type=ScaleType.float,
-            scale_format=None,
-            scale_calculation_mode=None,
-            qat_spec=None,
-            mx_element_dtype=None,
-            zero_point_type=ZeroPointType.int32,
-            is_scale_quant=False,
-            enable_buffer_reuse=False,
-            max_input_numel=4194304,
-        ),
-        output_tensors=None,
-        weight=QTensorConfig(
-            dtype=Dtype.fp8_e4m3,
-            observer_cls=<class 'quark.torch.quantization.observer.observer.PerTensorMinMaxObserver'>,
-            is_dynamic=False,
-            qscheme=QSchemeType.per_tensor,
-            ch_axis=None,
-            group_size=None,
-            block_size=None,
-            symmetric=True,
-            round_method=RoundType.half_even,
-            scale_type=ScaleType.float,
-            scale_format=None,
-            scale_calculation_mode=None,
-            qat_spec=None,
-            mx_element_dtype=None,
-            zero_point_type=ZeroPointType.int32,
-            is_scale_quant=False,
-            enable_buffer_reuse=False,
-            max_input_numel=4194304,
-        ),
-        bias=None,
-        target_device=None,
-    ),
-    exclude=['lm_head.*', 'lm_head'],
-    algo_config=None,
-    log_severity_level=1,
-    version="0.12.post1",
-    layer_type_quant_config={},
-    layer_quant_config={'*k_proj': QLayerConfig(input_tensors=QTensorConfig(dtype=<Dtype.fp8_e4m3: 'fp8_e4m3'>, observer_cls=<class 'quark.torch.quantization.observer.observer.PerTensorMinMaxObserver'>, is_dynamic=False, qscheme=<QSchemeType.per_tensor: 'per_tensor'>, ch_axis=None, group_size=None, block_size=None, symmetric=True, round_method=<RoundType.half_even: 8>, scale_type=<ScaleType.float: 'float'>, scale_format=None, scale_calculation_mode=None, qat_spec=None, mx_element_dtype=None, zero_point_type=<ZeroPointType.int32: 'int32'>, is_scale_quant=False, enable_buffer_reuse=False, max_input_numel=4194304), output_tensors=QTensorConfig(dtype=<Dtype.fp8_e4m3: 'fp8_e4m3'>, observer_cls=<class 'quark.torch.quantization.observer.observer.PerTensorMinMaxObserver'>, is_dynamic=False, qscheme=<QSchemeType.per_tensor: 'per_tensor'>, ch_axis=None, group_size=None, block_size=None, symmetric=True, round_method=<RoundType.half_even: 8>, scale_type=None, scale_format=None, scale_calculation_mode=None, qat_spec=None, mx_element_dtype=None, zero_point_type=<ZeroPointType.int32: 'int32'>, is_scale_quant=False, enable_buffer_reuse=False, max_input_numel=4194304), weight=QTensorConfig(dtype=<Dtype.fp8_e4m3: 'fp8_e4m3'>, observer_cls=<class 'quark.torch.quantization.observer.observer.PerTensorMinMaxObserver'>, is_dynamic=False, qscheme=<QSchemeType.per_tensor: 'per_tensor'>, ch_axis=None, group_size=None, block_size=None, symmetric=True, round_method=<RoundType.half_even: 8>, scale_type=<ScaleType.float: 'float'>, scale_format=None, scale_calculation_mode=None, qat_spec=None, mx_element_dtype=None, zero_point_type=<ZeroPointType.int32: 'int32'>, is_scale_quant=False, enable_buffer_reuse=False, max_input_numel=4194304), bias=None, target_device=None), '*v_proj': QLayerConfig(input_tensors=QTensorConfig(dtype=<Dtype.fp8_e4m3: 'fp8_e4m3'>, observer_cls=<class 'quark.torch.quantization.observer.observer.PerTensorMinMaxObserver'>, is_dynamic=False, qscheme=<QSchemeType.per_tensor: 'per_tensor'>, ch_axis=None, group_size=None, block_size=None, symmetric=True, round_method=<RoundType.half_even: 8>, scale_type=<ScaleType.float: 'float'>, scale_format=None, scale_calculation_mode=None, qat_spec=None, mx_element_dtype=None, zero_point_type=<ZeroPointType.int32: 'int32'>, is_scale_quant=False, enable_buffer_reuse=False, max_input_numel=4194304), output_tensors=QTensorConfig(dtype=<Dtype.fp8_e4m3: 'fp8_e4m3'>, observer_cls=<class 'quark.torch.quantization.observer.observer.PerTensorMinMaxObserver'>, is_dynamic=False, qscheme=<QSchemeType.per_tensor: 'per_tensor'>, ch_axis=None, group_size=None, block_size=None, symmetric=True, round_method=<RoundType.half_even: 8>, scale_type=None, scale_format=None, scale_calculation_mode=None, qat_spec=None, mx_element_dtype=None, zero_point_type=<ZeroPointType.int32: 'int32'>, is_scale_quant=False, enable_buffer_reuse=False, max_input_numel=4194304), weight=QTensorConfig(dtype=<Dtype.fp8_e4m3: 'fp8_e4m3'>, observer_cls=<class 'quark.torch.quantization.observer.observer.PerTensorMinMaxObserver'>, is_dynamic=False, qscheme=<QSchemeType.per_tensor: 'per_tensor'>, ch_axis=None, group_size=None, block_size=None, symmetric=True, round_method=<RoundType.half_even: 8>, scale_type=<ScaleType.float: 'float'>, scale_format=None, scale_calculation_mode=None, qat_spec=None, mx_element_dtype=None, zero_point_type=<ZeroPointType.int32: 'int32'>, is_scale_quant=False, enable_buffer_reuse=False, max_input_numel=4194304), bias=None, target_device=None)},
-    kv_cache_quant_config={'*k_proj': QLayerConfig(input_tensors=QTensorConfig(dtype=<Dtype.fp8_e4m3: 'fp8_e4m3'>, observer_cls=<class 'quark.torch.quantization.observer.observer.PerTensorMinMaxObserver'>, is_dynamic=False, qscheme=<QSchemeType.per_tensor: 'per_tensor'>, ch_axis=None, group_size=None, block_size=None, symmetric=True, round_method=<RoundType.half_even: 8>, scale_type=<ScaleType.float: 'float'>, scale_format=None, scale_calculation_mode=None, qat_spec=None, mx_element_dtype=None, zero_point_type=<ZeroPointType.int32: 'int32'>, is_scale_quant=False, enable_buffer_reuse=False, max_input_numel=4194304), output_tensors=QTensorConfig(dtype=<Dtype.fp8_e4m3: 'fp8_e4m3'>, observer_cls=<class 'quark.torch.quantization.observer.observer.PerTensorMinMaxObserver'>, is_dynamic=False, qscheme=<QSchemeType.per_tensor: 'per_tensor'>, ch_axis=None, group_size=None, block_size=None, symmetric=True, round_method=<RoundType.half_even: 8>, scale_type=None, scale_format=None, scale_calculation_mode=None, qat_spec=None, mx_element_dtype=None, zero_point_type=<ZeroPointType.int32: 'int32'>, is_scale_quant=False, enable_buffer_reuse=False, max_input_numel=4194304), weight=QTensorConfig(dtype=<Dtype.fp8_e4m3: 'fp8_e4m3'>, observer_cls=<class 'quark.torch.quantization.observer.observer.PerTensorMinMaxObserver'>, is_dynamic=False, qscheme=<QSchemeType.per_tensor: 'per_tensor'>, ch_axis=None, group_size=None, block_size=None, symmetric=True, round_method=<RoundType.half_even: 8>, scale_type=<ScaleType.float: 'float'>, scale_format=None, scale_calculation_mode=None, qat_spec=None, mx_element_dtype=None, zero_point_type=<ZeroPointType.int32: 'int32'>, is_scale_quant=False, enable_buffer_reuse=False, max_input_numel=4194304), bias=None, target_device=None), '*v_proj': QLayerConfig(input_tensors=QTensorConfig(dtype=<Dtype.fp8_e4m3: 'fp8_e4m3'>, observer_cls=<class 'quark.torch.quantization.observer.observer.PerTensorMinMaxObserver'>, is_dynamic=False, qscheme=<QSchemeType.per_tensor: 'per_tensor'>, ch_axis=None, group_size=None, block_size=None, symmetric=True, round_method=<RoundType.half_even: 8>, scale_type=<ScaleType.float: 'float'>, scale_format=None, scale_calculation_mode=None, qat_spec=None, mx_element_dtype=None, zero_point_type=<ZeroPointType.int32: 'int32'>, is_scale_quant=False, enable_buffer_reuse=False, max_input_numel=4194304), output_tensors=QTensorConfig(dtype=<Dtype.fp8_e4m3: 'fp8_e4m3'>, observer_cls=<class 'quark.torch.quantization.observer.observer.PerTensorMinMaxObserver'>, is_dynamic=False, qscheme=<QSchemeType.per_tensor: 'per_tensor'>, ch_axis=None, group_size=None, block_size=None, symmetric=True, round_method=<RoundType.half_even: 8>, scale_type=None, scale_format=None, scale_calculation_mode=None, qat_spec=None, mx_element_dtype=None, zero_point_type=<ZeroPointType.int32: 'int32'>, is_scale_quant=False, enable_buffer_reuse=False, max_input_numel=4194304), weight=QTensorConfig(dtype=<Dtype.fp8_e4m3: 'fp8_e4m3'>, observer_cls=<class 'quark.torch.quantization.observer.observer.PerTensorMinMaxObserver'>, is_dynamic=False, qscheme=<QSchemeType.per_tensor: 'per_tensor'>, ch_axis=None, group_size=None, block_size=None, symmetric=True, round_method=<RoundType.half_even: 8>, scale_type=<ScaleType.float: 'float'>, scale_format=None, scale_calculation_mode=None, qat_spec=None, mx_element_dtype=None, zero_point_type=<ZeroPointType.int32: 'int32'>, is_scale_quant=False, enable_buffer_reuse=False, max_input_numel=4194304), bias=None, target_device=None)},
-    kv_cache_group=['*k_proj', '*v_proj'],
-    min_kv_scale=0.0,
-    kv_cache_post_rope=False,
-    shared_scale_groups=[
-    ],
-    softmax_quant_spec=None,
-    quant_mode=QuantizationMode.eager_mode,
-    sync_moe_expert_input_amax=False,
-    keep_prequantized_layers=True,
-)[0m
-[32m
-[QUARK-INFO]: In-place OPs replacement start.[0m
-[32m
-[QUARK-INFO]: Module exclusion from quantization summary:
-|      Exclude pattern       | Number of modules excluded |
-|         lm_head.*          |             0              |
-|          lm_head           |             1              |
-[0m
-[INFO] Starting quantization...
-  0%|          | 0/787 [00:00<?, ?it/s] 76%|███████▌  | 595/787 [00:00<00:00, 5948.42it/s]100%|██████████| 787/787 [00:00<00:00, 5786.18it/s]
-[32m
-[QUARK-INFO]: Module replacement for quantization summary:
-|            Original module             |  Number original   |  Number replaced   |
-|                 Conv2d                 |         0          |         0          |
-|                 Linear                 |        347         |        346         |
-|            ConvTranspose2d             |         0          |         0          |
-|               Embedding                |         2          |         0          |
-|              EmbeddingBag              |         0          |         0          |
-|    Qwen3_5ForConditionalGeneration     |         1          |         0          |
-|              Qwen3_5Model              |         1          |         0          |
-|           Qwen3_5VisionModel           |         1          |         0          |
-|        Qwen3_5VisionPatchEmbed         |         1          |         0          |
-|                 Conv3d                 |         1          |         0          |
-|      Qwen3_5VisionRotaryEmbedding      |         1          |         0          |
-|               ModuleList               |         2          |         0          |
-|           Qwen3_5VisionBlock           |         24         |         0          |
-|               LayerNorm                |         49         |         0          |
-|         Qwen3_5VisionAttention         |         24         |         0          |
-|            Qwen3_5VisionMLP            |         24         |         0          |
-|                GELUTanh                |         24         |         0          |
-|        Qwen3_5VisionPatchMerger        |         1          |         0          |
-|                  GELU                  |         1          |         0          |
-|            Qwen3_5TextModel            |         1          |         0          |
-|          Qwen3_5DecoderLayer           |         32         |         0          |
-|          Qwen3_5GatedDeltaNet          |         24         |         0          |
-|             SiLUActivation             |         56         |         0          |
-|                 Conv1d                 |         24         |         0          |
-|          Qwen3_5RMSNormGated           |         24         |         0          |
-|               Qwen3_5MLP               |         32         |         0          |
-|             Qwen3_5RMSNorm             |         81         |         0          |
-|            Qwen3_5Attention            |         8          |         0          |
-|       Qwen3_5TextRotaryEmbedding       |         1          |         0          |
-[0m
-[32m
-[QUARK-INFO]: In-place OPs replacement end.[0m
-[32m
-[QUARK-INFO]: Calibration start.[0m
-[32m
-[QUARK-INFO]: Calibrating all weights and biases...[0m
-Calibrating all params:   0%|          | 0/2203 [00:00<?, ?it/s]Calibrating all params:   1%|          | 13/2203 [00:01<03:33, 10.26it/s]Calibrating all params:  38%|███▊      | 848/2203 [00:01<00:01, 855.33it/s]Calibrating all params:  61%|██████    | 1340/2203 [00:01<00:00, 1349.05it/s]Calibrating all params:  82%|████████▏ | 1808/2203 [00:01<00:00, 1841.19it/s]Calibrating all params: 100%|██████████| 2203/2203 [00:01<00:00, 1320.42it/s]
-[32m
-[QUARK-INFO]: Running forward pass calibration for activations...[0m
-Calibrating activations:   0%|          | 0/15 [00:00<?, ?it/s]Calibrating activations:   7%|▋         | 1/15 [00:05<01:21,  5.84s/it]Calibrating activations:  13%|█▎        | 2/15 [00:10<01:08,  5.27s/it]Calibrating activations:  20%|██        | 3/15 [00:15<01:00,  5.07s/it]Calibrating activations:  27%|██▋       | 4/15 [00:20<00:54,  4.98s/it]Calibrating activations:  33%|███▎      | 5/15 [00:25<00:49,  4.93s/it]Calibrating activations:  40%|████      | 6/15 [00:30<00:44,  4.90s/it]Calibrating activations:  47%|████▋     | 7/15 [00:34<00:39,  4.89s/it]Calibrating activations:  53%|█████▎    | 8/15 [00:39<00:34,  4.88s/it]Calibrating activations:  60%|██████    | 9/15 [00:44<00:29,  4.88s/it]Calibrating activations:  67%|██████▋   | 10/15 [00:49<00:24,  4.89s/it]Calibrating activations:  73%|███████▎  | 11/15 [00:54<00:19,  4.87s/it]Calibrating activations:  80%|████████  | 12/15 [00:59<00:14,  4.86s/it]Calibrating activations:  87%|████████▋ | 13/15 [01:04<00:09,  4.86s/it]Calibrating activations:  93%|█████████▎| 14/15 [01:08<00:04,  4.86s/it]Calibrating activations: 100%|██████████| 15/15 [01:13<00:00,  4.85s/it]Calibrating activations: 100%|██████████| 15/15 [01:13<00:00,  4.92s/it]
-[32m
-[QUARK-INFO]: Calibration end.[0m
-[32m
-[QUARK-INFO]: Model quantization has been completed.[0m
-Realigning block scales:   0%|          | 0/346 [00:00<?, ?it/s]Realigning block scales: 100%|██████████| 346/346 [00:00<00:00, 820366.98it/s]
-[33m
-[QUARK-WARNING]: The module: model.visual.blocks.0.attn.qkv received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
-[33m
-[QUARK-WARNING]: The module: model.visual.blocks.0.attn.proj received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
-[33m
-[QUARK-WARNING]: The module: model.visual.blocks.0.mlp.linear_fc1 received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
-[33m
-[QUARK-WARNING]: The module: model.visual.blocks.0.mlp.linear_fc2 received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
-[33m
-[QUARK-WARNING]: The module: model.visual.blocks.1.attn.qkv received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
-[33m
-[QUARK-WARNING]: The module: model.visual.blocks.1.attn.proj received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
-[33m
-[QUARK-WARNING]: The module: model.visual.blocks.1.mlp.linear_fc1 received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
-[33m
-[QUARK-WARNING]: The module: model.visual.blocks.1.mlp.linear_fc2 received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
-[33m
-[QUARK-WARNING]: The module: model.visual.blocks.2.attn.qkv received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
-[33m
-[QUARK-WARNING]: The module: model.visual.blocks.2.attn.proj received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
-[33m
-[QUARK-WARNING]: The module: model.visual.blocks.2.mlp.linear_fc1 received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
-[33m
-[QUARK-WARNING]: The module: model.visual.blocks.2.mlp.linear_fc2 received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
-[33m
-[QUARK-WARNING]: The module: model.visual.blocks.3.attn.qkv received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
-[33m
-[QUARK-WARNING]: The module: model.visual.blocks.3.attn.proj received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
-[33m
-[QUARK-WARNING]: The module: model.visual.blocks.3.mlp.linear_fc1 received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
-[33m
-[QUARK-WARNING]: The module: model.visual.blocks.3.mlp.linear_fc2 received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
-[33m
-[QUARK-WARNING]: The module: model.visual.blocks.4.attn.qkv received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
-[33m
-[QUARK-WARNING]: The module: model.visual.blocks.4.attn.proj received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
-[33m
-[QUARK-WARNING]: The module: model.visual.blocks.4.mlp.linear_fc1 received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
-[33m
-[QUARK-WARNING]: The module: model.visual.blocks.4.mlp.linear_fc2 received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
-[33m
-[QUARK-WARNING]: The module: model.visual.blocks.5.attn.qkv received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
-[33m
-[QUARK-WARNING]: The module: model.visual.blocks.5.attn.proj received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
-[33m
-[QUARK-WARNING]: The module: model.visual.blocks.5.mlp.linear_fc1 received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
-[33m
-[QUARK-WARNING]: The module: model.visual.blocks.5.mlp.linear_fc2 received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
-[33m
-[QUARK-WARNING]: The module: model.visual.blocks.6.attn.qkv received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
-[33m
-[QUARK-WARNING]: The module: model.visual.blocks.6.attn.proj received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
-[33m
-[QUARK-WARNING]: The module: model.visual.blocks.6.mlp.linear_fc1 received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
-[33m
-[QUARK-WARNING]: The module: model.visual.blocks.6.mlp.linear_fc2 received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
-[33m
-[QUARK-WARNING]: The module: model.visual.blocks.7.attn.qkv received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
-[33m
-[QUARK-WARNING]: The module: model.visual.blocks.7.attn.proj received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
-[33m
-[QUARK-WARNING]: The module: model.visual.blocks.7.mlp.linear_fc1 received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
-[33m
-[QUARK-WARNING]: The module: model.visual.blocks.7.mlp.linear_fc2 received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
-[33m
-[QUARK-WARNING]: The module: model.visual.blocks.8.attn.qkv received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
-[33m
-[QUARK-WARNING]: The module: model.visual.blocks.8.attn.proj received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
-[33m
-[QUARK-WARNING]: The module: model.visual.blocks.8.mlp.linear_fc1 received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
-[33m
-[QUARK-WARNING]: The module: model.visual.blocks.8.mlp.linear_fc2 received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
-[33m
-[QUARK-WARNING]: The module: model.visual.blocks.9.attn.qkv received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
-[33m
-[QUARK-WARNING]: The module: model.visual.blocks.9.attn.proj received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
-[33m
-[QUARK-WARNING]: The module: model.visual.blocks.9.mlp.linear_fc1 received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
-[33m
-[QUARK-WARNING]: The module: model.visual.blocks.9.mlp.linear_fc2 received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
-[33m
-[QUARK-WARNING]: The module: model.visual.blocks.10.attn.qkv received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
-[33m
-[QUARK-WARNING]: The module: model.visual.blocks.10.attn.proj received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
-[33m
-[QUARK-WARNING]: The module: model.visual.blocks.10.mlp.linear_fc1 received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
-[33m
-[QUARK-WARNING]: The module: model.visual.blocks.10.mlp.linear_fc2 received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
-[33m
-[QUARK-WARNING]: The module: model.visual.blocks.11.attn.qkv received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
-[33m
-[QUARK-WARNING]: The module: model.visual.blocks.11.attn.proj received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
-[33m
-[QUARK-WARNING]: The module: model.visual.blocks.11.mlp.linear_fc1 received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
-[33m
-[QUARK-WARNING]: The module: model.visual.blocks.11.mlp.linear_fc2 received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
-[33m
-[QUARK-WARNING]: The module: model.visual.blocks.12.attn.qkv received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
-[33m
-[QUARK-WARNING]: The module: model.visual.blocks.12.attn.proj received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
-[33m
-[QUARK-WARNING]: The module: model.visual.blocks.12.mlp.linear_fc1 received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
-[33m
-[QUARK-WARNING]: The module: model.visual.blocks.12.mlp.linear_fc2 received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
-[33m
-[QUARK-WARNING]: The module: model.visual.blocks.13.attn.qkv received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
-[33m
-[QUARK-WARNING]: The module: model.visual.blocks.13.attn.proj received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
-[33m
-[QUARK-WARNING]: The module: model.visual.blocks.13.mlp.linear_fc1 received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
-[33m
-[QUARK-WARNING]: The module: model.visual.blocks.13.mlp.linear_fc2 received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
-[33m
-[QUARK-WARNING]: The module: model.visual.blocks.14.attn.qkv received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
-[33m
-[QUARK-WARNING]: The module: model.visual.blocks.14.attn.proj received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
-[33m
-[QUARK-WARNING]: The module: model.visual.blocks.14.mlp.linear_fc1 received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
-[33m
-[QUARK-WARNING]: The module: model.visual.blocks.14.mlp.linear_fc2 received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
-[33m
-[QUARK-WARNING]: The module: model.visual.blocks.15.attn.qkv received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
-[33m
-[QUARK-WARNING]: The module: model.visual.blocks.15.attn.proj received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
-[33m
-[QUARK-WARNING]: The module: model.visual.blocks.15.mlp.linear_fc1 received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
-[33m
-[QUARK-WARNING]: The module: model.visual.blocks.15.mlp.linear_fc2 received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
-[33m
-[QUARK-WARNING]: The module: model.visual.blocks.16.attn.qkv received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
-[33m
-[QUARK-WARNING]: The module: model.visual.blocks.16.attn.proj received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
-[33m
-[QUARK-WARNING]: The module: model.visual.blocks.16.mlp.linear_fc1 received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
-[33m
-[QUARK-WARNING]: The module: model.visual.blocks.16.mlp.linear_fc2 received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
-[33m
-[QUARK-WARNING]: The module: model.visual.blocks.17.attn.qkv received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
-[33m
-[QUARK-WARNING]: The module: model.visual.blocks.17.attn.proj received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
-[33m
-[QUARK-WARNING]: The module: model.visual.blocks.17.mlp.linear_fc1 received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
-[33m
-[QUARK-WARNING]: The module: model.visual.blocks.17.mlp.linear_fc2 received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
-[33m
-[QUARK-WARNING]: The module: model.visual.blocks.18.attn.qkv received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
-[33m
-[QUARK-WARNING]: The module: model.visual.blocks.18.attn.proj received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
-[33m
-[QUARK-WARNING]: The module: model.visual.blocks.18.mlp.linear_fc1 received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
-[33m
-[QUARK-WARNING]: The module: model.visual.blocks.18.mlp.linear_fc2 received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
-[33m
-[QUARK-WARNING]: The module: model.visual.blocks.19.attn.qkv received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
-[33m
-[QUARK-WARNING]: The module: model.visual.blocks.19.attn.proj received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
-[33m
-[QUARK-WARNING]: The module: model.visual.blocks.19.mlp.linear_fc1 received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
-[33m
-[QUARK-WARNING]: The module: model.visual.blocks.19.mlp.linear_fc2 received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
-[33m
-[QUARK-WARNING]: The module: model.visual.blocks.20.attn.qkv received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
-[33m
-[QUARK-WARNING]: The module: model.visual.blocks.20.attn.proj received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
-[33m
-[QUARK-WARNING]: The module: model.visual.blocks.20.mlp.linear_fc1 received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
-[33m
-[QUARK-WARNING]: The module: model.visual.blocks.20.mlp.linear_fc2 received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
-[33m
-[QUARK-WARNING]: The module: model.visual.blocks.21.attn.qkv received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
-[33m
-[QUARK-WARNING]: The module: model.visual.blocks.21.attn.proj received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
-[33m
-[QUARK-WARNING]: The module: model.visual.blocks.21.mlp.linear_fc1 received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
-[33m
-[QUARK-WARNING]: The module: model.visual.blocks.21.mlp.linear_fc2 received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
-[33m
-[QUARK-WARNING]: The module: model.visual.blocks.22.attn.qkv received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
-[33m
-[QUARK-WARNING]: The module: model.visual.blocks.22.attn.proj received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
-[33m
-[QUARK-WARNING]: The module: model.visual.blocks.22.mlp.linear_fc1 received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
-[33m
-[QUARK-WARNING]: The module: model.visual.blocks.22.mlp.linear_fc2 received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
-[33m
-[QUARK-WARNING]: The module: model.visual.blocks.23.attn.qkv received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
-[33m
-[QUARK-WARNING]: The module: model.visual.blocks.23.attn.proj received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
-[33m
-[QUARK-WARNING]: The module: model.visual.blocks.23.mlp.linear_fc1 received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
-[33m
-[QUARK-WARNING]: The module: model.visual.blocks.23.mlp.linear_fc2 received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
-[33m
-[QUARK-WARNING]: The module: model.visual.merger.linear_fc1 received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
-[33m
-[QUARK-WARNING]: The module: model.visual.merger.linear_fc2 received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
-[32m
-[QUARK-INFO]: Merging scales for the kv cache, kv_cache_group=['*k_proj', '*v_proj'].[0m
-[32m
-[QUARK-INFO]: Model post process start.[0m
-[32m
-[QUARK-INFO]: Simplifying quantized operators...[0m
-[INFO] Export Quant Model.
-Preserving pre-quantized modules: 0it [00:00, ?it/s]Preserving pre-quantized modules: 0it [00:00, ?it/s]
-[32m
-[QUARK-INFO]: Real_quantized: Doing real quantization for operators...[0m
-Converting QuantLinear for export:   0%|          | 0/346 [00:00<?, ?it/s]Converting QuantLinear for export:  46%|████▌     | 159/346 [00:00<00:00, 1585.61it/s]Converting QuantLinear for export:  92%|█████████▏| 318/346 [00:00<00:00, 1193.50it/s]Converting QuantLinear for export: 100%|██████████| 346/346 [00:00<00:00, 1234.32it/s]
-[32m
-[QUARK-INFO]: Model post process end[0m
-[32m
-[QUARK-INFO]: Start exporting huggingface_format quantized model ...[0m
-Writing model shards:   0%|          | 0/1 [00:00<?, ?it/s]Writing model shards: 100%|██████████| 1/1 [00:49<00:00, 49.83s/it]Writing model shards: 100%|██████████| 1/1 [00:49<00:00, 49.83s/it]
-[32m
-[QUARK-INFO]: [patch_missing_weights] Resolved source checkpoint to: /shared/prerelease/home/cambridge/han/.cache/huggingface/hub/models--Qwen--Qwen3.5-4B/snapshots/851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a[0m
-[32m
-[QUARK-INFO]: [patch_missing_weights] Found 15 weight tensor(s) present in the source checkpoint at /shared/prerelease/home/cambridge/han/.cache/huggingface/hub/models--Qwen--Qwen3.5-4B/snapshots/851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a but missing from the export (restoring): ['mtp.layers.0.mlp.down_proj.weight', 'mtp.layers.0.mlp.gate_proj.weight', 'mtp.layers.0.mlp.up_proj.weight', 'mtp.layers.0.self_attn.q_proj.weight', 'mtp.fc.weight', 'mtp.layers.0.self_attn.o_proj.weight', 'mtp.layers.0.self_attn.k_proj.weight', 'mtp.layers.0.self_attn.v_proj.weight', 'mtp.layers.0.input_layernorm.weight', 'mtp.layers.0.post_attention_layernorm.weight'] ...[0m
-Restoring missing weights:   0%|          | 0/15 [00:00<?, ?it/s]Restoring missing weights: 100%|██████████| 15/15 [00:00<00:00, 270.90it/s]
-[32m
-[QUARK-INFO]: [patch_missing_weights] Appended 15 weight(s) to model.safetensors.[0m
-[32m
-[QUARK-INFO]: hf_format quantized model exported to Qwen3.5-4B_fp8 successfully.[0m
-[32m
-[QUARK-INFO]: Successfully exported model to Safetensors format in quark mode: Qwen3.5-4B_fp8[0m
-[INFO] Quantization complete.
-[INFO] Simple test PPL with wikitext-2.
-  0%|          | 0/145 [00:00<?, ?it/s]  1%|          | 1/145 [00:04<10:40,  4.45s/it]  1%|▏         | 2/145 [00:08<10:25,  4.38s/it]  2%|▏         | 3/145 [00:13<10:19,  4.37s/it]  3%|▎         | 4/145 [00:17<10:14,  4.36s/it]  3%|▎         | 5/145 [00:21<10:09,  4.35s/it]  4%|▍         | 6/145 [00:26<10:05,  4.36s/it]  5%|▍         | 7/145 [00:30<10:00,  4.35s/it]  6%|▌         | 8/145 [00:34<09:56,  4.35s/it]  6%|▌         | 9/145 [00:39<09:51,  4.35s/it]  7%|▋         | 10/145 [00:43<09:46,  4.35s/it]  8%|▊         | 11/145 [00:47<09:42,  4.35s/it]  8%|▊         | 12/145 [00:52<09:38,  4.35s/it]  9%|▉         | 13/145 [00:56<09:34,  4.35s/it] 10%|▉         | 14/145 [01:00<09:30,  4.35s/it] 10%|█         | 15/145 [01:05<09:25,  4.35s/it] 11%|█         | 16/145 [01:09<09:22,  4.36s/it] 12%|█▏        | 17/145 [01:14<09:17,  4.36s/it] 12%|█▏        | 18/145 [01:18<09:13,  4.36s/it] 13%|█▎        | 19/145 [01:22<09:09,  4.36s/it] 14%|█▍        | 20/145 [01:27<09:04,  4.36s/it] 14%|█▍        | 21/145 [01:31<09:00,  4.36s/it] 15%|█▌        | 22/145 [01:35<08:55,  4.35s/it] 16%|█▌        | 23/145 [01:40<08:50,  4.35s/it] 17%|█▋        | 24/145 [01:44<08:45,  4.34s/it] 17%|█▋        | 25/145 [01:48<08:42,  4.35s/it] 18%|█▊        | 26/145 [01:53<08:37,  4.35s/it] 19%|█▊        | 27/145 [01:57<08:32,  4.35s/it] 19%|█▉        | 28/145 [02:01<08:28,  4.34s/it] 20%|██        | 29/145 [02:06<08:24,  4.35s/it] 21%|██        | 30/145 [02:10<08:20,  4.35s/it] 21%|██▏       | 31/145 [02:14<08:15,  4.35s/it] 22%|██▏       | 32/145 [02:19<08:11,  4.35s/it] 23%|██▎       | 33/145 [02:23<08:07,  4.35s/it] 23%|██▎       | 34/145 [02:28<08:03,  4.35s/it] 24%|██▍       | 35/145 [02:32<07:59,  4.36s/it] 25%|██▍       | 36/145 [02:36<07:54,  4.36s/it] 26%|██▌       | 37/145 [02:41<07:50,  4.36s/it] 26%|██▌       | 38/145 [02:45<07:45,  4.35s/it] 27%|██▋       | 39/145 [02:49<07:40,  4.35s/it] 28%|██▊       | 40/145 [02:54<07:36,  4.34s/it] 28%|██▊       | 41/145 [02:58<07:31,  4.34s/it] 29%|██▉       | 42/145 [03:02<07:26,  4.34s/it] 30%|██▉       | 43/145 [03:07<07:22,  4.34s/it] 30%|███       | 44/145 [03:11<07:18,  4.34s/it] 31%|███       | 45/145 [03:15<07:14,  4.34s/it] 32%|███▏      | 46/145 [03:20<07:10,  4.35s/it] 32%|███▏      | 47/145 [03:24<07:05,  4.35s/it] 33%|███▎      | 48/145 [03:28<07:00,  4.34s/it] 34%|███▍      | 49/145 [03:33<06:56,  4.34s/it] 34%|███▍      | 50/145 [03:37<06:51,  4.33s/it] 35%|███▌      | 51/145 [03:41<06:46,  4.33s/it] 36%|███▌      | 52/145 [03:46<06:42,  4.33s/it] 37%|███▋      | 53/145 [03:50<06:37,  4.32s/it] 37%|███▋      | 54/145 [03:54<06:33,  4.32s/it] 38%|███▊      | 55/145 [03:59<06:28,  4.32s/it] 39%|███▊      | 56/145 [04:03<06:23,  4.31s/it] 39%|███▉      | 57/145 [04:07<06:18,  4.31s/it] 40%|████      | 58/145 [04:11<06:14,  4.30s/it] 41%|████      | 59/145 [04:16<06:10,  4.30s/it] 41%|████▏     | 60/145 [04:20<06:05,  4.30s/it] 42%|████▏     | 61/145 [04:24<06:01,  4.31s/it] 43%|████▎     | 62/145 [04:29<05:57,  4.31s/it] 43%|████▎     | 63/145 [04:33<05:53,  4.31s/it] 44%|████▍     | 64/145 [04:37<05:49,  4.31s/it] 45%|████▍     | 65/145 [04:42<05:44,  4.31s/it] 46%|████▌     | 66/145 [04:46<05:40,  4.31s/it] 46%|████▌     | 67/145 [04:50<05:39,  4.36s/it] 47%|████▋     | 68/145 [04:55<05:33,  4.34s/it] 48%|████▊     | 69/145 [04:59<05:28,  4.32s/it] 48%|████▊     | 70/145 [05:03<05:23,  4.31s/it] 49%|████▉     | 71/145 [05:08<05:18,  4.31s/it] 50%|████▉     | 72/145 [05:12<05:14,  4.31s/it] 50%|█████     | 73/145 [05:16<05:09,  4.30s/it] 51%|█████     | 74/145 [05:20<05:05,  4.30s/it] 52%|█████▏    | 75/145 [05:25<05:00,  4.30s/it] 52%|█████▏    | 76/145 [05:29<04:56,  4.30s/it] 53%|█████▎    | 77/145 [05:33<04:52,  4.30s/it] 54%|█████▍    | 78/145 [05:38<04:47,  4.30s/it] 54%|█████▍    | 79/145 [05:42<04:43,  4.29s/it] 55%|█████▌    | 80/145 [05:46<04:39,  4.30s/it] 56%|█████▌    | 81/145 [05:51<04:34,  4.29s/it] 57%|█████▋    | 82/145 [05:55<04:30,  4.29s/it] 57%|█████▋    | 83/145 [05:59<04:26,  4.30s/it] 58%|█████▊    | 84/145 [06:03<04:21,  4.29s/it] 59%|█████▊    | 85/145 [06:08<04:17,  4.29s/it] 59%|█████▉    | 86/145 [06:12<04:12,  4.28s/it] 60%|██████    | 87/145 [06:16<04:08,  4.29s/it] 61%|██████    | 88/145 [06:21<04:04,  4.28s/it] 61%|██████▏   | 89/145 [06:25<03:59,  4.28s/it] 62%|██████▏   | 90/145 [06:29<03:55,  4.28s/it] 63%|██████▎   | 91/145 [06:33<03:51,  4.28s/it] 63%|██████▎   | 92/145 [06:38<03:47,  4.29s/it] 64%|██████▍   | 93/145 [06:42<03:42,  4.28s/it] 65%|██████▍   | 94/145 [06:46<03:38,  4.28s/it] 66%|██████▌   | 95/145 [06:50<03:33,  4.28s/it] 66%|██████▌   | 96/145 [06:55<03:29,  4.27s/it] 67%|██████▋   | 97/145 [06:59<03:25,  4.28s/it] 68%|██████▊   | 98/145 [07:03<03:20,  4.27s/it] 68%|██████▊   | 99/145 [07:08<03:16,  4.27s/it] 69%|██████▉   | 100/145 [07:12<03:12,  4.27s/it] 70%|██████▉   | 101/145 [07:16<03:07,  4.27s/it] 70%|███████   | 102/145 [07:20<03:03,  4.26s/it] 71%|███████   | 103/145 [07:25<02:58,  4.25s/it] 72%|███████▏  | 104/145 [07:29<02:54,  4.25s/it] 72%|███████▏  | 105/145 [07:33<02:49,  4.24s/it] 73%|███████▎  | 106/145 [07:37<02:45,  4.23s/it] 74%|███████▍  | 107/145 [07:41<02:40,  4.23s/it] 74%|███████▍  | 108/145 [07:46<02:36,  4.23s/it] 75%|███████▌  | 109/145 [07:50<02:32,  4.23s/it] 76%|███████▌  | 110/145 [07:54<02:28,  4.23s/it] 77%|███████▋  | 111/145 [07:58<02:23,  4.23s/it] 77%|███████▋  | 112/145 [08:03<02:19,  4.23s/it] 78%|███████▊  | 113/145 [08:07<02:15,  4.23s/it] 79%|███████▊  | 114/145 [08:11<02:11,  4.23s/it] 79%|███████▉  | 115/145 [08:15<02:06,  4.23s/it] 80%|████████  | 116/145 [08:20<02:02,  4.23s/it] 81%|████████  | 117/145 [08:24<01:58,  4.24s/it] 81%|████████▏ | 118/145 [08:28<01:54,  4.23s/it] 82%|████████▏ | 119/145 [08:32<01:50,  4.23s/it] 83%|████████▎ | 120/145 [08:36<01:45,  4.23s/it] 83%|████████▎ | 121/145 [08:41<01:41,  4.23s/it] 84%|████████▍ | 122/145 [08:45<01:37,  4.24s/it] 85%|████████▍ | 123/145 [08:49<01:33,  4.23s/it] 86%|████████▌ | 124/145 [08:53<01:28,  4.23s/it] 86%|████████▌ | 125/145 [08:58<01:24,  4.24s/it] 87%|████████▋ | 126/145 [09:02<01:20,  4.23s/it] 88%|████████▊ | 127/145 [09:06<01:16,  4.23s/it] 88%|████████▊ | 128/145 [09:10<01:11,  4.23s/it] 89%|████████▉ | 129/145 [09:15<01:07,  4.23s/it] 90%|████████▉ | 130/145 [09:19<01:03,  4.23s/it] 90%|█████████ | 131/145 [09:23<00:59,  4.23s/it] 91%|█████████ | 132/145 [09:27<00:55,  4.24s/it] 92%|█████████▏| 133/145 [09:32<00:50,  4.24s/it] 92%|█████████▏| 134/145 [09:36<00:46,  4.23s/it] 93%|█████████▎| 135/145 [09:40<00:42,  4.23s/it] 94%|█████████▍| 136/145 [09:44<00:38,  4.24s/it] 94%|█████████▍| 137/145 [09:48<00:33,  4.24s/it] 95%|█████████▌| 138/145 [09:53<00:29,  4.24s/it] 96%|█████████▌| 139/145 [09:57<00:25,  4.23s/it] 97%|█████████▋| 140/145 [10:01<00:21,  4.23s/it] 97%|█████████▋| 141/145 [10:05<00:16,  4.23s/it] 98%|█████████▊| 142/145 [10:10<00:12,  4.23s/it] 99%|█████████▊| 143/145 [10:14<00:08,  4.22s/it] 99%|█████████▉| 144/145 [10:18<00:04,  4.23s/it]100%|██████████| 145/145 [10:22<00:00,  4.23s/it]100%|██████████| 145/145 [10:22<00:00,  4.30s/it]
-[INFO] Perplexity of the original model: 9.58484364
-[INFO] Perplexity of the quantised model: 9.55390930
