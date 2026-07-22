@@ -1,0 +1,24 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv
+.env
+
+# Models
+Qwen3.5-4B_fp8
+Qwen3.5-4B-fp8
+
+# Scripts
+bash
+eval
+quant
+quant_w_calib
+serve
+com
+test
