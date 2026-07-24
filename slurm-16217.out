@@ -1,0 +1,118 @@
+Fetching 2 files:   0%|          | 0/2 [00:00<?, ?it/s]Fetching 2 files: 100%|██████████| 2/2 [00:00<00:00, 529.62it/s]
+[transformers] The fast path is not available because one of the required library is not installed. Falling back to torch implementation. To install follow https://github.com/fla-org/flash-linear-attention#installation and https://github.com/Dao-AILab/causal-conv1d
+Loading weights:   0%|          | 0/426 [00:00<?, ?it/s]Loading weights:   7%|▋         | 30/426 [00:00<00:01, 240.81it/s]Loading weights:  15%|█▍        | 63/426 [00:00<00:01, 281.74it/s]Loading weights:  22%|██▏       | 92/426 [00:00<00:01, 282.61it/s]Loading weights:  29%|██▉       | 123/426 [00:00<00:01, 287.14it/s]Loading weights:  37%|███▋      | 156/426 [00:00<00:00, 291.67it/s]Loading weights:  44%|████▍     | 189/426 [00:00<00:00, 288.85it/s]Loading weights:  51%|█████     | 218/426 [00:00<00:00, 288.37it/s]Loading weights:  58%|█████▊    | 247/426 [00:00<00:00, 281.49it/s]Loading weights:  66%|██████▋   | 283/426 [00:00<00:00, 293.01it/s]Loading weights:  75%|███████▍  | 318/426 [00:01<00:00, 299.31it/s]Loading weights:  83%|████████▎ | 352/426 [00:01<00:00, 283.18it/s]Loading weights:  91%|█████████▏| 389/426 [00:01<00:00, 306.67it/s]Loading weights:  99%|█████████▉| 421/426 [00:01<00:00, 309.58it/s]Loading weights: 100%|██████████| 426/426 [00:01<00:00, 297.11it/s]
+[aiter] import [module_aiter_core] under /shared/prerelease/home/cambridge/han/Projects/quark-quantisation/.venv/lib/python3.12/site-packages/aiter/jit/module_aiter_core.so
+[32m
+[QUARK-INFO]: C++ kernel loading check start.[0m
+[32m
+[QUARK-INFO]: Compiling stable ABI hw_emulation extension via JIT. First-time compilation may take a few minutes...[0m
+[92mSuccessfully preprocessed all matching files.[0m
+[32m
+[QUARK-INFO]: Stable ABI hw_emulation JIT compilation complete.[0m
+[32m
+[QUARK-INFO]: C++ kernel loading/compilation is complete. Total time: 0.8224 seconds[0m
+[32m
+[QUARK-INFO]: Using weight only quantization.[0m
+[32m
+[QUARK-INFO]: Quantizing with the quantization configuration:
+QConfig(
+    global_quant_config=QLayerConfig(
+        input_tensors=None,
+        output_tensors=None,
+        weight=QTensorConfig(
+            dtype=Dtype.int8,
+            observer_cls=<class 'quark.torch.quantization.observer.observer.PerBlockBFPObserver'>,
+            is_dynamic=True,
+            qscheme=QSchemeType.per_group,
+            ch_axis=-1,
+            group_size=8,
+            block_size=None,
+            symmetric=True,
+            round_method=RoundType.half_even,
+            scale_type=ScaleType.float,
+            scale_format=None,
+            scale_calculation_mode=None,
+            qat_spec=None,
+            mx_element_dtype=None,
+            zero_point_type=ZeroPointType.int32,
+            is_scale_quant=False,
+            enable_buffer_reuse=False,
+            max_input_numel=4194304,
+        ),
+        bias=None,
+        target_device=None,
+    ),
+    exclude=[
+    ],
+    algo_config=None,
+    log_severity_level=1,
+    version="0.12.post1",
+    layer_type_quant_config={},
+    layer_quant_config={},
+    kv_cache_quant_config={},
+    kv_cache_group=[
+    ],
+    min_kv_scale=0.0,
+    kv_cache_post_rope=False,
+    shared_scale_groups=[
+    ],
+    softmax_quant_spec=None,
+    quant_mode=QuantizationMode.eager_mode,
+    sync_moe_expert_input_amax=False,
+    keep_prequantized_layers=True,
+)[0m
+[32m
+[QUARK-INFO]: In-place OPs replacement start.[0m
+  0%|          | 0/535 [00:00<?, ?it/s] 18%|█▊        | 95/535 [00:00<00:03, 135.24it/s]100%|██████████| 535/535 [00:00<00:00, 734.28it/s]
+[32m
+[QUARK-INFO]: Module replacement for quantization summary:
+|            Original module             |  Number original   |  Number replaced   |
+|                 Conv2d                 |         0          |         0          |
+|                 Linear                 |        249         |        249         |
+|            ConvTranspose2d             |         0          |         0          |
+|               Embedding                |         1          |         0          |
+|              EmbeddingBag              |         0          |         0          |
+|           Qwen3_5ForCausalLM           |         1          |         0          |
+|            Qwen3_5TextModel            |         1          |         0          |
+|               ModuleList               |         1          |         0          |
+|          Qwen3_5DecoderLayer           |         32         |         0          |
+|          Qwen3_5GatedDeltaNet          |         24         |         0          |
+|             SiLUActivation             |         56         |         0          |
+|                 Conv1d                 |         24         |         0          |
+|          Qwen3_5RMSNormGated           |         24         |         0          |
+|               Qwen3_5MLP               |         32         |         0          |
+|             Qwen3_5RMSNorm             |         81         |         0          |
+|            Qwen3_5Attention            |         8          |         0          |
+|       Qwen3_5TextRotaryEmbedding       |         1          |         0          |
+[0m
+[32m
+[QUARK-INFO]: In-place OPs replacement end.[0m
+[32m
+[QUARK-INFO]: Dynamic quantization, no calibration.[0m
+[32m
+[QUARK-INFO]: Model quantization has been completed.[0m
+Realigning block scales:   0%|          | 0/249 [00:00<?, ?it/s]Realigning block scales: 100%|██████████| 249/249 [00:00<00:00, 1205983.48it/s]
+[32m
+[QUARK-INFO]: Model post process start.[0m
+[32m
+[QUARK-INFO]: Simplifying quantized operators...[0m
+Preserving pre-quantized modules: 0it [00:00, ?it/s]Preserving pre-quantized modules: 0it [00:00, ?it/s]
+[32m
+[QUARK-INFO]: Real_quantized: Doing real quantization for operators...[0m
+Converting QuantLinear for export:   0%|          | 0/249 [00:00<?, ?it/s]Converting QuantLinear for export: 100%|██████████| 249/249 [00:00<00:00, 6979.02it/s]
+[32m
+[QUARK-INFO]: Model post process end[0m
+[32m
+[QUARK-INFO]: Start exporting huggingface_format quantized model ...[0m
+Writing model shards:   0%|          | 0/1 [00:00<?, ?it/s]Writing model shards: 100%|██████████| 1/1 [02:24<00:00, 144.55s/it]Writing model shards: 100%|██████████| 1/1 [02:24<00:00, 144.55s/it]
+[32m
+[QUARK-INFO]: [patch_missing_weights] Resolved source checkpoint to: /shared/prerelease/home/cambridge/han/.cache/huggingface/hub/models--Qwen--Qwen3.5-4B/snapshots/851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a[0m
+[32m
+[QUARK-INFO]: [patch_missing_weights] Found 312 weight tensor(s) present in the source checkpoint at /shared/prerelease/home/cambridge/han/.cache/huggingface/hub/models--Qwen--Qwen3.5-4B/snapshots/851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a but missing from the export (restoring): ['mtp.layers.0.mlp.down_proj.weight', 'mtp.layers.0.mlp.gate_proj.weight', 'mtp.layers.0.mlp.up_proj.weight', 'mtp.layers.0.self_attn.q_proj.weight', 'model.visual.merger.linear_fc1.weight', 'mtp.fc.weight', 'mtp.layers.0.self_attn.o_proj.weight', 'model.visual.merger.linear_fc2.weight', 'model.visual.blocks.0.mlp.linear_fc1.weight', 'model.visual.blocks.0.mlp.linear_fc2.weight'] ...[0m
+Restoring missing weights:   0%|          | 0/312 [00:00<?, ?it/s]Restoring missing weights:   5%|▌         | 17/312 [00:00<00:01, 163.75it/s]Restoring missing weights:  11%|█         | 34/312 [00:00<00:01, 161.91it/s]Restoring missing weights:  16%|█▋        | 51/312 [00:00<00:01, 161.46it/s]Restoring missing weights:  22%|██▏       | 68/312 [00:00<00:01, 161.38it/s]Restoring missing weights:  28%|██▊       | 86/312 [00:00<00:01, 164.59it/s]Restoring missing weights:  33%|███▎      | 103/312 [00:00<00:01, 163.68it/s]Restoring missing weights: 100%|██████████| 312/312 [00:00<00:00, 464.95it/s]
+[32m
+[QUARK-INFO]: [patch_missing_weights] Appended 312 weight(s) to model.safetensors.[0m
+[32m
+[QUARK-INFO]: hf_format quantized model exported to Qwen3.5-4B-bfp16 successfully.[0m
+[32m
+[QUARK-INFO]: Successfully exported model to Safetensors format in quark mode: Qwen3.5-4B-bfp16[0m

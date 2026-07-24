@@ -1,0 +1,11 @@
+[aiter] import [module_aiter_core] under /shared/prerelease/home/cambridge/han/Projects/quark-quantisation/.venv/lib/python3.12/site-packages/aiter/jit/module_aiter_core.so
+[32m
+[QUARK-INFO]: C++ kernel loading check start.[0m
+[32m
+[QUARK-INFO]: Compiling stable ABI hw_emulation extension via JIT. First-time compilation may take a few minutes...[0m
+[92mSuccessfully preprocessed all matching files.[0m
+[32m
+[QUARK-INFO]: Stable ABI hw_emulation JIT compilation complete.[0m
+[32m
+[QUARK-INFO]: C++ kernel loading/compilation is complete. Total time: 2.2514 seconds[0m
+['int4_wo_32', 'int4_wo_64', 'int4_wo_128', 'int4_wo_per_channel', 'int4_wa_64', 'uint4_wo_32', 'uint4_wo_64', 'uint4_wo_128', 'uint4_wo_per_channel', 'int8', 'fp8', 'ptpc_fp8', 'mxfp4', 'mxfp4_weight_only', 'mxfp6_e3m2', 'mxfp6_e2m3', 'mxfp4_mxfp6_e2m3', 'mxfp4_fp8', 'amdfp4', 'amdfp4_g32', 'int4_fp8', 'mx6', 'bfp16', 'nvfp4', 'fp4_block16_scale_e4m3', 'amdfp4_global16', 'amdfp4_global32']

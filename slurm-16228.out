@@ -1,0 +1,146 @@
+[transformers] The fast path is not available because one of the required library is not installed. Falling back to torch implementation. To install follow https://github.com/fla-org/flash-linear-attention#installation and https://github.com/Dao-AILab/causal-conv1d
+Loading weights:   0%|          | 0/723 [00:00<?, ?it/s]Loading weights:   4%|▎         | 26/723 [00:00<00:02, 259.67it/s]Loading weights:  15%|█▍        | 107/723 [00:00<00:01, 539.88it/s]Loading weights:  22%|██▏       | 162/723 [00:00<00:01, 517.79it/s]Loading weights:  30%|██▉       | 214/723 [00:00<00:01, 503.66it/s]Loading weights:  37%|███▋      | 264/723 [00:00<00:00, 485.56it/s]Loading weights:  45%|████▌     | 328/723 [00:00<00:00, 508.89it/s]Loading weights:  53%|█████▎    | 384/723 [00:00<00:00, 516.83it/s]Loading weights:  61%|██████▏   | 444/723 [00:00<00:00, 526.46it/s]Loading weights:  70%|███████   | 507/723 [00:00<00:00, 552.19it/s]Loading weights:  83%|████████▎ | 599/723 [00:01<00:00, 658.17it/s]Loading weights:  93%|█████████▎| 674/723 [00:01<00:00, 669.61it/s]Loading weights: 100%|██████████| 723/723 [00:01<00:00, 594.19it/s]
+[aiter] import [module_aiter_core] under /shared/prerelease/home/cambridge/han/Projects/quark-quantisation/.venv/lib/python3.12/site-packages/aiter/jit/module_aiter_core.so
+[32m
+[QUARK-INFO]: C++ kernel loading check start.[0m
+[32m
+[QUARK-INFO]: Compiling stable ABI hw_emulation extension via JIT. First-time compilation may take a few minutes...[0m
+[92mSuccessfully preprocessed all matching files.[0m
+[32m
+[QUARK-INFO]: Stable ABI hw_emulation JIT compilation complete.[0m
+[32m
+[QUARK-INFO]: C++ kernel loading/compilation is complete. Total time: 0.8083 seconds[0m
+[33m
+[QUARK-WARNING]: Expanding exclude pattern ['*lm_head'] to ['*lm_head', '*lm_head.*'][0m
+[32m
+[QUARK-INFO]: Using weight quantization and activation static quantization.[0m
+[32m
+[QUARK-INFO]: Quantizing with the quantization configuration:
+QConfig(
+    global_quant_config=QLayerConfig(
+        input_tensors=QTensorConfig(
+            dtype=Dtype.bfp16,
+            observer_cls=None,
+            is_dynamic=None,
+            qscheme=None,
+            ch_axis=-1,
+            group_size=8,
+            block_size=None,
+            symmetric=None,
+            round_method=None,
+            scale_type=None,
+            scale_format=None,
+            scale_calculation_mode="even",
+            qat_spec=None,
+            mx_element_dtype=None,
+            zero_point_type=ZeroPointType.int32,
+            is_scale_quant=False,
+            enable_buffer_reuse=False,
+            max_input_numel=4194304,
+        ),
+        output_tensors=None,
+        weight=QTensorConfig(
+            dtype=Dtype.bfp16,
+            observer_cls=None,
+            is_dynamic=None,
+            qscheme=None,
+            ch_axis=-1,
+            group_size=8,
+            block_size=None,
+            symmetric=None,
+            round_method=None,
+            scale_type=None,
+            scale_format=None,
+            scale_calculation_mode="even",
+            qat_spec=None,
+            mx_element_dtype=None,
+            zero_point_type=ZeroPointType.int32,
+            is_scale_quant=False,
+            enable_buffer_reuse=False,
+            max_input_numel=4194304,
+        ),
+        bias=None,
+        target_device=None,
+    ),
+    exclude=['*lm_head.*', '*lm_head'],
+    algo_config=None,
+    log_severity_level=1,
+    version="0.12.post1",
+    layer_type_quant_config={},
+    layer_quant_config={'*k_proj': QLayerConfig(input_tensors=QTensorConfig(dtype=<Dtype.bfp16: 'bfp16'>, observer_cls=None, is_dynamic=None, qscheme=None, ch_axis=-1, group_size=8, block_size=None, symmetric=None, round_method=None, scale_type=None, scale_format=None, scale_calculation_mode='even', qat_spec=None, mx_element_dtype=None, zero_point_type=<ZeroPointType.int32: 'int32'>, is_scale_quant=False, enable_buffer_reuse=False, max_input_numel=4194304), output_tensors=QTensorConfig(dtype=<Dtype.fp8_e4m3: 'fp8_e4m3'>, observer_cls=<class 'quark.torch.quantization.observer.observer.PerTensorMinMaxObserver'>, is_dynamic=False, qscheme=<QSchemeType.per_tensor: 'per_tensor'>, ch_axis=None, group_size=None, block_size=None, symmetric=True, round_method=<RoundType.half_even: 8>, scale_type=None, scale_format=None, scale_calculation_mode=None, qat_spec=None, mx_element_dtype=None, zero_point_type=<ZeroPointType.int32: 'int32'>, is_scale_quant=False, enable_buffer_reuse=False, max_input_numel=4194304), weight=QTensorConfig(dtype=<Dtype.bfp16: 'bfp16'>, observer_cls=None, is_dynamic=None, qscheme=None, ch_axis=-1, group_size=8, block_size=None, symmetric=None, round_method=None, scale_type=None, scale_format=None, scale_calculation_mode='even', qat_spec=None, mx_element_dtype=None, zero_point_type=<ZeroPointType.int32: 'int32'>, is_scale_quant=False, enable_buffer_reuse=False, max_input_numel=4194304), bias=None, target_device=None), '*v_proj': QLayerConfig(input_tensors=QTensorConfig(dtype=<Dtype.bfp16: 'bfp16'>, observer_cls=None, is_dynamic=None, qscheme=None, ch_axis=-1, group_size=8, block_size=None, symmetric=None, round_method=None, scale_type=None, scale_format=None, scale_calculation_mode='even', qat_spec=None, mx_element_dtype=None, zero_point_type=<ZeroPointType.int32: 'int32'>, is_scale_quant=False, enable_buffer_reuse=False, max_input_numel=4194304), output_tensors=QTensorConfig(dtype=<Dtype.fp8_e4m3: 'fp8_e4m3'>, observer_cls=<class 'quark.torch.quantization.observer.observer.PerTensorMinMaxObserver'>, is_dynamic=False, qscheme=<QSchemeType.per_tensor: 'per_tensor'>, ch_axis=None, group_size=None, block_size=None, symmetric=True, round_method=<RoundType.half_even: 8>, scale_type=None, scale_format=None, scale_calculation_mode=None, qat_spec=None, mx_element_dtype=None, zero_point_type=<ZeroPointType.int32: 'int32'>, is_scale_quant=False, enable_buffer_reuse=False, max_input_numel=4194304), weight=QTensorConfig(dtype=<Dtype.bfp16: 'bfp16'>, observer_cls=None, is_dynamic=None, qscheme=None, ch_axis=-1, group_size=8, block_size=None, symmetric=None, round_method=None, scale_type=None, scale_format=None, scale_calculation_mode='even', qat_spec=None, mx_element_dtype=None, zero_point_type=<ZeroPointType.int32: 'int32'>, is_scale_quant=False, enable_buffer_reuse=False, max_input_numel=4194304), bias=None, target_device=None)},
+    kv_cache_quant_config={'*k_proj': QLayerConfig(input_tensors=QTensorConfig(dtype=<Dtype.bfp16: 'bfp16'>, observer_cls=None, is_dynamic=None, qscheme=None, ch_axis=-1, group_size=8, block_size=None, symmetric=None, round_method=None, scale_type=None, scale_format=None, scale_calculation_mode='even', qat_spec=None, mx_element_dtype=None, zero_point_type=<ZeroPointType.int32: 'int32'>, is_scale_quant=False, enable_buffer_reuse=False, max_input_numel=4194304), output_tensors=QTensorConfig(dtype=<Dtype.fp8_e4m3: 'fp8_e4m3'>, observer_cls=<class 'quark.torch.quantization.observer.observer.PerTensorMinMaxObserver'>, is_dynamic=False, qscheme=<QSchemeType.per_tensor: 'per_tensor'>, ch_axis=None, group_size=None, block_size=None, symmetric=True, round_method=<RoundType.half_even: 8>, scale_type=None, scale_format=None, scale_calculation_mode=None, qat_spec=None, mx_element_dtype=None, zero_point_type=<ZeroPointType.int32: 'int32'>, is_scale_quant=False, enable_buffer_reuse=False, max_input_numel=4194304), weight=QTensorConfig(dtype=<Dtype.bfp16: 'bfp16'>, observer_cls=None, is_dynamic=None, qscheme=None, ch_axis=-1, group_size=8, block_size=None, symmetric=None, round_method=None, scale_type=None, scale_format=None, scale_calculation_mode='even', qat_spec=None, mx_element_dtype=None, zero_point_type=<ZeroPointType.int32: 'int32'>, is_scale_quant=False, enable_buffer_reuse=False, max_input_numel=4194304), bias=None, target_device=None), '*v_proj': QLayerConfig(input_tensors=QTensorConfig(dtype=<Dtype.bfp16: 'bfp16'>, observer_cls=None, is_dynamic=None, qscheme=None, ch_axis=-1, group_size=8, block_size=None, symmetric=None, round_method=None, scale_type=None, scale_format=None, scale_calculation_mode='even', qat_spec=None, mx_element_dtype=None, zero_point_type=<ZeroPointType.int32: 'int32'>, is_scale_quant=False, enable_buffer_reuse=False, max_input_numel=4194304), output_tensors=QTensorConfig(dtype=<Dtype.fp8_e4m3: 'fp8_e4m3'>, observer_cls=<class 'quark.torch.quantization.observer.observer.PerTensorMinMaxObserver'>, is_dynamic=False, qscheme=<QSchemeType.per_tensor: 'per_tensor'>, ch_axis=None, group_size=None, block_size=None, symmetric=True, round_method=<RoundType.half_even: 8>, scale_type=None, scale_format=None, scale_calculation_mode=None, qat_spec=None, mx_element_dtype=None, zero_point_type=<ZeroPointType.int32: 'int32'>, is_scale_quant=False, enable_buffer_reuse=False, max_input_numel=4194304), weight=QTensorConfig(dtype=<Dtype.bfp16: 'bfp16'>, observer_cls=None, is_dynamic=None, qscheme=None, ch_axis=-1, group_size=8, block_size=None, symmetric=None, round_method=None, scale_type=None, scale_format=None, scale_calculation_mode='even', qat_spec=None, mx_element_dtype=None, zero_point_type=<ZeroPointType.int32: 'int32'>, is_scale_quant=False, enable_buffer_reuse=False, max_input_numel=4194304), bias=None, target_device=None)},
+    kv_cache_group=['*k_proj', '*v_proj'],
+    min_kv_scale=0.0,
+    kv_cache_post_rope=False,
+    shared_scale_groups=[
+    ],
+    softmax_quant_spec=None,
+    quant_mode=QuantizationMode.eager_mode,
+    sync_moe_expert_input_amax=False,
+    keep_prequantized_layers=True,
+)[0m
+[32m
+[QUARK-INFO]: In-place OPs replacement start.[0m
+[32m
+[QUARK-INFO]: Module exclusion from quantization summary:
+|      Exclude pattern       | Number of modules excluded |
+|         *lm_head.*         |             0              |
+|          *lm_head          |             1              |
+[0m
+  0%|          | 0/787 [00:00<?, ?it/s]100%|██████████| 787/787 [00:00<00:00, 13278.83it/s]
+[32m
+[QUARK-INFO]: Module replacement for quantization summary:
+|            Original module             |  Number original   |  Number replaced   |
+|                 Conv2d                 |         0          |         0          |
+|                 Linear                 |        347         |        346         |
+|            ConvTranspose2d             |         0          |         0          |
+|               Embedding                |         2          |         0          |
+|              EmbeddingBag              |         0          |         0          |
+|    Qwen3_5ForConditionalGeneration     |         1          |         0          |
+|              Qwen3_5Model              |         1          |         0          |
+|           Qwen3_5VisionModel           |         1          |         0          |
+|        Qwen3_5VisionPatchEmbed         |         1          |         0          |
+|                 Conv3d                 |         1          |         0          |
+|      Qwen3_5VisionRotaryEmbedding      |         1          |         0          |
+|               ModuleList               |         2          |         0          |
+|           Qwen3_5VisionBlock           |         24         |         0          |
+|               LayerNorm                |         49         |         0          |
+|         Qwen3_5VisionAttention         |         24         |         0          |
+|            Qwen3_5VisionMLP            |         24         |         0          |
+|                GELUTanh                |         24         |         0          |
+|        Qwen3_5VisionPatchMerger        |         1          |         0          |
+|                  GELU                  |         1          |         0          |
+|            Qwen3_5TextModel            |         1          |         0          |
+|          Qwen3_5DecoderLayer           |         32         |         0          |
+|          Qwen3_5GatedDeltaNet          |         24         |         0          |
+|             SiLUActivation             |         56         |         0          |
+|                 Conv1d                 |         24         |         0          |
+|          Qwen3_5RMSNormGated           |         24         |         0          |
+|               Qwen3_5MLP               |         32         |         0          |
+|             Qwen3_5RMSNorm             |         81         |         0          |
+|            Qwen3_5Attention            |         8          |         0          |
+|       Qwen3_5TextRotaryEmbedding       |         1          |         0          |
+[0m
+[32m
+[QUARK-INFO]: In-place OPs replacement end.[0m
+[32m
+[QUARK-INFO]: Calibration start.[0m
+Traceback (most recent call last):
+  File "/shared/prerelease/home/cambridge/han/Projects/quark-quantisation/quark_getting_started.py", line 26, in <module>
+    quant_model = quantizer.quantize_model(model)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/shared/prerelease/home/cambridge/han/Projects/quark-quantisation/.venv/lib/python3.12/site-packages/quark/common/profiler/profiler.py", line 80, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/shared/prerelease/home/cambridge/han/Projects/quark-quantisation/.venv/lib/python3.12/site-packages/quark/torch/quantization/api.py", line 211, in quantize_model
+    model = self._do_calibration(model, dataloader)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/shared/prerelease/home/cambridge/han/Projects/quark-quantisation/.venv/lib/python3.12/site-packages/torch/utils/_contextlib.py", line 124, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/shared/prerelease/home/cambridge/han/Projects/quark-quantisation/.venv/lib/python3.12/site-packages/quark/common/profiler/profiler.py", line 80, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/shared/prerelease/home/cambridge/han/Projects/quark-quantisation/.venv/lib/python3.12/site-packages/quark/torch/quantization/api.py", line 630, in _do_calibration
+    raise ValueError(
+ValueError: A dataloader is required for static activation calibration. Got dataloader=None.
