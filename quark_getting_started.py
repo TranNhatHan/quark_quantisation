@@ -19,11 +19,11 @@ template = LLMTemplate(
 
 LLMTemplate.register_template(template)
 template = LLMTemplate.get("qwen3_5")
-quant_config = template.get_config(scheme="bfp16", kv_cache_scheme="fp8")
+quant_config = template.get_config(scheme="fp8", kv_cache_scheme="fp8")
 
 from quark.torch import ModelQuantizer
 quantizer = ModelQuantizer(quant_config)
-quant_model = quantizer.quantize_model(model)
+quant_model = quantizer.quantize_model(model, calib_dataloader)
 
 from quark.torch import export_safetensors
 export_model_name="./Qwen3.5-4B-bfp16_without_cab"
