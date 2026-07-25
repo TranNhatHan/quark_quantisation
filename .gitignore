@@ -17,6 +17,7 @@ Qwen3.6-27B-fp8
 Qwen3.6-27B-fp8_without_cab
 Qwen3.5-4B-bfp16
 Qwen3.6-27B-mxfp4_without_cab
+Qwen3.6-27B-bfp16_without_cab
 
 # Scripts
 bash
@@ -26,3 +27,4 @@ quant_w_calib
 serve
 com
 test
+qinference
