@@ -18,6 +18,7 @@ Qwen3.6-27B-fp8_without_cab
 Qwen3.5-4B-bfp16
 Qwen3.6-27B-mxfp4_without_cab
 Qwen3.6-27B-bfp16_without_cab
+Qwen3.6-27B-ptpc_fp8
 
 # Scripts
 bash
