@@ -124,17 +124,14 @@ def evaluate_perplexity(
 
     tokens_per_sec = total_pred_tokens / total_time
 
-    print("\n========================================")
     print(
         f"Final estimate: PPL over "
         f"{total_chunks} chunks "
         f"for n_ctx={ctx_size} = {final_ppl:.4f}"
     )
-    print("========================================")
     print()
 
     print("Timing")
-    print("----------------------------------------")
     print(f"Elapsed time      : {total_time:.2f} sec")
     print(f"Tokens evaluated  : {total_pred_tokens}")
     print(f"Throughput        : {tokens_per_sec:.2f} tokens/sec")

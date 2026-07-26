@@ -1,6 +1,6 @@
 from transformers import AutoTokenizer, AutoModelForImageTextToText
 
-model_path = "Qwen3.6-27B-bfp16_without_cab" 
+model_path = "Qwen3.6-27B-ptpc_fp8" 
 tokenizer = AutoTokenizer.from_pretrained(model_path)
 model = AutoModelForImageTextToText.from_pretrained(model_path, device_map="auto", dtype="auto")
 
