@@ -1,7 +1,0 @@
-#!/bin/bash
-
-# Run your command
-export HF_TOKEN="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"
-module load rocm/7.2.3
-source .venv/bin/activate
-uv run quark_getting_started.py

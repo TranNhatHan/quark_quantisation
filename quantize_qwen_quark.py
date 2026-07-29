@@ -64,7 +64,7 @@ def get_model(model_id: str, device: str | None) -> PreTrainedModel:
     model: PreTrainedModel = AutoModelForImageTextToText.from_pretrained(
         model_id,
         attn_implementation="sdpa",
-        torch_dtype="auto",
+        dtype="auto",
         device_map="auto"
     )
     return model.eval().to(device)
@@ -85,13 +85,13 @@ def quantize_model_pipeline(
 
     LLMTemplate.register_template(template)
     template = LLMTemplate.get("qwen3_6")
-    quant_config = template.get_config(scheme="fp8", kv_cache_scheme="fp8")
+    quant_config = template.get_config(scheme="mxfp4")
 
     quantizer = ModelQuantizer(quant_config, multi_device=True)
-    quantized_model: PreTrainedModel = quantizer.quantize_model(model, calib_dataloader)
+    quantized_model: PreTrainedModel = quantizer.quantize_model(model)
 
     print("[INFO] Export Quant Model.")
-    quantized_model_dir = "./Qwen3.6-27B-fp8"
+    quantized_model_dir = "./Qwen3.6-27B-mxfp4-no_cal"
     export_safetensors(model=quantized_model, output_dir=quantized_model_dir)
     tokenizer.save_pretrained(quantized_model_dir)
 
@@ -102,35 +102,18 @@ def ppl_eval(
     model: PreTrainedModel,
     tokenizer: PreTrainedTokenizer,
     device: str | None,
-    seqlen_for_eval: int = 512,
+    seqlen_for_eval: int = 2048,
     eval_batch_size: int = 4,
 ) -> torch.Tensor:
-    testdata = load_dataset(
-        "Salesforce/wikitext",
-        "wikitext-2-raw-v1",
-        split="test",
-    )
-    testenc = tokenizer(
-        "\n\n".join(testdata["text"]),
-        return_tensors="pt",
-    ).input_ids.to(device)
+    testdata = load_dataset("Salesforce/wikitext", "wikitext-2-raw-v1", split="test")
+    testenc = tokenizer("\n\n".join(testdata["text"]),return_tensors="pt").input_ids.to(device)
 
     nsamples = testenc.numel() // seqlen_for_eval
     total_nll = 0.0
     total_tokens = 0
     for start_idx in tqdm(range(0, nsamples, eval_batch_size)):
         end_idx = min(start_idx + eval_batch_size, nsamples)
-        batch = torch.cat(
-            [
-                testenc[
-                    :,
-                    i * seqlen_for_eval : (i + 1) * seqlen_for_eval,
-                ]
-                for i in range(start_idx, end_idx)
-            ],
-            dim=0,
-        )
-        # batch shape = (current_batch_size, seqlen_for_eval)
+        batch = torch.cat([testenc[:,i * seqlen_for_eval : (i + 1) * seqlen_for_eval] for i in range(start_idx, end_idx)],dim=0)
         logits = model(batch).logits
         shift_logits = logits[:, :-1, :].contiguous()
         shift_labels = batch[:, 1:].contiguous()
@@ -154,12 +137,11 @@ def run_quark_fp8_example() -> None:
     model = get_model(model_id, device)
     tokenizer = get_tokenizer(model_id, max_seq_len=seq_len)
     original_ppl = ppl_eval(model, tokenizer, device)
-    # calib_dataloader = get_dataloader(tokenizer, batch_size, device, seq_len)
+    calib_dataloader = get_dataloader(tokenizer, batch_size, device, seq_len)
 
-    # print("[INFO] Starting quantization...")
-    # quantized_model = quantize_model_pipeline(model, calib_dataloader, tokenizer)
-    # print("[INFO] Quantization complete.")
-    quantized_model = get_model("Qwen3.6-27B-ptpc_fp8", device)
+    print("[INFO] Starting quantization...")
+    quantized_model = quantize_model_pipeline(model, calib_dataloader, tokenizer)
+    print("[INFO] Quantization complete.")
     print("[INFO] Simple test PPL with wikitext-2.")
     quantized_ppl = ppl_eval(quantized_model, tokenizer, device)
     print(f"[INFO] Perplexity of the original model: {original_ppl.item():.8f}")

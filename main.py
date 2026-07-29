@@ -9,5 +9,5 @@ template = LLMTemplate(
 
 LLMTemplate.register_template(template)
 template = LLMTemplate.get("qwen3_6")
-quant_config = template.get_config(scheme="ptpc_fp8", kv_cache_scheme="fp8")
+quant_config = template.get_config(scheme="mxfp4")
 print(quant_config)

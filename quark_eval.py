@@ -26,7 +26,7 @@ model.eval()
 
 tokenizer = AutoTokenizer.from_pretrained(model_path, use_safetensors=True)
 
-testdata = load_dataset("Salesforce/wikitext", "wikitext-2-raw-v1",split="test",)
+testdata = load_dataset("Salesforce/wikitext", "wikitext-2-raw-v1",split="test")
 testenc = tokenizer("\n\n".join(testdata["text"]), return_tensors="pt")
 
 ppl = ppl_eval(model, testenc, device, "hf_format")
@@ -54,7 +54,7 @@ generations = rouge_meteor_generations(
 
 rouge_scores = rouge_eval("xsum", generations)
 meteor_scores = meteor_eval("xsum", generations)
-print(f"\n[INFO] xsum ROUGE: {rouge_scores}")
-print(f"\n[INFO] xsum METEOR: {meteor_scores}")
 
-# print(f"\n[INFO] Perplexity: {ppl.item()}")
+print(f"\n[INFO] XSum ROUGE: {rouge_scores}")
+print(f"\n[INFO] XSum METEOR: {meteor_scores}")
+print(f"\n[INFO] WikiText Perplexity: {ppl.item()}")

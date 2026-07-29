@@ -14,6 +14,9 @@ def ppl_eval(model, tokenizer, device, seqlen_for_eval=2048):
     nsamples = testenc.numel() // seqlen_for_eval
     nlls = []
 
+    total_nll = 0
+    total_tokens = 0
+
     for i in tqdm(range(nsamples), desc="Evaluating PPL"):
         batch = testenc[:, i * seqlen_for_eval : (i + 1) * seqlen_for_eval]
         lm_logits = model(batch)["logits"]
@@ -21,13 +24,16 @@ def ppl_eval(model, tokenizer, device, seqlen_for_eval=2048):
         shift_logits = lm_logits[:, :-1, :].contiguous()
         shift_labels = batch[:, 1:]
 
-        loss = torch.nn.CrossEntropyLoss()(
+        loss = torch.nn.functional.cross_entropy(
             shift_logits.view(-1, shift_logits.size(-1)),
             shift_labels.view(-1),
+            reduction="mean"
         )
-        nlls.append(loss.float() * seqlen_for_eval)
+        num_tokens = shift_labels.numel()
+        total_nll += loss.float() * num_tokens
+        total_tokens += num_tokens
 
-    ppl = torch.exp(torch.stack(nlls).sum() / (nsamples * seqlen_for_eval))
+    ppl = torch.exp(total_nll / total_tokens)
     return ppl
 
 @torch.no_grad()
@@ -70,7 +76,7 @@ def generate_summaries(model, tokenizer, device, num_samples=100, batch_size=8):
 
 def run_quark_fp8_example():
     device = "cuda" if torch.cuda.is_available() else "cpu"
-    model_path = "./Qwen3.5-4B_fp8"
+    model_path = "Qwen/Qwen3.6-27B"
 
     print("[INFO] Loading Model & Tokenizer...")
     tokenizer = AutoTokenizer.from_pretrained(
@@ -83,24 +89,24 @@ def run_quark_fp8_example():
     model = AutoModelForImageTextToText.from_pretrained(
         model_path,
         device_map="auto",
-        torch_dtype="auto",
+        dtype="auto",
         attn_implementation="sdpa",
     ).eval()
 
     ppl = ppl_eval(model, tokenizer, device)
     print(f"[INFO] Perplexity: {ppl.item():.4f}\n")
 
-    preds, refs = generate_summaries(model, tokenizer, device, num_samples=100, batch_size=8)
+    # preds, refs = generate_summaries(model, tokenizer, device, num_samples=100, batch_size=8)
 
-    print("[INFO] Computing ROUGE and METEOR metrics...")
-    rouge = evaluate.load("rouge")
-    meteor = evaluate.load("meteor")
+    # print("[INFO] Computing ROUGE and METEOR metrics...")
+    # rouge = evaluate.load("rouge")
+    # meteor = evaluate.load("meteor")
 
-    rouge_scores = rouge.compute(predictions=preds, references=refs)
-    meteor_scores = meteor.compute(predictions=preds, references=refs)
+    # rouge_scores = rouge.compute(predictions=preds, references=refs)
+    # meteor_scores = meteor.compute(predictions=preds, references=refs)
 
-    print("[INFO] ROUGE Results:", rouge_scores)
-    print("[INFO] METEOR Results:", meteor_scores)
+    # print("[INFO] ROUGE Results:", rouge_scores)
+    # print("[INFO] METEOR Results:", meteor_scores)
 
 
 if __name__ == "__main__":
