@@ -14,11 +14,11 @@ wheels/
 Qwen3.5-4B_fp8
 Qwen3.5-4B-fp8
 Qwen3.6-27B-fp8
-Qwen3.6-27B-fp8_without_cab
 Qwen3.5-4B-bfp16
-Qwen3.6-27B-mxfp4_without_cab
-Qwen3.6-27B-bfp16_without_cab
+Qwen3.6-27B-mxfp4
+Qwen3.6-27B-bfp16
 Qwen3.6-27B-ptpc_fp8
+Qwen3.6-27B-mxfp4_no_kvcache
 
 # Scripts
 bash
@@ -29,3 +29,7 @@ serve
 com
 test
 qinference
+
+#Example
+example*.py
+example_advanced_config.py
