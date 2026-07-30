@@ -32,3 +32,5 @@ qinference
 
 #Example
 example*.py
+lm_eval
+seval

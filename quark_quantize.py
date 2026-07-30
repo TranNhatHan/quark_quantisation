@@ -64,8 +64,7 @@ def get_model(model_id: str, device: str | None) -> PreTrainedModel:
     model: PreTrainedModel = AutoModelForImageTextToText.from_pretrained(
         model_id,
         attn_implementation="sdpa",
-        dtype="auto",
-        device_map="auto"
+        dtype="auto"
     )
     return model.eval().to(device)
 
@@ -85,13 +84,13 @@ def quantize_model_pipeline(
 
     LLMTemplate.register_template(template)
     template = LLMTemplate.get("qwen3_6")
-    quant_config = template.get_config(scheme="mxfp4")
+    quant_config = template.get_config(scheme="ptpc_fp8")
 
     quantizer = ModelQuantizer(quant_config, multi_device=True)
     quantized_model: PreTrainedModel = quantizer.quantize_model(model)
 
     print("[INFO] Export Quant Model.")
-    quantized_model_dir = "./Qwen3.6-27B-mxfp4-no_cal"
+    quantized_model_dir = "./Qwen3.6-27B-ptpc_fp8_no_kv_cache"
     export_safetensors(model=quantized_model, output_dir=quantized_model_dir)
     tokenizer.save_pretrained(quantized_model_dir)
 
