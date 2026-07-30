@@ -88,7 +88,7 @@ def generate_summaries(model, tokenizer, device, num_samples=100, batch_size=8):
 
 def run_quark_fp8_example():
     device = "cuda" if torch.cuda.is_available() else "cpu"
-    model_path = "Qwen/Qwen3.6-27B"
+    model_path = "Qwen3.6-27B-fp8"
 
     print("[INFO] Loading Model & Tokenizer...")
     tokenizer = AutoTokenizer.from_pretrained(model_path, padding_side="left")
@@ -99,7 +99,7 @@ def run_quark_fp8_example():
 
     ppl = ppl_eval(model, tokenizer, device)
 
-    print(f"[INFO] Perplexity: {ppl.item():.4f}\n")
+    print(f"[INFO] Perplexity: {ppl.item():.8f}\n")
 
     preds, refs = generate_summaries(model, tokenizer, device, num_samples=-1, batch_size=8)
 
