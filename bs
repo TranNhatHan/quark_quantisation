@@ -1,0 +1,27 @@
+guidellm run \
+  --backend kind=openai_http,target=http://localhost:8000 \
+  --profile kind=constant,rate=2 \
+  --constraint kind=max_duration,seconds=300 \
+  --data kind=synthetic_text,prompt_tokens=20000,output_tokens=1000
+
+guidellm run \
+--backend kind=openai_http,target=http://localhost:8000 \
+--profile kind=synchronous \
+--constraint kind=max_requests,count=10 \
+--data kind=synthetic_text,prompt_tokens=10000,output_tokens=1500 \
+--seed kind=static,value=67 \
+--output kind=json,path=results/benchmark.json \
+--output kind=csv,path=results/benchmark.csv \
+--output kind=html,path=results/benchmark.html
+
+guidellm run \
+--backend kind=openai_http,target=http://localhost:8000 \
+--profile kind=throughput,max_concurrency=10 \
+--data kind=synthetic_text,prompt_tokens=10000,output_tokens=1500 \
+--seed kind=static,value=67 \
+--output kind=json,path=results/benchmark1.json \
+--output kind=csv,path=results/benchmark1.csv \
+--output kind=html,path=results/benchmark1.html
+
+
+guidellm run --profile kind=throughput,max_concurrency=10

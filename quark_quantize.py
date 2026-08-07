@@ -84,13 +84,13 @@ def quantize_model_pipeline(
 
     LLMTemplate.register_template(template)
     template = LLMTemplate.get("qwen3_6")
-    quant_config = template.get_config(scheme="ptpc_fp8")
+    quant_config = template.get_config(scheme="fp8")
 
     quantizer = ModelQuantizer(quant_config, multi_device=True)
-    quantized_model: PreTrainedModel = quantizer.quantize_model(model)
+    quantized_model: PreTrainedModel = quantizer.quantize_model(model, calib_dataloader)
 
     print("[INFO] Export Quant Model.")
-    quantized_model_dir = "./Qwen3.6-27B-ptpc_fp8_no_kv_cache"
+    quantized_model_dir = "./Qwen3.6-27B-fp8_no_kv_cache"
     export_safetensors(model=quantized_model, output_dir=quantized_model_dir)
     tokenizer.save_pretrained(quantized_model_dir)
 

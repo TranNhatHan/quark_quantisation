@@ -19,6 +19,7 @@ Qwen3.6-27B-mxfp4
 Qwen3.6-27B-bfp16
 Qwen3.6-27B-ptpc_fp8
 Qwen3.6-27B-mxfp4_no_kvcache
+Qwen3.6-27B-ptpc_fp8_no_kv_cache
 
 # Scripts
 bash
@@ -34,3 +35,5 @@ qinference
 example*.py
 lm_eval
 seval
+benchmark
+.gitignore
