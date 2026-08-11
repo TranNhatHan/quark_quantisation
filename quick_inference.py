@@ -1,11 +1,12 @@
-from transformers import AutoTokenizer, AutoModelForImageTextToText
+from transformers import AutoTokenizer, AutoModelForCausalLM
 
-model_path = "Qwen3.6-27B-ptpc_fp8" 
+model_path = "Qwen/Qwen3.6-27B-FP8" 
 tokenizer = AutoTokenizer.from_pretrained(model_path)
-model = AutoModelForImageTextToText.from_pretrained(model_path, device_map="auto", dtype="auto")
+model = AutoModelForCausalLM.from_pretrained(model_path, device_map="auto", dtype="auto", trust_remote_code=True)
 
-from transformers import pipeline
+inputs = tokenizer("Once upon a time,", return_tensors="pt").to(model.device)
 
-generator = pipeline("text-generation", model=model, tokenizer=tokenizer)
-output = generator("Once upon a time,", max_length=50)
+generated_ids = model.generate(**inputs, max_new_tokens=50)
+
+output = tokenizer.decode(generated_ids[0], skip_special_tokens=True)
 print(output)

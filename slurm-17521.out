@@ -1,0 +1,179 @@
+✔ OpenAIHTTPBackend backend validated with model Qwen/Qwen3.6-27B
+  {'kind': 'openai_http', 'target': 'http://ppac-pl1-s24-30:8000', 'model':     
+  'Qwen/Qwen3.6-27B', 'request_format': '/v1/chat/completions', 'api_key': None,
+  'api_routes': {'/health': 'health', '/v1/models': 'v1/models',                
+  '/v1/completions': 'v1/completions', '/v1/chat/completions':                  
+  'v1/chat/completions', '/v1/embeddings': 'v1/embeddings', '/v1/responses':    
+  'v1/responses', '/v1/audio/transcriptions': 'v1/audio/transcriptions',        
+  '/v1/audio/translations': 'v1/audio/translations', '/pooling': 'pooling'},    
+  'timeout': None, 'timeout_connect': 5.0, 'http2': True, 'follow_redirects':   
+  True, 'verify': False, 'validate_backend': True, 'stream': True, 'extras':    
+  None, 'max_tokens': None, 'server_history': False,                            
+  'tool_call_missing_behavior': 'error_stop', 'multiturn_reasoning': False}     
+✔ Tokenizer resolved, using model 'Qwen/Qwen3.6-27B' as tokenizer
+  {'kind': 'huggingface_auto', 'model': 'Qwen/Qwen3.6-27B', 'load_kwargs': {}}  
+✔ 1 datasets resolved
+  [{'kind': 'synthetic_text', 'load_kwargs': {}, 'prompt_tokens': 20000,        
+  'prompt_tokens_stdev': None, 'prompt_tokens_min': None, 'prompt_tokens_max':  
+  None, 'output_tokens': 1000, 'output_tokens_stdev': None, 'output_tokens_min':
+  None, 'output_tokens_max': None, 'delay': None, 'delay_stdev': None,          
+  'delay_min': None, 'delay_max': None, 'turns': 1, 'tool_call_turns': [],      
+  'tools': None, 'tool_response_tokens': None, 'tool_response_tokens_stdev':    
+  None, 'tool_response_tokens_min': None, 'tool_response_tokens_max': None,     
+  'server_tool_call_turns': [], 'prefix_buckets': None}]                        
+✔ 2 preprocessors resolved
+  [{'kind': 'generative_column_mapper', 'column_mappings': None}, {'kind':      
+  'encode_media', 'audio_kwargs': {}, 'image_kwargs': {}, 'video_kwargs': {}}]  
+✔ Finalizer resolved
+  {'kind': 'generative', 'tool_call_mode': 'client'}                            
+✔ Request loader resolved with inf unique requests
+  {'kind': 'pytorch', 'samples': -1, 'shuffle': False, 'num_workers': 1}        
+✔ SweepProfile profile resolved
+  {'kind': 'sweep', 'rampup_duration': 0.0, 'warmup': {'percent': None, 'value':
+  None, 'mode': 'prefer_duration'}, 'cooldown': {'percent': None, 'value': None,
+  'mode': 'prefer_duration'}, 'sweep_size': 10, 'strategy_type': 'constant',    
+  'max_concurrency': 512}                                                       
+✔ Output formats resolved
+  [{'kind': 'json', 'path': 'results/benchmark.json'}]                          
+✔ Setup complete, starting benchmarks...
+
+
+
+
+╭─ Benchmarks ─────────────────────────────────────────────────────────────────╮
+│ [1… synch… (… Req:    0.0 req/s,   77.74s Lat,     1.0 Conc,      10 Comp, … │
+│               Tok:   13.2 gen/s,  276.5 tot/s, 14135.2ms TTFT,   63.7ms ITL… │
+│ [1… throu… (… Req:    0.0 req/s,  269.20s Lat,    10.0 Conc,      10 Comp, … │
+│               Tok:   39.8 gen/s,  835.2 tot/s, 102999.7ms TTFT,  166.4ms IT… │
+│ [1… const… (… Req:    0.0 req/s,   91.48s Lat,     0.8 Conc,      10 Comp, … │
+│               Tok:    8.3 gen/s,  175.2 tot/s, 14988.4ms TTFT,   76.6ms ITL… │
+│ [1… const… (… Req:    0.0 req/s,   93.74s Lat,     1.2 Conc,       9 Comp, … │
+│               Tok:   12.8 gen/s,  269.8 tot/s, 15144.0ms TTFT,   78.7ms ITL… │
+│ [1… const… (… Req:    0.0 req/s,  106.39s Lat,     1.3 Conc,      10 Comp, … │
+│               Tok:   12.5 gen/s,  262.5 tot/s, 15966.6ms TTFT,   90.5ms ITL… │
+│ [1… const… (… Req:    0.0 req/s,  114.59s Lat,     1.7 Conc,      10 Comp, … │
+│               Tok:   15.0 gen/s,  314.6 tot/s, 16486.7ms TTFT,   98.2ms ITL… │
+│ [1… const… (… Req:    0.0 req/s,  117.56s Lat,     1.6 Conc,      10 Comp, … │
+│               Tok:   14.1 gen/s,  295.9 tot/s, 15745.5ms TTFT,  101.9ms ITL… │
+│ [1… const… (… Req:    0.0 req/s,  114.31s Lat,     1.8 Conc,      10 Comp, … │
+│               Tok:   16.3 gen/s,  341.5 tot/s, 15430.7ms TTFT,   99.0ms ITL… │
+│ [1… const… (… Req:    0.0 req/s,  123.08s Lat,     2.3 Conc,       9 Comp, … │
+│               Tok:   19.3 gen/s,  405.8 tot/s, 16250.4ms TTFT,  106.9ms ITL… │
+│ [1… const… (… Req:    0.0 req/s,  155.90s Lat,     2.9 Conc,      10 Comp, … │
+│               Tok:   19.0 gen/s,  399.8 tot/s, 17157.8ms TTFT,  138.9ms ITL… │
+╰──────────────────────────────────────────────────────────────────────────────╯
+Generating... ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ (10/10) [ 2:07:22 < 0:00:00 ]
+
+ℹ Run Summary Info
+|=============|==========|==========|========|======|======|==========|=====|=====|=========|=====|=====|
+| Benchmark   | Timings                                ||||| Input Tokens       ||| Output Tokens     |||
+| Strategy    | Start    | End      | Dur    | Warm | Cool | Comp     | Inc | Err | Comp    | Inc | Err |
+|             |          |          | Sec    | Sec  | Sec  | Tot      | Tot | Tot | Tot     | Tot | Tot |
+|-------------|----------|----------|--------|------|------|----------|-----|-----|---------|-----|-----|
+| synchronous | 15:58:56 | 16:11:54 | 777.4  | 0.0  | 0.0  | 200099.0 | 0.0 | 0.0 | 10000.0 | 0.0 | 0.0 |
+| throughput  | 16:11:56 | 16:16:26 | 270.4  | 0.0  | 0.0  | 200100.0 | 0.0 | 0.0 | 10000.0 | 0.0 | 0.0 |
+| constant    | 16:17:31 | 16:37:44 | 1213.4 | 0.0  | 0.0  | 200100.0 | 0.0 | 0.0 | 10000.0 | 0.0 | 0.0 |
+| constant    | 16:39:32 | 16:51:27 | 714.9  | 0.0  | 0.0  | 180090.0 | 0.0 | 0.0 | 9000.0  | 0.0 | 0.0 |
+| constant    | 16:56:32 | 17:10:07 | 814.4  | 0.0  | 0.0  | 200099.0 | 0.0 | 0.0 | 10000.0 | 0.0 | 0.0 |
+| constant    | 17:10:49 | 17:22:10 | 681.7  | 0.0  | 0.0  | 200100.0 | 0.0 | 0.0 | 10000.0 | 0.0 | 0.0 |
+| constant    | 17:23:24 | 17:35:28 | 723.9  | 0.0  | 0.0  | 200100.0 | 0.0 | 0.0 | 10000.0 | 0.0 | 0.0 |
+| constant    | 17:36:34 | 17:47:03 | 629.1  | 0.0  | 0.0  | 200100.0 | 0.0 | 0.0 | 10000.0 | 0.0 | 0.0 |
+| constant    | 17:48:34 | 17:56:34 | 479.9  | 0.0  | 0.0  | 180090.0 | 0.0 | 0.0 | 9000.0  | 0.0 | 0.0 |
+| constant    | 17:57:19 | 18:06:18 | 539.3  | 0.0  | 0.0  | 200100.0 | 0.0 | 0.0 | 10000.0 | 0.0 | 0.0 |
+|=============|==========|==========|========|======|======|==========|=====|=====|=========|=====|=====|
+
+
+ℹ Text Metrics Statistics (Completed Requests)
+|=============|=========|=========|=========|==========|=========|=========|=========|=========|==========|==========|==========|==========|
+| Benchmark   | Input Tokens                        |||| Input Words                        |||| Input Characters                       ||||
+| Strategy    | Per Request      || Per Second        || Per Request      || Per Second       || Per Request        || Per Second         ||
+|             | Mdn     | p95     | Mdn     | Mean     | Mdn     | p95     | Mdn     | Mean    | Mdn      | p95      | Mdn      | Mean     |
+|-------------|---------|---------|---------|----------|---------|---------|---------|---------|----------|----------|----------|----------|
+| synchronous | 20010.0 | 20010.0 | 258.6   | 287.4    | 15779.0 | 15802.0 | 204.0   | 226.5   | 105869.0 | 106909.0 | 1373.1   | 1522.9   |
+| throughput  | 20010.0 | 20010.0 | 95467.2 | 112036.7 | 15783.0 | 15810.0 | 75348.0 | 88349.9 | 106129.0 | 106366.0 | 505957.3 | 594197.4 |
+| constant    | 20010.0 | 20010.0 | 133.7   | 179.1    | 15777.0 | 15818.0 | 105.3   | 141.3   | 106029.0 | 106448.0 | 708.7    | 949.8    |
+| constant    | 20010.0 | 20010.0 | 327.3   | 283.7    | 15789.0 | 15813.0 | 258.2   | 223.8   | 106019.0 | 106430.0 | 1733.9   | 1502.8   |
+| constant    | 20010.0 | 20010.0 | 225.0   | 272.4    | 15770.0 | 15822.0 | 177.3   | 214.7   | 105994.0 | 106527.0 | 1192.8   | 1442.2   |
+| constant    | 20010.0 | 20010.0 | 251.7   | 353.4    | 15764.0 | 15803.0 | 198.6   | 278.5   | 106096.0 | 106510.0 | 1336.2   | 1873.2   |
+| constant    | 20010.0 | 20010.0 | 234.3   | 318.3    | 15782.0 | 15798.0 | 184.8   | 251.0   | 106175.0 | 106451.0 | 1243.3   | 1687.9   |
+| constant    | 20010.0 | 20010.0 | 302.3   | 419.0    | 15777.0 | 15805.0 | 238.4   | 330.2   | 105803.0 | 106667.0 | 1605.3   | 2219.3   |
+| constant    | 20010.0 | 20010.0 | 386.9   | 494.2    | 15782.0 | 15795.0 | 305.2   | 389.6   | 105868.0 | 106352.0 | 2044.8   | 2616.5   |
+| constant    | 20010.0 | 20010.0 | 198.5   | 606.6    | 15780.0 | 15799.0 | 156.5   | 478.4   | 106060.0 | 106436.0 | 1049.8   | 3215.0   |
+|=============|=========|=========|=========|==========|=========|=========|=========|=========|==========|==========|==========|==========|
+| Benchmark   | Output Tokens                       |||| Output Words                       |||| Output Characters                      ||||
+| Strategy    | Per Request      || Per Second        || Per Request      || Per Second       || Per Request        || Per Second         ||
+|             | Mdn     | p95     | Mdn     | Mean     | Mdn     | p95     | Mdn     | Mean    | Mdn      | p95      | Mdn      | Mean     |
+|-------------|---------|---------|---------|----------|---------|---------|---------|---------|----------|----------|----------|----------|
+| synchronous | 1000.0  | 1000.0  | 12.9    | 14.4     | 658.0   | 685.0   | 8.6     | 9.2     | 4155.0   | 4258.0   | 54.1     | 57.4     |
+| throughput  | 1000.0  | 1000.0  | 4771.0  | 5599.0   | 661.0   | 691.0   | 3153.6  | 3703.2  | 4208.0   | 4341.0   | 20076.3  | 23480.7  |
+| constant    | 1000.0  | 1000.0  | 6.7     | 9.0      | 652.0   | 694.0   | 3.8     | 5.7     | 4142.0   | 4364.0   | 28.1     | 36.9     |
+| constant    | 1000.0  | 1000.0  | 16.4    | 14.2     | 650.0   | 682.0   | 7.9     | 8.6     | 4167.0   | 4240.0   | 47.4     | 55.0     |
+| constant    | 1000.0  | 1000.0  | 11.2    | 13.6     | 653.0   | 688.0   | 7.2     | 9.0     | 4133.0   | 4259.0   | 46.4     | 56.0     |
+| constant    | 1000.0  | 1000.0  | 12.6    | 17.7     | 654.0   | 688.0   | 7.7     | 11.4    | 4135.0   | 4334.0   | 47.2     | 71.8     |
+| constant    | 1000.0  | 1000.0  | 11.7    | 15.9     | 659.0   | 747.0   | 7.3     | 10.3    | 4218.0   | 4766.0   | 49.2     | 66.7     |
+| constant    | 1000.0  | 1000.0  | 15.1    | 20.9     | 656.0   | 696.0   | 10.0    | 13.5    | 4118.0   | 4240.0   | 64.1     | 83.2     |
+| constant    | 1000.0  | 1000.0  | 19.3    | 24.7     | 661.0   | 678.0   | 13.1    | 16.3    | 4180.0   | 4400.0   | 80.7     | 104.0    |
+| constant    | 1000.0  | 1000.0  | 9.9     | 30.3     | 652.0   | 677.0   | 6.3     | 19.7    | 4133.0   | 4246.0   | 40.0     | 123.0    |
+|=============|=========|=========|=========|==========|=========|=========|=========|=========|==========|==========|==========|==========|
+
+
+ℹ Request Token Statistics (Completed Requests)
+|=============|=========|=========|========|========|=========|=========|========|========|=========|========|
+| Benchmark   | Input Tok        || Output Tok     || Total Tok        || Stream Iter    || Output Tok      ||
+| Strategy    | Per Req          || Per Req        || Per Req          || Per Req        || Per Stream Iter ||
+|             | Mdn     | p95     | Mdn    | p95    | Mdn     | p95     | Mdn    | p95    | Mdn     | p95    |
+|-------------|---------|---------|--------|--------|---------|---------|--------|--------|---------|--------|
+| synchronous | 20010.0 | 20010.0 | 1000.0 | 1000.0 | 21010.0 | 21010.0 | 1003.0 | 1003.0 | 1.0     | 1.0    |
+| throughput  | 20010.0 | 20010.0 | 1000.0 | 1000.0 | 21010.0 | 21010.0 | 1003.0 | 1003.0 | 1.0     | 1.0    |
+| constant    | 20010.0 | 20010.0 | 1000.0 | 1000.0 | 21010.0 | 21010.0 | 1003.0 | 1003.0 | 1.0     | 1.0    |
+| constant    | 20010.0 | 20010.0 | 1000.0 | 1000.0 | 21010.0 | 21010.0 | 1003.0 | 1003.0 | 1.0     | 1.0    |
+| constant    | 20010.0 | 20010.0 | 1000.0 | 1000.0 | 21010.0 | 21010.0 | 1003.0 | 1003.0 | 1.0     | 1.0    |
+| constant    | 20010.0 | 20010.0 | 1000.0 | 1000.0 | 21010.0 | 21010.0 | 1003.0 | 1003.0 | 1.0     | 1.0    |
+| constant    | 20010.0 | 20010.0 | 1000.0 | 1000.0 | 21010.0 | 21010.0 | 1003.0 | 1003.0 | 1.0     | 1.0    |
+| constant    | 20010.0 | 20010.0 | 1000.0 | 1000.0 | 21010.0 | 21010.0 | 1003.0 | 1003.0 | 1.0     | 1.0    |
+| constant    | 20010.0 | 20010.0 | 1000.0 | 1000.0 | 21010.0 | 21010.0 | 1003.0 | 1003.0 | 1.0     | 1.0    |
+| constant    | 20010.0 | 20010.0 | 1000.0 | 1000.0 | 21010.0 | 21010.0 | 1003.0 | 1003.0 | 1.0     | 1.0    |
+|=============|=========|=========|========|========|=========|=========|========|========|=========|========|
+
+
+ℹ Request Latency Statistics (Completed Requests)
+|=============|=========|========|=========|==========|=========|==========|=======|=======|=======|=======|
+| Benchmark   | Request Latency || TTFT              || TTFOT             || ITL          || TPOT         ||
+| Strategy    | Sec             || ms                || ms                || ms           || ms           ||
+|             | Mdn     | p95    | Mdn     | p95      | Mdn     | p95      | Mdn   | p95   | Mdn   | p95   |
+|-------------|---------|--------|---------|----------|---------|----------|-------|-------|-------|-------|
+| synchronous | 77.4    | 81.1   | 13746.1 | 17587.8  | 13746.1 | 17587.8  | 63.7  | 63.7  | 77.4  | 81.1  |
+| throughput  | 269.2   | 269.7  | 96019.6 | 183296.0 | 96019.6 | 183296.0 | 157.0 | 250.0 | 269.2 | 269.7 |
+| constant    | 95.8    | 99.5   | 15624.8 | 15760.2  | 15624.8 | 15760.2  | 82.0  | 83.9  | 95.8  | 99.5  |
+| constant    | 100.3   | 100.9  | 15669.9 | 15815.2  | 15669.9 | 15815.2  | 84.8  | 85.2  | 100.3 | 100.9 |
+| constant    | 106.9   | 125.0  | 15684.2 | 17343.0  | 15684.2 | 17343.0  | 89.7  | 107.9 | 106.9 | 125.0 |
+| constant    | 112.4   | 148.0  | 15795.5 | 18943.7  | 15795.5 | 18943.7  | 93.6  | 130.8 | 112.4 | 148.0 |
+| constant    | 105.3   | 160.9  | 14606.8 | 19007.5  | 14606.8 | 19007.5  | 90.8  | 143.7 | 105.3 | 160.9 |
+| constant    | 109.1   | 157.6  | 14602.7 | 18978.3  | 14602.7 | 18978.3  | 94.6  | 142.1 | 109.1 | 157.6 |
+| constant    | 115.5   | 166.5  | 15742.2 | 18966.9  | 15742.2 | 18966.9  | 101.7 | 149.3 | 115.5 | 166.5 |
+| constant    | 159.8   | 209.5  | 15616.2 | 22148.5  | 15616.2 | 22148.5  | 137.8 | 195.8 | 159.8 | 209.5 |
+|=============|=========|========|=========|==========|=========|==========|=======|=======|=======|=======|
+
+
+ℹ Server Throughput Statistics (All Requests)
+|=============|=======|======|=========|==============|===============|==============|
+| Benchmark   | Requests             ||| Input Tokens | Output Tokens | Total Tokens |
+| Strategy    | Concurrency || Per Sec | Per Sec      | Per Sec       | Per Sec      |
+|             | Mdn   | Mean | Mean                                               ||||
+|-------------|-------|------|---------|--------------|---------------|--------------|
+| synchronous | 1.0   | 1.0  | 0.0     | 287.4        | 13.2          | 276.5        |
+| throughput  | 10.0  | 10.0 | 0.0     | 1211.8       | 39.8          | 835.2        |
+| constant    | 1.0   | 0.8  | 0.0     | 176.5        | 8.3           | 175.2        |
+| constant    | 1.0   | 1.2  | 0.0     | 283.6        | 12.8          | 269.8        |
+| constant    | 1.0   | 1.3  | 0.0     | 273.3        | 12.5          | 262.5        |
+| constant    | 2.0   | 1.7  | 0.0     | 332.4        | 15.0          | 314.6        |
+| constant    | 1.0   | 1.6  | 0.0     | 310.6        | 14.1          | 295.9        |
+| constant    | 1.0   | 1.8  | 0.0     | 364.4        | 16.3          | 341.5        |
+| constant    | 2.0   | 2.3  | 0.0     | 470.6        | 19.3          | 405.8        |
+| constant    | 2.0   | 2.9  | 0.0     | 435.2        | 19.0          | 399.8        |
+|=============|=======|======|=========|==============|===============|==============|
+
+
+
+✔ Benchmarking complete, generated 10 benchmark(s)
+…   json    : results/benchmark.json

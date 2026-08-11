@@ -1,3 +1,0 @@
-2026-08-07:08:36:49 INFO     [_cli.run:388] Selected Tasks: ['humaneval', 'gsm8k', 'mmlu']
-2026-08-07:08:36:58 INFO     [evaluator:214] Setting random seed to 0 | Setting numpy seed to 1234 | Setting torch manual seed to 1234 | Setting fewshot manual seed to 1234
-2026-08-07:08:36:58 INFO     [evaluator:239] Initializing vllm model, with arguments: {'pretrained': 'Qwen/Qwen3.6-27B-FP8', 'language_model_only': True}

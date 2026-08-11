@@ -135,7 +135,6 @@ def run_quark_fp8_example() -> None:
     print(f"[INFO] Loading model: {model_id}")
     model = get_model(model_id, device)
     tokenizer = get_tokenizer(model_id, max_seq_len=seq_len)
-    original_ppl = ppl_eval(model, tokenizer, device)
     calib_dataloader = get_dataloader(tokenizer, batch_size, device, seq_len)
 
     print("[INFO] Starting quantization...")
@@ -143,7 +142,6 @@ def run_quark_fp8_example() -> None:
     print("[INFO] Quantization complete.")
     print("[INFO] Simple test PPL with wikitext-2.")
     quantized_ppl = ppl_eval(quantized_model, tokenizer, device)
-    print(f"[INFO] Perplexity of the original model: {original_ppl.item():.8f}")
     print(f"[INFO] Perplexity of the quantised model: {quantized_ppl.item():.8f}")
 
 if __name__ == "__main__":
