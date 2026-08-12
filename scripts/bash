@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# Run your command
+module load rocm/7.2.3
+source .venv/bin/activate
+uv run main.py
+# lm_eval \
+#   --model vllm \
+#   --model_args "pretrained=Qwen/Qwen3.6-27B,max_model_len=2048,trust_remote_code=True" \
+#   --tasks gsm8k \
+#   --num_fewshot 5 \
+#   --batch_size 4 \
+#   --output_path results

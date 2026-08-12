@@ -1,0 +1,97 @@
+#!/bin/bash
+
+# Run your command
+module load rocm/7.2.3
+source .venv/bin/activate
+# export HF_ALLOW_CODE_EVAL="1"
+
+lm_eval \
+  --model vllm \
+  --model_args "pretrained=Qwen/Qwen3.6-27B,max_model_len=4096,gpu_memory_utilization=0.85,language_model_only=True" \
+  --tasks wikitext \
+  --batch_size 2 \
+  --log_samples \
+  --output_path results
+
+lm_eval \
+  --model vllm \
+  --model_args "pretrained=Qwen/Qwen3.6-27B-FP8,max_model_len=4096,gpu_memory_utilization=0.85,language_model_only=True" \
+  --tasks wikitext \
+  --batch_size 2 \
+  --log_samples \
+  --output_path results
+
+lm_eval \
+  --model vllm \
+  --model_args "pretrained=Qwen3.6-27B-FP8,max_model_len=4096,gpu_memory_utilization=0.85,language_model_only=True" \
+  --tasks wikitext \
+  --batch_size 2 \
+  --log_samples \
+  --output_path results
+
+lm_eval \
+  --model vllm \
+  --model_args "pretrained=Qwen3.6-27B-FP8_KVFP8,max_model_len=4096,gpu_memory_utilization=0.85,language_model_only=True" \
+  --tasks wikitext \
+  --batch_size 2 \
+  --log_samples \
+  --output_path results
+
+lm_eval \
+  --model vllm \
+  --model_args "pretrained=Qwen3.6-27B-MXFP4,max_model_len=4096,gpu_memory_utilization=0.85,language_model_only=True" \
+  --tasks wikitext \
+  --batch_size 2 \
+  --log_samples \
+  --output_path results
+
+lm_eval \
+  --model vllm \
+  --model_args "pretrained=Qwen3.6-27B-MXFP4-KVFP8,max_model_len=4096,gpu_memory_utilization=0.85,language_model_only=True" \
+  --tasks wikitext \
+  --batch_size 2 \
+  --log_samples \
+  --output_path results
+
+# lm_eval \
+#   --model hf \
+#   --model_args "pretrained=Qwen/Qwen3.6-27B,dtype=bfloat16" \
+#   --tasks wikitext \
+#   --batch_size 4 \
+#   --log_samples \
+#   --output_path results
+
+# lm_eval \
+#   --model local-completions \
+#   --model_args "model=Qwen/Qwen3.6-27B,base_url=http://ppac-pl1-s24-30:8000/v1/completions" \
+#   --tasks wikitext \
+#   --batch_size 4 \
+#   --log_samples \
+#   --output_path results
+
+# lm_eval \
+#   --model local-completions \
+#   --model_args model=Qwen/Qwen3.6-27B,base_url=http://ppac-pl1-s24-30:8000/v1/completions \
+#   --tasks wikitext \
+#   --batch_size 4 \
+#   --log_samples \
+#   --output_path results
+
+# lm_eval \
+#   --model local-chat-completions \
+#   --model_args "model=Qwen/Qwen3.6-27B,base_url=http://ppac-pl1-s24-30:8000/v1/chat/completions" \
+#   --tasks humaneval \
+#   --batch_size 16 \
+#   --log_samples \
+#   --confirm_run_unsafe_code \
+#   --apply_chat_template \
+#   --output_path results
+
+# lm_eval \
+#     --model vllm \
+#     --model_args pretrained=Qwen3.6-27B-fp8_no_kv_cache,language_model_only=True \
+#     --tasks humaneval,gsm8k,mmlu \
+#     --batch_size 16 \
+#     --confirm_run_unsafe_code \
+#     --output_path results
+

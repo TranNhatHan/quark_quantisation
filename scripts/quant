@@ -1,0 +1,5 @@
+#!/bin/bash
+
+# Run your command
+module load rocm/7.2.3
+uv run quark_quantize.py
