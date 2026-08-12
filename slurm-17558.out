@@ -1,8 +1,0 @@
-Loaded 62 samples
-Total log-likelihood: -496743.5000
-Total words:          241335
-Perplexity:           7.832762
-
-PPL:                    7.832762
-95% bootstrap CI:       [7.304153, 8.501289]
-Bootstrap samples:      1000

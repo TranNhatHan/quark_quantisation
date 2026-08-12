@@ -11,11 +11,5 @@ wheels/
 .env
 
 # Models
-Qwen3.6-27B-FP8
-Qwen3.6-27B-FP8-KVFP8
-Qwen3.6-27B-FP8-KVFP8-ATFP8
-Qwen3.6-27B-MXFP4
-Qwen3.6-27B-MXFP4-KVFP8
+models
 
-#Example
-example*.py
