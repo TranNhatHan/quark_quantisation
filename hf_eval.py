@@ -1,5 +1,6 @@
 import torch
 import evaluate
+import math
 from datasets import load_dataset
 from tqdm import tqdm
 from transformers import AutoTokenizer, AutoModelForImageTextToText
@@ -9,30 +10,69 @@ def ppl_eval(
     model,
     tokenizer,
     device: str | None,
-    seqlen_for_eval: int = 2048,
-    eval_batch_size: int = 4,
-) -> torch.Tensor:
-    testdata = load_dataset("Salesforce/wikitext", "wikitext-2-raw-v1", split="test")
-    testenc = tokenizer("\n\n".join(testdata["text"]),return_tensors="pt").input_ids.to(device)
+    max_length: int = 4096,
+    stride: int = 512,
+) -> float:
 
-    nsamples = testenc.numel() // seqlen_for_eval
-    total_nll = 0.0
-    total_tokens = 0
-    for start_idx in tqdm(range(0, nsamples, eval_batch_size)):
-        end_idx = min(start_idx + eval_batch_size, nsamples)
-        batch = torch.cat([testenc[:,i * seqlen_for_eval : (i + 1) * seqlen_for_eval] for i in range(start_idx, end_idx)],dim=0)
-        logits = model(batch).logits
-        shift_logits = logits[:, :-1, :].contiguous()
-        shift_labels = batch[:, 1:].contiguous()
-        loss = torch.nn.functional.cross_entropy(
-            shift_logits.view(-1, shift_logits.size(-1)),
-            shift_labels.view(-1),
-            reduction="mean",
+    test = load_dataset(
+        "Salesforce/wikitext",
+        "wikitext-2-raw-v1",
+        split="test",
+    )
+
+    encodings = tokenizer(
+        "\n\n".join(test["text"]),
+        return_tensors="pt",
+    )
+
+    seq_len = encodings.input_ids.size(1)
+
+    nll_sum = 0.0
+    n_tokens = 0
+    prev_end_loc = 0
+
+    for begin_loc in tqdm(range(0, seq_len, stride)):
+        end_loc = min(begin_loc + max_length, seq_len)
+
+        trg_len = end_loc - prev_end_loc
+
+        input_ids = encodings.input_ids[
+            :, begin_loc:end_loc
+        ].to(device)
+
+        target_ids = input_ids.clone()
+
+        target_ids[:, :-trg_len] = -100
+
+        outputs = model(
+            input_ids,
+            labels=target_ids,
         )
-        num_tokens = shift_labels.numel()
-        total_nll += loss.float() * num_tokens
-        total_tokens += num_tokens
-    ppl = torch.exp(total_nll / total_tokens)
+
+        neg_log_likelihood = outputs.loss
+
+        num_valid_tokens = (
+            target_ids != -100
+        ).sum().item()
+
+        batch_size = target_ids.size(0)
+        num_loss_tokens = num_valid_tokens - batch_size
+
+        nll_sum += (
+            neg_log_likelihood.item()
+            * num_loss_tokens
+        )
+
+        n_tokens += num_loss_tokens
+
+        prev_end_loc = end_loc
+
+        if end_loc == seq_len:
+            break
+
+    avg_nll = nll_sum / n_tokens
+    ppl = math.exp(avg_nll)
+
     return ppl
 
 @torch.no_grad()
@@ -68,7 +108,7 @@ def generate_summaries(model, tokenizer, device, num_samples=100, batch_size=8):
 
         outputs = model.generate(
             **inputs,
-            max_new_tokens=128,
+            max_new_tokens=512,
             do_sample=False,
             use_cache=True,
             pad_token_id=tokenizer.pad_token_id,
@@ -88,7 +128,7 @@ def generate_summaries(model, tokenizer, device, num_samples=100, batch_size=8):
 
 def run_quark_fp8_example():
     device = "cuda" if torch.cuda.is_available() else "cpu"
-    model_path = "Qwen3.6-27B-fp8"
+    model_path = "Qwen/Qwen3.6-27B"
 
     print("[INFO] Loading Model & Tokenizer...")
     tokenizer = AutoTokenizer.from_pretrained(model_path, padding_side="left")
@@ -99,9 +139,9 @@ def run_quark_fp8_example():
 
     ppl = ppl_eval(model, tokenizer, device)
 
-    print(f"[INFO] Perplexity: {ppl.item():.8f}\n")
+    print(f"[INFO] Perplexity: {ppl:.8f}\n")
 
-    preds, refs = generate_summaries(model, tokenizer, device, num_samples=-1, batch_size=8)
+    preds, refs = generate_summaries(model, tokenizer, device, num_samples=100, batch_size=8)
 
     print("[INFO] Computing ROUGE and METEOR scores...")
 

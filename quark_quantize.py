@@ -5,7 +5,7 @@ from datasets import load_dataset
 from torch.utils.data import DataLoader
 from tqdm import tqdm
 from transformers import AutoModelForImageTextToText, AutoModelForCausalLM, AutoTokenizer, PreTrainedModel, PreTrainedTokenizer
-
+from quark.torch.quantization.config.config import load_quant_algo_config_from_file
 from quark.torch import LLMTemplate, ModelQuantizer, export_safetensors, export_gguf
 
 def get_pileval(
@@ -74,23 +74,24 @@ def quantize_model_pipeline(
     calib_dataloader: DataLoader,
     tokenizer: PreTrainedTokenizer,
 ) -> PreTrainedModel:
-
+    custom_autosmoothquant_config = load_quant_algo_config_from_file("qwen3_6_autosmoothquant_config.json")
     template = LLMTemplate(
         model_type="qwen3_6",
         kv_layers_name=["*k_proj", "*v_proj"],
         q_layer_name="*q_proj",
         exclude_layers_name=["lm_head"],
+        algorithm_configs={"autosmoothquant": custom_autosmoothquant_config}
     )
 
     LLMTemplate.register_template(template)
     template = LLMTemplate.get("qwen3_6")
-    quant_config = template.get_config(scheme="fp8", kv_cache_scheme="fp8", attention_scheme="fp8")
+    quant_config = template.get_config(scheme="fp8", algorithm=["autosmoothquant"])
 
     quantizer = ModelQuantizer(quant_config, multi_device=True)
     quantized_model: PreTrainedModel = quantizer.quantize_model(model, calib_dataloader)
 
     print("[INFO] Export Quant Model.")
-    quantized_model_dir = "./Qwen3.6-27B-FP8-KVFP8-ATFP8"
+    quantized_model_dir = "models/Qwen3.6-27B-FP8-ASQ"
     export_safetensors(model=quantized_model, output_dir=quantized_model_dir)
     tokenizer.save_pretrained(quantized_model_dir)
 

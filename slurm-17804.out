@@ -1,0 +1,415 @@
+[aiter] import [module_aiter_core] under /shared/prerelease/home/cambridge/han/Projects/quark-quantisation/.venv/lib/python3.12/site-packages/aiter/jit/module_aiter_core.so
+[32m
+[QUARK-INFO]: C++ kernel loading check start.[0m
+[32m
+[QUARK-INFO]: Compiling stable ABI hw_emulation extension via JIT. First-time compilation may take a few minutes...[0m
+[92mSuccessfully preprocessed all matching files.[0m
+[32m
+[QUARK-INFO]: Stable ABI hw_emulation JIT compilation complete.[0m
+[32m
+[QUARK-INFO]: C++ kernel loading/compilation is complete. Total time: 1.4636 seconds[0m
+[transformers] The fast path is not available because one of the required library is not installed. Falling back to torch implementation. To install follow https://github.com/fla-org/flash-linear-attention#installation and https://github.com/Dao-AILab/causal-conv1d
+[INFO] Loading model: Qwen/Qwen3.6-27B
+Loading weights:   0%|          | 0/1184 [00:00<?, ?it/s]Loading weights:   3%|▎         | 30/1184 [00:00<00:04, 247.43it/s]Loading weights:   5%|▍         | 55/1184 [00:00<00:04, 245.47it/s]Loading weights:   8%|▊         | 97/1184 [00:00<00:03, 313.51it/s]Loading weights:  11%|█         | 129/1184 [00:00<00:03, 292.50it/s]Loading weights:  14%|█▍        | 164/1184 [00:00<00:03, 291.62it/s]Loading weights:  19%|█▉        | 226/1184 [00:00<00:02, 388.08it/s]Loading weights:  24%|██▎       | 281/1184 [00:00<00:02, 434.38it/s]Loading weights:  28%|██▊       | 332/1184 [00:00<00:01, 453.24it/s]Loading weights:  32%|███▏      | 378/1184 [00:01<00:01, 403.52it/s]Loading weights:  35%|███▌      | 420/1184 [00:01<00:01, 405.24it/s]Loading weights:  41%|████      | 482/1184 [00:01<00:01, 458.34it/s]Loading weights:  45%|████▍     | 529/1184 [00:01<00:01, 421.25it/s]Loading weights:  48%|████▊     | 573/1184 [00:01<00:01, 383.81it/s]Loading weights:  52%|█████▏    | 613/1184 [00:01<00:01, 375.01it/s]Loading weights:  56%|█████▌    | 661/1184 [00:01<00:01, 396.79it/s]Loading weights:  61%|██████    | 717/1184 [00:01<00:01, 436.19it/s]Loading weights:  68%|██████▊   | 806/1184 [00:01<00:00, 561.32it/s]Loading weights:  82%|████████▏ | 974/1184 [00:02<00:00, 877.54it/s]Loading weights: 100%|██████████| 1184/1184 [00:02<00:00, 580.78it/s]
+Repo card metadata block was not found. Setting CardData to empty.
+[transformers] Token indices sequence length is longer than the specified maximum sequence length for this model (1043 > 512). Running this sequence through the model will result in indexing errors
+[33m
+[QUARK-WARNING]: Expanding exclude pattern ['lm_head'] to ['lm_head', 'lm_head.*'][0m
+[32m
+[QUARK-INFO]: Using weight quantization and activation static quantization.[0m
+[32m
+[QUARK-INFO]: Quantizing with the quantization configuration:
+QConfig(
+    global_quant_config=QLayerConfig(
+        input_tensors=QTensorConfig(
+            dtype=Dtype.fp8_e4m3,
+            observer_cls=<class 'quark.torch.quantization.observer.observer.PerTensorMinMaxObserver'>,
+            is_dynamic=False,
+            qscheme=QSchemeType.per_tensor,
+            ch_axis=None,
+            group_size=None,
+            block_size=None,
+            symmetric=True,
+            round_method=RoundType.half_even,
+            scale_type=ScaleType.float,
+            scale_format=None,
+            scale_calculation_mode=None,
+            qat_spec=None,
+            mx_element_dtype=None,
+            zero_point_type=ZeroPointType.int32,
+            is_scale_quant=False,
+            enable_buffer_reuse=False,
+            max_input_numel=4194304,
+        ),
+        output_tensors=None,
+        weight=QTensorConfig(
+            dtype=Dtype.fp8_e4m3,
+            observer_cls=<class 'quark.torch.quantization.observer.observer.PerTensorMinMaxObserver'>,
+            is_dynamic=False,
+            qscheme=QSchemeType.per_tensor,
+            ch_axis=None,
+            group_size=None,
+            block_size=None,
+            symmetric=True,
+            round_method=RoundType.half_even,
+            scale_type=ScaleType.float,
+            scale_format=None,
+            scale_calculation_mode=None,
+            qat_spec=None,
+            mx_element_dtype=None,
+            zero_point_type=ZeroPointType.int32,
+            is_scale_quant=False,
+            enable_buffer_reuse=False,
+            max_input_numel=4194304,
+        ),
+        bias=None,
+        target_device=None,
+    ),
+    exclude=['lm_head.*', 'lm_head'],
+    algo_config=None,
+    log_severity_level=1,
+    version="0.12.post1",
+    layer_type_quant_config={},
+    layer_quant_config={'*k_proj': QLayerConfig(input_tensors=QTensorConfig(dtype=<Dtype.fp8_e4m3: 'fp8_e4m3'>, observer_cls=<class 'quark.torch.quantization.observer.observer.PerTensorMinMaxObserver'>, is_dynamic=False, qscheme=<QSchemeType.per_tensor: 'per_tensor'>, ch_axis=None, group_size=None, block_size=None, symmetric=True, round_method=<RoundType.half_even: 8>, scale_type=<ScaleType.float: 'float'>, scale_format=None, scale_calculation_mode=None, qat_spec=None, mx_element_dtype=None, zero_point_type=<ZeroPointType.int32: 'int32'>, is_scale_quant=False, enable_buffer_reuse=False, max_input_numel=4194304), output_tensors=QTensorConfig(dtype=<Dtype.fp8_e4m3: 'fp8_e4m3'>, observer_cls=<class 'quark.torch.quantization.observer.observer.PerTensorMinMaxObserver'>, is_dynamic=False, qscheme=<QSchemeType.per_tensor: 'per_tensor'>, ch_axis=None, group_size=None, block_size=None, symmetric=True, round_method=<RoundType.half_even: 8>, scale_type=None, scale_format=None, scale_calculation_mode=None, qat_spec=None, mx_element_dtype=None, zero_point_type=<ZeroPointType.int32: 'int32'>, is_scale_quant=False, enable_buffer_reuse=False, max_input_numel=4194304), weight=QTensorConfig(dtype=<Dtype.fp8_e4m3: 'fp8_e4m3'>, observer_cls=<class 'quark.torch.quantization.observer.observer.PerTensorMinMaxObserver'>, is_dynamic=False, qscheme=<QSchemeType.per_tensor: 'per_tensor'>, ch_axis=None, group_size=None, block_size=None, symmetric=True, round_method=<RoundType.half_even: 8>, scale_type=<ScaleType.float: 'float'>, scale_format=None, scale_calculation_mode=None, qat_spec=None, mx_element_dtype=None, zero_point_type=<ZeroPointType.int32: 'int32'>, is_scale_quant=False, enable_buffer_reuse=False, max_input_numel=4194304), bias=None, target_device=None), '*v_proj': QLayerConfig(input_tensors=QTensorConfig(dtype=<Dtype.fp8_e4m3: 'fp8_e4m3'>, observer_cls=<class 'quark.torch.quantization.observer.observer.PerTensorMinMaxObserver'>, is_dynamic=False, qscheme=<QSchemeType.per_tensor: 'per_tensor'>, ch_axis=None, group_size=None, block_size=None, symmetric=True, round_method=<RoundType.half_even: 8>, scale_type=<ScaleType.float: 'float'>, scale_format=None, scale_calculation_mode=None, qat_spec=None, mx_element_dtype=None, zero_point_type=<ZeroPointType.int32: 'int32'>, is_scale_quant=False, enable_buffer_reuse=False, max_input_numel=4194304), output_tensors=QTensorConfig(dtype=<Dtype.fp8_e4m3: 'fp8_e4m3'>, observer_cls=<class 'quark.torch.quantization.observer.observer.PerTensorMinMaxObserver'>, is_dynamic=False, qscheme=<QSchemeType.per_tensor: 'per_tensor'>, ch_axis=None, group_size=None, block_size=None, symmetric=True, round_method=<RoundType.half_even: 8>, scale_type=None, scale_format=None, scale_calculation_mode=None, qat_spec=None, mx_element_dtype=None, zero_point_type=<ZeroPointType.int32: 'int32'>, is_scale_quant=False, enable_buffer_reuse=False, max_input_numel=4194304), weight=QTensorConfig(dtype=<Dtype.fp8_e4m3: 'fp8_e4m3'>, observer_cls=<class 'quark.torch.quantization.observer.observer.PerTensorMinMaxObserver'>, is_dynamic=False, qscheme=<QSchemeType.per_tensor: 'per_tensor'>, ch_axis=None, group_size=None, block_size=None, symmetric=True, round_method=<RoundType.half_even: 8>, scale_type=<ScaleType.float: 'float'>, scale_format=None, scale_calculation_mode=None, qat_spec=None, mx_element_dtype=None, zero_point_type=<ZeroPointType.int32: 'int32'>, is_scale_quant=False, enable_buffer_reuse=False, max_input_numel=4194304), bias=None, target_device=None), '*in_proj_qkv': QLayerConfig(input_tensors=QTensorConfig(dtype=<Dtype.fp8_e4m3: 'fp8_e4m3'>, observer_cls=<class 'quark.torch.quantization.observer.observer.PerTensorMinMaxObserver'>, is_dynamic=False, qscheme=<QSchemeType.per_tensor: 'per_tensor'>, ch_axis=None, group_size=None, block_size=None, symmetric=True, round_method=<RoundType.half_even: 8>, scale_type=<ScaleType.float: 'float'>, scale_format=None, scale_calculation_mode=None, qat_spec=None, mx_element_dtype=None, zero_point_type=<ZeroPointType.int32: 'int32'>, is_scale_quant=False, enable_buffer_reuse=False, max_input_numel=4194304), output_tensors=QTensorConfig(dtype=<Dtype.fp8_e4m3: 'fp8_e4m3'>, observer_cls=<class 'quark.torch.quantization.observer.observer.PerTensorMinMaxObserver'>, is_dynamic=False, qscheme=<QSchemeType.per_tensor: 'per_tensor'>, ch_axis=None, group_size=None, block_size=None, symmetric=True, round_method=<RoundType.half_even: 8>, scale_type=None, scale_format=None, scale_calculation_mode=None, qat_spec=None, mx_element_dtype=None, zero_point_type=<ZeroPointType.int32: 'int32'>, is_scale_quant=False, enable_buffer_reuse=False, max_input_numel=4194304), weight=QTensorConfig(dtype=<Dtype.fp8_e4m3: 'fp8_e4m3'>, observer_cls=<class 'quark.torch.quantization.observer.observer.PerTensorMinMaxObserver'>, is_dynamic=False, qscheme=<QSchemeType.per_tensor: 'per_tensor'>, ch_axis=None, group_size=None, block_size=None, symmetric=True, round_method=<RoundType.half_even: 8>, scale_type=<ScaleType.float: 'float'>, scale_format=None, scale_calculation_mode=None, qat_spec=None, mx_element_dtype=None, zero_point_type=<ZeroPointType.int32: 'int32'>, is_scale_quant=False, enable_buffer_reuse=False, max_input_numel=4194304), bias=None, target_device=None), '*q_proj': QLayerConfig(input_tensors=QTensorConfig(dtype=<Dtype.fp8_e4m3: 'fp8_e4m3'>, observer_cls=<class 'quark.torch.quantization.observer.observer.PerTensorMinMaxObserver'>, is_dynamic=False, qscheme=<QSchemeType.per_tensor: 'per_tensor'>, ch_axis=None, group_size=None, block_size=None, symmetric=True, round_method=<RoundType.half_even: 8>, scale_type=<ScaleType.float: 'float'>, scale_format=None, scale_calculation_mode=None, qat_spec=None, mx_element_dtype=None, zero_point_type=<ZeroPointType.int32: 'int32'>, is_scale_quant=False, enable_buffer_reuse=False, max_input_numel=4194304), output_tensors=QTensorConfig(dtype=<Dtype.fp8_e4m3: 'fp8_e4m3'>, observer_cls=<class 'quark.torch.quantization.observer.observer.PerTensorMinMaxObserver'>, is_dynamic=False, qscheme=<QSchemeType.per_tensor: 'per_tensor'>, ch_axis=None, group_size=None, block_size=None, symmetric=True, round_method=<RoundType.half_even: 8>, scale_type=None, scale_format=None, scale_calculation_mode=None, qat_spec=None, mx_element_dtype=None, zero_point_type=<ZeroPointType.int32: 'int32'>, is_scale_quant=False, enable_buffer_reuse=False, max_input_numel=4194304), weight=QTensorConfig(dtype=<Dtype.fp8_e4m3: 'fp8_e4m3'>, observer_cls=<class 'quark.torch.quantization.observer.observer.PerTensorMinMaxObserver'>, is_dynamic=False, qscheme=<QSchemeType.per_tensor: 'per_tensor'>, ch_axis=None, group_size=None, block_size=None, symmetric=True, round_method=<RoundType.half_even: 8>, scale_type=<ScaleType.float: 'float'>, scale_format=None, scale_calculation_mode=None, qat_spec=None, mx_element_dtype=None, zero_point_type=<ZeroPointType.int32: 'int32'>, is_scale_quant=False, enable_buffer_reuse=False, max_input_numel=4194304), bias=None, target_device=None)},
+    kv_cache_quant_config={'*k_proj': QLayerConfig(input_tensors=QTensorConfig(dtype=<Dtype.fp8_e4m3: 'fp8_e4m3'>, observer_cls=<class 'quark.torch.quantization.observer.observer.PerTensorMinMaxObserver'>, is_dynamic=False, qscheme=<QSchemeType.per_tensor: 'per_tensor'>, ch_axis=None, group_size=None, block_size=None, symmetric=True, round_method=<RoundType.half_even: 8>, scale_type=<ScaleType.float: 'float'>, scale_format=None, scale_calculation_mode=None, qat_spec=None, mx_element_dtype=None, zero_point_type=<ZeroPointType.int32: 'int32'>, is_scale_quant=False, enable_buffer_reuse=False, max_input_numel=4194304), output_tensors=QTensorConfig(dtype=<Dtype.fp8_e4m3: 'fp8_e4m3'>, observer_cls=<class 'quark.torch.quantization.observer.observer.PerTensorMinMaxObserver'>, is_dynamic=False, qscheme=<QSchemeType.per_tensor: 'per_tensor'>, ch_axis=None, group_size=None, block_size=None, symmetric=True, round_method=<RoundType.half_even: 8>, scale_type=None, scale_format=None, scale_calculation_mode=None, qat_spec=None, mx_element_dtype=None, zero_point_type=<ZeroPointType.int32: 'int32'>, is_scale_quant=False, enable_buffer_reuse=False, max_input_numel=4194304), weight=QTensorConfig(dtype=<Dtype.fp8_e4m3: 'fp8_e4m3'>, observer_cls=<class 'quark.torch.quantization.observer.observer.PerTensorMinMaxObserver'>, is_dynamic=False, qscheme=<QSchemeType.per_tensor: 'per_tensor'>, ch_axis=None, group_size=None, block_size=None, symmetric=True, round_method=<RoundType.half_even: 8>, scale_type=<ScaleType.float: 'float'>, scale_format=None, scale_calculation_mode=None, qat_spec=None, mx_element_dtype=None, zero_point_type=<ZeroPointType.int32: 'int32'>, is_scale_quant=False, enable_buffer_reuse=False, max_input_numel=4194304), bias=None, target_device=None), '*v_proj': QLayerConfig(input_tensors=QTensorConfig(dtype=<Dtype.fp8_e4m3: 'fp8_e4m3'>, observer_cls=<class 'quark.torch.quantization.observer.observer.PerTensorMinMaxObserver'>, is_dynamic=False, qscheme=<QSchemeType.per_tensor: 'per_tensor'>, ch_axis=None, group_size=None, block_size=None, symmetric=True, round_method=<RoundType.half_even: 8>, scale_type=<ScaleType.float: 'float'>, scale_format=None, scale_calculation_mode=None, qat_spec=None, mx_element_dtype=None, zero_point_type=<ZeroPointType.int32: 'int32'>, is_scale_quant=False, enable_buffer_reuse=False, max_input_numel=4194304), output_tensors=QTensorConfig(dtype=<Dtype.fp8_e4m3: 'fp8_e4m3'>, observer_cls=<class 'quark.torch.quantization.observer.observer.PerTensorMinMaxObserver'>, is_dynamic=False, qscheme=<QSchemeType.per_tensor: 'per_tensor'>, ch_axis=None, group_size=None, block_size=None, symmetric=True, round_method=<RoundType.half_even: 8>, scale_type=None, scale_format=None, scale_calculation_mode=None, qat_spec=None, mx_element_dtype=None, zero_point_type=<ZeroPointType.int32: 'int32'>, is_scale_quant=False, enable_buffer_reuse=False, max_input_numel=4194304), weight=QTensorConfig(dtype=<Dtype.fp8_e4m3: 'fp8_e4m3'>, observer_cls=<class 'quark.torch.quantization.observer.observer.PerTensorMinMaxObserver'>, is_dynamic=False, qscheme=<QSchemeType.per_tensor: 'per_tensor'>, ch_axis=None, group_size=None, block_size=None, symmetric=True, round_method=<RoundType.half_even: 8>, scale_type=<ScaleType.float: 'float'>, scale_format=None, scale_calculation_mode=None, qat_spec=None, mx_element_dtype=None, zero_point_type=<ZeroPointType.int32: 'int32'>, is_scale_quant=False, enable_buffer_reuse=False, max_input_numel=4194304), bias=None, target_device=None), '*in_proj_qkv': QLayerConfig(input_tensors=QTensorConfig(dtype=<Dtype.fp8_e4m3: 'fp8_e4m3'>, observer_cls=<class 'quark.torch.quantization.observer.observer.PerTensorMinMaxObserver'>, is_dynamic=False, qscheme=<QSchemeType.per_tensor: 'per_tensor'>, ch_axis=None, group_size=None, block_size=None, symmetric=True, round_method=<RoundType.half_even: 8>, scale_type=<ScaleType.float: 'float'>, scale_format=None, scale_calculation_mode=None, qat_spec=None, mx_element_dtype=None, zero_point_type=<ZeroPointType.int32: 'int32'>, is_scale_quant=False, enable_buffer_reuse=False, max_input_numel=4194304), output_tensors=QTensorConfig(dtype=<Dtype.fp8_e4m3: 'fp8_e4m3'>, observer_cls=<class 'quark.torch.quantization.observer.observer.PerTensorMinMaxObserver'>, is_dynamic=False, qscheme=<QSchemeType.per_tensor: 'per_tensor'>, ch_axis=None, group_size=None, block_size=None, symmetric=True, round_method=<RoundType.half_even: 8>, scale_type=None, scale_format=None, scale_calculation_mode=None, qat_spec=None, mx_element_dtype=None, zero_point_type=<ZeroPointType.int32: 'int32'>, is_scale_quant=False, enable_buffer_reuse=False, max_input_numel=4194304), weight=QTensorConfig(dtype=<Dtype.fp8_e4m3: 'fp8_e4m3'>, observer_cls=<class 'quark.torch.quantization.observer.observer.PerTensorMinMaxObserver'>, is_dynamic=False, qscheme=<QSchemeType.per_tensor: 'per_tensor'>, ch_axis=None, group_size=None, block_size=None, symmetric=True, round_method=<RoundType.half_even: 8>, scale_type=<ScaleType.float: 'float'>, scale_format=None, scale_calculation_mode=None, qat_spec=None, mx_element_dtype=None, zero_point_type=<ZeroPointType.int32: 'int32'>, is_scale_quant=False, enable_buffer_reuse=False, max_input_numel=4194304), bias=None, target_device=None)},
+    kv_cache_group=['*k_proj', '*v_proj', '*in_proj_qkv'],
+    min_kv_scale=0.0,
+    kv_cache_post_rope=False,
+    shared_scale_groups=[
+    ],
+    softmax_quant_spec=QTensorConfig(
+        dtype=Dtype.fp8_e4m3,
+        observer_cls=<class 'quark.torch.quantization.observer.observer.PerTensorMinMaxObserver'>,
+        is_dynamic=False,
+        qscheme=QSchemeType.per_tensor,
+        ch_axis=None,
+        group_size=None,
+        block_size=None,
+        symmetric=True,
+        round_method=RoundType.half_even,
+        scale_type=None,
+        scale_format=None,
+        scale_calculation_mode=None,
+        qat_spec=None,
+        mx_element_dtype=None,
+        zero_point_type=ZeroPointType.int32,
+        is_scale_quant=False,
+        enable_buffer_reuse=False,
+        max_input_numel=4194304,
+    ),
+    quant_mode=QuantizationMode.eager_mode,
+    sync_moe_expert_input_amax=False,
+    keep_prequantized_layers=True,
+)[0m
+[32m
+[QUARK-INFO]: In-place OPs replacement start.[0m
+[33m
+[QUARK-WARNING]: When model.config._attn_implementation != 'eager', the output of torch.nn.functional.softmax will not be quantized.[0m
+[32m
+[QUARK-INFO]: Module exclusion from quantization summary:
+|      Exclude pattern       | Number of modules excluded |
+|         lm_head.*          |             0              |
+|          lm_head           |             1              |
+[0m
+Initializing tokenizer from Qwen/Qwen3.6-27B
+[INFO] Starting quantization...
+  0%|          | 0/1345 [00:00<?, ?it/s] 43%|████▎     | 577/1345 [00:00<00:00, 5753.78it/s] 86%|████████▌ | 1153/1345 [00:00<00:00, 5392.24it/s]100%|██████████| 1345/1345 [00:00<00:00, 5410.03it/s]
+[32m
+[QUARK-INFO]: Module replacement for quantization summary:
+|            Original module             |  Number original   |  Number replaced   |
+|                 Conv2d                 |         0          |         0          |
+|                 Linear                 |        607         |        606         |
+|            ConvTranspose2d             |         0          |         0          |
+|               Embedding                |         2          |         0          |
+|              EmbeddingBag              |         0          |         0          |
+|    Qwen3_5ForConditionalGeneration     |         1          |         0          |
+|              Qwen3_5Model              |         1          |         0          |
+|           Qwen3_5VisionModel           |         1          |         0          |
+|        Qwen3_5VisionPatchEmbed         |         1          |         0          |
+|                 Conv3d                 |         1          |         0          |
+|      Qwen3_5VisionRotaryEmbedding      |         1          |         0          |
+|               ModuleList               |         2          |         0          |
+|           Qwen3_5VisionBlock           |         27         |         0          |
+|               LayerNorm                |         55         |         0          |
+|         Qwen3_5VisionAttention         |         27         |         0          |
+|            Qwen3_5VisionMLP            |         27         |         0          |
+|                GELUTanh                |         27         |         0          |
+|        Qwen3_5VisionPatchMerger        |         1          |         0          |
+|                  GELU                  |         1          |         0          |
+|            Qwen3_5TextModel            |         1          |         0          |
+|          Qwen3_5DecoderLayer           |         64         |         0          |
+|          Qwen3_5GatedDeltaNet          |         48         |         0          |
+|             SiLUActivation             |        112         |         0          |
+|                 Conv1d                 |         48         |         0          |
+|           FusedRMSNormGated            |         48         |         0          |
+|               Qwen3_5MLP               |         64         |         0          |
+|             Qwen3_5RMSNorm             |        161         |         0          |
+|            Qwen3_5Attention            |         16         |         0          |
+|       Qwen3_5TextRotaryEmbedding       |         1          |         0          |
+[0m
+[32m
+[QUARK-INFO]: In-place OPs replacement end.[0m
+[32m
+[QUARK-INFO]: Calibration start.[0m
+[32m
+[QUARK-INFO]: Calibrating all weights and biases...[0m
+Calibrating all params:   0%|          | 0/3961 [00:00<?, ?it/s]Calibrating all params:   0%|          | 13/3961 [00:01<07:47,  8.45it/s]Calibrating all params:  18%|█▊        | 719/3961 [00:01<00:05, 607.14it/s]Calibrating all params:  29%|██▊       | 1129/3961 [00:01<00:03, 864.52it/s]Calibrating all params:  36%|███▌      | 1434/3961 [00:02<00:02, 1066.69it/s]Calibrating all params:  43%|████▎     | 1701/3961 [00:02<00:01, 1244.48it/s]Calibrating all params:  49%|████▉     | 1948/3961 [00:02<00:01, 1405.74it/s]Calibrating all params:  55%|█████▌    | 2184/3961 [00:02<00:01, 1537.97it/s]Calibrating all params:  61%|██████    | 2411/3961 [00:02<00:00, 1680.61it/s]Calibrating all params:  67%|██████▋   | 2636/3961 [00:02<00:00, 1789.54it/s]Calibrating all params:  72%|███████▏  | 2858/3961 [00:02<00:00, 1887.77it/s]Calibrating all params:  78%|███████▊  | 3079/3961 [00:02<00:00, 1966.69it/s]Calibrating all params:  83%|████████▎ | 3300/3961 [00:02<00:00, 1986.02it/s]Calibrating all params:  89%|████████▉ | 3522/3961 [00:02<00:00, 2046.85it/s]Calibrating all params:  94%|█████████▍| 3740/3961 [00:03<00:00, 2076.66it/s]Calibrating all params: 100%|█████████▉| 3957/3961 [00:03<00:00, 2057.54it/s]Calibrating all params: 100%|██████████| 3961/3961 [00:03<00:00, 1238.56it/s]
+[32m
+[QUARK-INFO]: Running forward pass calibration for activations...[0m
+Calibrating activations:   0%|          | 0/15 [00:00<?, ?it/s]Calibrating activations:   7%|▋         | 1/15 [00:21<05:01, 21.54s/it]Calibrating activations:  13%|█▎        | 2/15 [00:22<02:02,  9.39s/it]Calibrating activations:  20%|██        | 3/15 [00:23<01:06,  5.55s/it]Calibrating activations:  27%|██▋       | 4/15 [00:24<00:40,  3.67s/it]Calibrating activations:  33%|███▎      | 5/15 [00:24<00:26,  2.63s/it]Calibrating activations:  40%|████      | 6/15 [00:25<00:18,  2.01s/it]Calibrating activations:  47%|████▋     | 7/15 [00:26<00:12,  1.61s/it]Calibrating activations:  53%|█████▎    | 8/15 [00:27<00:09,  1.35s/it]Calibrating activations:  60%|██████    | 9/15 [00:28<00:07,  1.18s/it]Calibrating activations:  67%|██████▋   | 10/15 [00:28<00:05,  1.06s/it]Calibrating activations:  73%|███████▎  | 11/15 [00:29<00:03,  1.02it/s]Calibrating activations:  80%|████████  | 12/15 [00:30<00:02,  1.08it/s]Calibrating activations:  87%|████████▋ | 13/15 [00:31<00:01,  1.13it/s]Calibrating activations:  93%|█████████▎| 14/15 [00:32<00:00,  1.16it/s]Calibrating activations: 100%|██████████| 15/15 [00:32<00:00,  1.19it/s]Calibrating activations: 100%|██████████| 15/15 [00:32<00:00,  2.20s/it]
+[32m
+[QUARK-INFO]: Calibration end.[0m
+[32m
+[QUARK-INFO]: Model quantization has been completed.[0m
+Realigning block scales:   0%|          | 0/606 [00:00<?, ?it/s]Realigning block scales: 100%|██████████| 606/606 [00:00<00:00, 1369476.41it/s]
+[33m
+[QUARK-WARNING]: The module: model.visual.blocks.0.attn.qkv received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
+[33m
+[QUARK-WARNING]: The module: model.visual.blocks.0.attn.proj received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
+[33m
+[QUARK-WARNING]: The module: model.visual.blocks.0.mlp.linear_fc1 received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
+[33m
+[QUARK-WARNING]: The module: model.visual.blocks.0.mlp.linear_fc2 received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
+[33m
+[QUARK-WARNING]: The module: model.visual.blocks.1.attn.qkv received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
+[33m
+[QUARK-WARNING]: The module: model.visual.blocks.1.attn.proj received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
+[33m
+[QUARK-WARNING]: The module: model.visual.blocks.1.mlp.linear_fc1 received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
+[33m
+[QUARK-WARNING]: The module: model.visual.blocks.1.mlp.linear_fc2 received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
+[33m
+[QUARK-WARNING]: The module: model.visual.blocks.2.attn.qkv received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
+[33m
+[QUARK-WARNING]: The module: model.visual.blocks.2.attn.proj received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
+[33m
+[QUARK-WARNING]: The module: model.visual.blocks.2.mlp.linear_fc1 received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
+[33m
+[QUARK-WARNING]: The module: model.visual.blocks.2.mlp.linear_fc2 received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
+[33m
+[QUARK-WARNING]: The module: model.visual.blocks.3.attn.qkv received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
+[33m
+[QUARK-WARNING]: The module: model.visual.blocks.3.attn.proj received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
+[33m
+[QUARK-WARNING]: The module: model.visual.blocks.3.mlp.linear_fc1 received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
+[33m
+[QUARK-WARNING]: The module: model.visual.blocks.3.mlp.linear_fc2 received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
+[33m
+[QUARK-WARNING]: The module: model.visual.blocks.4.attn.qkv received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
+[33m
+[QUARK-WARNING]: The module: model.visual.blocks.4.attn.proj received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
+[33m
+[QUARK-WARNING]: The module: model.visual.blocks.4.mlp.linear_fc1 received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
+[33m
+[QUARK-WARNING]: The module: model.visual.blocks.4.mlp.linear_fc2 received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
+[33m
+[QUARK-WARNING]: The module: model.visual.blocks.5.attn.qkv received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
+[33m
+[QUARK-WARNING]: The module: model.visual.blocks.5.attn.proj received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
+[33m
+[QUARK-WARNING]: The module: model.visual.blocks.5.mlp.linear_fc1 received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
+[33m
+[QUARK-WARNING]: The module: model.visual.blocks.5.mlp.linear_fc2 received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
+[33m
+[QUARK-WARNING]: The module: model.visual.blocks.6.attn.qkv received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
+[33m
+[QUARK-WARNING]: The module: model.visual.blocks.6.attn.proj received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
+[33m
+[QUARK-WARNING]: The module: model.visual.blocks.6.mlp.linear_fc1 received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
+[33m
+[QUARK-WARNING]: The module: model.visual.blocks.6.mlp.linear_fc2 received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
+[33m
+[QUARK-WARNING]: The module: model.visual.blocks.7.attn.qkv received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
+[33m
+[QUARK-WARNING]: The module: model.visual.blocks.7.attn.proj received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
+[33m
+[QUARK-WARNING]: The module: model.visual.blocks.7.mlp.linear_fc1 received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
+[33m
+[QUARK-WARNING]: The module: model.visual.blocks.7.mlp.linear_fc2 received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
+[33m
+[QUARK-WARNING]: The module: model.visual.blocks.8.attn.qkv received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
+[33m
+[QUARK-WARNING]: The module: model.visual.blocks.8.attn.proj received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
+[33m
+[QUARK-WARNING]: The module: model.visual.blocks.8.mlp.linear_fc1 received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
+[33m
+[QUARK-WARNING]: The module: model.visual.blocks.8.mlp.linear_fc2 received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
+[33m
+[QUARK-WARNING]: The module: model.visual.blocks.9.attn.qkv received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
+[33m
+[QUARK-WARNING]: The module: model.visual.blocks.9.attn.proj received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
+[33m
+[QUARK-WARNING]: The module: model.visual.blocks.9.mlp.linear_fc1 received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
+[33m
+[QUARK-WARNING]: The module: model.visual.blocks.9.mlp.linear_fc2 received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
+[33m
+[QUARK-WARNING]: The module: model.visual.blocks.10.attn.qkv received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
+[33m
+[QUARK-WARNING]: The module: model.visual.blocks.10.attn.proj received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
+[33m
+[QUARK-WARNING]: The module: model.visual.blocks.10.mlp.linear_fc1 received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
+[33m
+[QUARK-WARNING]: The module: model.visual.blocks.10.mlp.linear_fc2 received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
+[33m
+[QUARK-WARNING]: The module: model.visual.blocks.11.attn.qkv received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
+[33m
+[QUARK-WARNING]: The module: model.visual.blocks.11.attn.proj received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
+[33m
+[QUARK-WARNING]: The module: model.visual.blocks.11.mlp.linear_fc1 received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
+[33m
+[QUARK-WARNING]: The module: model.visual.blocks.11.mlp.linear_fc2 received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
+[33m
+[QUARK-WARNING]: The module: model.visual.blocks.12.attn.qkv received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
+[33m
+[QUARK-WARNING]: The module: model.visual.blocks.12.attn.proj received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
+[33m
+[QUARK-WARNING]: The module: model.visual.blocks.12.mlp.linear_fc1 received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
+[33m
+[QUARK-WARNING]: The module: model.visual.blocks.12.mlp.linear_fc2 received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
+[33m
+[QUARK-WARNING]: The module: model.visual.blocks.13.attn.qkv received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
+[33m
+[QUARK-WARNING]: The module: model.visual.blocks.13.attn.proj received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
+[33m
+[QUARK-WARNING]: The module: model.visual.blocks.13.mlp.linear_fc1 received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
+[33m
+[QUARK-WARNING]: The module: model.visual.blocks.13.mlp.linear_fc2 received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
+[33m
+[QUARK-WARNING]: The module: model.visual.blocks.14.attn.qkv received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
+[33m
+[QUARK-WARNING]: The module: model.visual.blocks.14.attn.proj received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
+[33m
+[QUARK-WARNING]: The module: model.visual.blocks.14.mlp.linear_fc1 received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
+[33m
+[QUARK-WARNING]: The module: model.visual.blocks.14.mlp.linear_fc2 received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
+[33m
+[QUARK-WARNING]: The module: model.visual.blocks.15.attn.qkv received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
+[33m
+[QUARK-WARNING]: The module: model.visual.blocks.15.attn.proj received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
+[33m
+[QUARK-WARNING]: The module: model.visual.blocks.15.mlp.linear_fc1 received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
+[33m
+[QUARK-WARNING]: The module: model.visual.blocks.15.mlp.linear_fc2 received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
+[33m
+[QUARK-WARNING]: The module: model.visual.blocks.16.attn.qkv received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
+[33m
+[QUARK-WARNING]: The module: model.visual.blocks.16.attn.proj received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
+[33m
+[QUARK-WARNING]: The module: model.visual.blocks.16.mlp.linear_fc1 received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
+[33m
+[QUARK-WARNING]: The module: model.visual.blocks.16.mlp.linear_fc2 received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
+[33m
+[QUARK-WARNING]: The module: model.visual.blocks.17.attn.qkv received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
+[33m
+[QUARK-WARNING]: The module: model.visual.blocks.17.attn.proj received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
+[33m
+[QUARK-WARNING]: The module: model.visual.blocks.17.mlp.linear_fc1 received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
+[33m
+[QUARK-WARNING]: The module: model.visual.blocks.17.mlp.linear_fc2 received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
+[33m
+[QUARK-WARNING]: The module: model.visual.blocks.18.attn.qkv received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
+[33m
+[QUARK-WARNING]: The module: model.visual.blocks.18.attn.proj received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
+[33m
+[QUARK-WARNING]: The module: model.visual.blocks.18.mlp.linear_fc1 received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
+[33m
+[QUARK-WARNING]: The module: model.visual.blocks.18.mlp.linear_fc2 received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
+[33m
+[QUARK-WARNING]: The module: model.visual.blocks.19.attn.qkv received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
+[33m
+[QUARK-WARNING]: The module: model.visual.blocks.19.attn.proj received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
+[33m
+[QUARK-WARNING]: The module: model.visual.blocks.19.mlp.linear_fc1 received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
+[33m
+[QUARK-WARNING]: The module: model.visual.blocks.19.mlp.linear_fc2 received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
+[33m
+[QUARK-WARNING]: The module: model.visual.blocks.20.attn.qkv received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
+[33m
+[QUARK-WARNING]: The module: model.visual.blocks.20.attn.proj received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
+[33m
+[QUARK-WARNING]: The module: model.visual.blocks.20.mlp.linear_fc1 received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
+[33m
+[QUARK-WARNING]: The module: model.visual.blocks.20.mlp.linear_fc2 received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
+[33m
+[QUARK-WARNING]: The module: model.visual.blocks.21.attn.qkv received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
+[33m
+[QUARK-WARNING]: The module: model.visual.blocks.21.attn.proj received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
+[33m
+[QUARK-WARNING]: The module: model.visual.blocks.21.mlp.linear_fc1 received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
+[33m
+[QUARK-WARNING]: The module: model.visual.blocks.21.mlp.linear_fc2 received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
+[33m
+[QUARK-WARNING]: The module: model.visual.blocks.22.attn.qkv received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
+[33m
+[QUARK-WARNING]: The module: model.visual.blocks.22.attn.proj received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
+[33m
+[QUARK-WARNING]: The module: model.visual.blocks.22.mlp.linear_fc1 received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
+[33m
+[QUARK-WARNING]: The module: model.visual.blocks.22.mlp.linear_fc2 received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
+[33m
+[QUARK-WARNING]: The module: model.visual.blocks.23.attn.qkv received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
+[33m
+[QUARK-WARNING]: The module: model.visual.blocks.23.attn.proj received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
+[33m
+[QUARK-WARNING]: The module: model.visual.blocks.23.mlp.linear_fc1 received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
+[33m
+[QUARK-WARNING]: The module: model.visual.blocks.23.mlp.linear_fc2 received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
+[33m
+[QUARK-WARNING]: The module: model.visual.blocks.24.attn.qkv received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
+[33m
+[QUARK-WARNING]: The module: model.visual.blocks.24.attn.proj received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
+[33m
+[QUARK-WARNING]: The module: model.visual.blocks.24.mlp.linear_fc1 received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
+[33m
+[QUARK-WARNING]: The module: model.visual.blocks.24.mlp.linear_fc2 received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
+[33m
+[QUARK-WARNING]: The module: model.visual.blocks.25.attn.qkv received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
+[33m
+[QUARK-WARNING]: The module: model.visual.blocks.25.attn.proj received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
+[33m
+[QUARK-WARNING]: The module: model.visual.blocks.25.mlp.linear_fc1 received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
+[33m
+[QUARK-WARNING]: The module: model.visual.blocks.25.mlp.linear_fc2 received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
+[33m
+[QUARK-WARNING]: The module: model.visual.blocks.26.attn.qkv received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
+[33m
+[QUARK-WARNING]: The module: model.visual.blocks.26.attn.proj received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
+[33m
+[QUARK-WARNING]: The module: model.visual.blocks.26.mlp.linear_fc1 received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
+[33m
+[QUARK-WARNING]: The module: model.visual.blocks.26.mlp.linear_fc2 received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
+[33m
+[QUARK-WARNING]: The module: model.visual.merger.linear_fc1 received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
+[33m
+[QUARK-WARNING]: The module: model.visual.merger.linear_fc2 received 0 tokens less than 0.0% of all 30720 calibration tokens.[0m
+[32m
+[QUARK-INFO]: Merging scales for the kv cache, kv_cache_group=['*k_proj', '*v_proj', '*in_proj_qkv'].[0m
+[32m
+[QUARK-INFO]: Model post process start.[0m
+[32m
+[QUARK-INFO]: Simplifying quantized operators...[0m
+[INFO] Export Quant Model.
+Preserving pre-quantized modules: 0it [00:00, ?it/s]Preserving pre-quantized modules: 0it [00:00, ?it/s]
+[32m
+[QUARK-INFO]: Real_quantized: Doing real quantization for operators...[0m
+Converting QuantLinear for export:   0%|          | 0/606 [00:00<?, ?it/s]Converting QuantLinear for export:   0%|          | 1/606 [00:00<02:00,  5.03it/s]Converting QuantLinear for export:  19%|█▉        | 116/606 [00:00<00:01, 474.57it/s]Converting QuantLinear for export:  30%|██▉       | 181/606 [00:00<00:00, 476.22it/s]Converting QuantLinear for export:  39%|███▉      | 239/606 [00:00<00:00, 458.35it/s]Converting QuantLinear for export:  48%|████▊     | 291/606 [00:00<00:00, 458.18it/s]Converting QuantLinear for export:  56%|█████▋    | 341/606 [00:00<00:00, 441.98it/s]Converting QuantLinear for export:  65%|██████▌   | 395/606 [00:00<00:00, 458.83it/s]Converting QuantLinear for export:  73%|███████▎  | 443/606 [00:01<00:00, 446.28it/s]Converting QuantLinear for export:  81%|████████  | 492/606 [00:01<00:00, 458.35it/s]Converting QuantLinear for export:  89%|████████▉ | 539/606 [00:01<00:00, 454.83it/s]Converting QuantLinear for export:  97%|█████████▋| 586/606 [00:01<00:00, 442.28it/s]Converting QuantLinear for export: 100%|██████████| 606/606 [00:01<00:00, 436.09it/s]
+[32m
+[QUARK-INFO]: Model post process end[0m
+[32m
+[QUARK-INFO]: Start exporting huggingface_format quantized model ...[0m
+Writing model shards:   0%|          | 0/1 [00:00<?, ?it/s]Writing model shards: 100%|██████████| 1/1 [04:41<00:00, 281.52s/it]Writing model shards: 100%|██████████| 1/1 [04:41<00:00, 281.52s/it]
+[32m
+[QUARK-INFO]: [patch_missing_weights] Resolved source checkpoint to: /shared/prerelease/home/cambridge/han/.cache/huggingface/hub/models--Qwen--Qwen3.6-27B/snapshots/6a9e13bd6fc8f0983b9b99948120bc37f49c13e9[0m
+[32m
+[QUARK-INFO]: [patch_missing_weights] Found 15 weight tensor(s) present in the source checkpoint at /shared/prerelease/home/cambridge/han/.cache/huggingface/hub/models--Qwen--Qwen3.6-27B/snapshots/6a9e13bd6fc8f0983b9b99948120bc37f49c13e9 but missing from the export (restoring): ['mtp.fc.weight', 'mtp.layers.0.input_layernorm.weight', 'mtp.layers.0.mlp.down_proj.weight', 'mtp.layers.0.mlp.gate_proj.weight', 'mtp.layers.0.mlp.up_proj.weight', 'mtp.layers.0.post_attention_layernorm.weight', 'mtp.layers.0.self_attn.k_norm.weight', 'mtp.layers.0.self_attn.k_proj.weight', 'mtp.layers.0.self_attn.o_proj.weight', 'mtp.layers.0.self_attn.q_norm.weight'] ...[0m
+Restoring missing weights:   0%|          | 0/15 [00:00<?, ?it/s]Restoring missing weights: 100%|██████████| 15/15 [00:00<00:00, 291.73it/s]
+[32m
+[QUARK-INFO]: [patch_missing_weights] Appended 15 weight(s) to model.safetensors.[0m
+[32m
+[QUARK-INFO]: hf_format quantized model exported to models/Qwen3.6-27B-FP8-KVFP8-ATFP8 successfully.[0m
+[32m
+[QUARK-INFO]: Successfully exported model to Safetensors format in quark mode: models/Qwen3.6-27B-FP8-KVFP8-ATFP8[0m
+[INFO] Quantization complete.
+[INFO] Simple test PPL with wikitext-2.
+  0%|          | 0/37 [00:00<?, ?it/s]  3%|▎         | 1/37 [00:02<01:19,  2.20s/it]  5%|▌         | 2/37 [00:02<00:36,  1.03s/it]  8%|▊         | 3/37 [00:05<00:59,  1.75s/it] 11%|█         | 4/37 [00:07<01:11,  2.18s/it] 14%|█▎        | 5/37 [00:10<01:20,  2.50s/it] 16%|█▌        | 6/37 [00:13<01:21,  2.61s/it] 19%|█▉        | 7/37 [00:16<01:20,  2.69s/it] 22%|██▏       | 8/37 [00:19<01:19,  2.74s/it] 24%|██▍       | 9/37 [00:22<01:17,  2.77s/it] 27%|██▋       | 10/37 [00:25<01:15,  2.80s/it] 30%|██▉       | 11/37 [00:28<01:13,  2.81s/it] 32%|███▏      | 12/37 [00:30<01:10,  2.83s/it] 35%|███▌      | 13/37 [00:33<01:08,  2.84s/it] 38%|███▊      | 14/37 [00:36<01:05,  2.84s/it] 41%|████      | 15/37 [00:39<01:02,  2.85s/it] 43%|████▎     | 16/37 [00:42<00:59,  2.85s/it] 46%|████▌     | 17/37 [00:45<00:57,  2.85s/it] 49%|████▊     | 18/37 [00:47<00:54,  2.85s/it] 51%|█████▏    | 19/37 [00:50<00:51,  2.85s/it] 54%|█████▍    | 20/37 [00:53<00:48,  2.85s/it] 57%|█████▋    | 21/37 [00:56<00:45,  2.86s/it] 59%|█████▉    | 22/37 [00:59<00:42,  2.86s/it] 62%|██████▏   | 23/37 [01:02<00:39,  2.86s/it] 65%|██████▍   | 24/37 [01:05<00:37,  2.86s/it] 68%|██████▊   | 25/37 [01:08<00:34,  2.86s/it] 70%|███████   | 26/37 [01:10<00:31,  2.86s/it] 73%|███████▎  | 27/37 [01:13<00:28,  2.86s/it] 76%|███████▌  | 28/37 [01:16<00:25,  2.86s/it] 78%|███████▊  | 29/37 [01:19<00:22,  2.85s/it] 81%|████████  | 30/37 [01:22<00:19,  2.85s/it] 84%|████████▍ | 31/37 [01:25<00:17,  2.86s/it] 86%|████████▋ | 32/37 [01:28<00:14,  2.86s/it] 89%|████████▉ | 33/37 [01:30<00:11,  2.86s/it] 92%|█████████▏| 34/37 [01:33<00:08,  2.86s/it] 95%|█████████▍| 35/37 [01:36<00:05,  2.86s/it] 97%|█████████▋| 36/37 [01:39<00:02,  2.86s/it]100%|██████████| 37/37 [01:44<00:00,  3.49s/it]100%|██████████| 37/37 [01:44<00:00,  2.82s/it]
+[INFO] Perplexity of the quantised model: 7.29962778
