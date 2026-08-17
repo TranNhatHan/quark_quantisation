@@ -2,34 +2,34 @@ import json
 import numpy as np
 
 FILES = {
-    "Qwen/Qwen3.6-27B": 
-        "results/Qwen__Qwen3.6-27B/samples_wikitext_2026-08-12T11-28-47.551818.jsonl",
+    "Qwen/Qwen3.6-27B":
+        "results/Qwen__Qwen3.6-27B/samples_wikitext_2026-08-13T15-44-04.085646.jsonl",
 
     "Qwen/Qwen3.6-27B-FP8":
-        "results/Qwen__Qwen3.6-27B-FP8/samples_wikitext_2026-08-12T11-45-30.614353.jsonl",
+        "results/Qwen__Qwen3.6-27B-FP8/samples_wikitext_2026-08-13T15-58-27.358353.jsonl",
 
     "models/Qwen3.6-27B-FP8-KVFP8-ATFP8":
-        "results/models__Qwen3.6-27B-FP8-KVFP8-ATFP8/samples_wikitext_2026-08-12T12-17-30.396761.jsonl",
+        "results/models__Qwen3.6-27B-FP8-KVFP8-ATFP8/samples_wikitext_2026-08-13T16-33-30.380889.jsonl",
 
     "models/Qwen3.6-27B-FP8-KVFP8":
-        "results/models__Qwen3.6-27B-FP8-KVFP8/samples_wikitext_2026-08-12T13-12-16.208392.jsonl",
+        "results/models__Qwen3.6-27B-FP8-KVFP8/samples_wikitext_2026-08-13T16-21-52.541479.jsonl",
 
     "models/Qwen3.6-27B-FP8":
-        "results/models__Qwen3.6-27B-FP8/samples_wikitext_2026-08-12T12-00-00.365934.jsonl",
-
-    "models/Qwen3.6-27B-MXFP4-KVFP8":
-        "results/models__Qwen3.6-27B-MXFP4-KVFP8/samples_wikitext_2026-08-12T12-47-06.770191.jsonl",
+        "results/models__Qwen3.6-27B-FP8/samples_wikitext_2026-08-13T16-10-24.355671.jsonl",
 
     "models/Qwen3.6-27B-MXFP4":
-        "results/models__Qwen3.6-27B-MXFP4/samples_wikitext_2026-08-12T12-33-02.972536.jsonl",
+        "results/models__Qwen3.6-27B-MXFP4/samples_wikitext_2026-08-13T16-45-54.805180.jsonl",
 }
 
 
 N_BOOTSTRAPS = 1000
+SEED = 67
+
+ORIGINAL_MODEL = "Qwen/Qwen3.6-27B"
 
 
-def calculate_ppl_ci(filepath, n_bootstraps=1000, seed=67):
-    """Calculate PPL and percentile bootstrap 95% CI."""
+def load_samples(filepath):
+    """Load WikiText lm_eval samples."""
 
     with open(filepath, "r") as f:
         samples = [
@@ -37,8 +37,6 @@ def calculate_ppl_ci(filepath, n_bootstraps=1000, seed=67):
             for line in f
             if line.strip()
         ]
-
-    print(f"Loaded {len(samples)} samples")
 
     log_likelihoods = np.array([
         float(doc["word_perplexity"][0])
@@ -50,103 +48,284 @@ def calculate_ppl_ci(filepath, n_bootstraps=1000, seed=67):
         for doc in samples
     ])
 
-    total_log_likelihood = np.sum(log_likelihoods)
-    total_words = np.sum(word_counts)
-
-    ppl = np.exp(
-        -total_log_likelihood / total_words
-    )
-
-    rng = np.random.default_rng(seed)
-
-    n_samples = len(samples)
-
-    bootstrap_ppl = np.empty(n_bootstraps)
-
-    for i in range(n_bootstraps):
-
-        indices = rng.integers(
-            0,
-            n_samples,
-            size=n_samples
-        )
-
-        sampled_ll = log_likelihoods[indices]
-        sampled_words = word_counts[indices]
-
-        bootstrap_ppl[i] = np.exp(
-            -np.sum(sampled_ll) / np.sum(sampled_words)
-        )
-
-    ci_lower = np.percentile(
-        bootstrap_ppl,
-        2.5
-    )
-
-    ci_upper = np.percentile(
-        bootstrap_ppl,
-        97.5
-    )
-
     return {
-        "n_samples": n_samples,
-        "total_log_likelihood": total_log_likelihood,
-        "total_words": total_words,
-        "ppl": ppl,
-        "ci_lower": ci_lower,
-        "ci_upper": ci_upper,
-        "bootstrap_ppl": bootstrap_ppl,
+        "samples": samples,
+        "log_likelihoods": log_likelihoods,
+        "word_counts": word_counts,
     }
 
-results = {}
+
+def calculate_ppl(log_likelihoods, word_counts):
+    """Calculate corpus-level perplexity."""
+
+    return np.expexp(-np.sum(log_likelihoods) / np.sum(word_counts))
+
+data = {}
 
 for model_name, filepath in FILES.items():
 
-    print("\n" + "=" * 70)
-    print(model_name)
-    print("=" * 70)
+    model_data = load_samples(filepath)
 
-    result = calculate_ppl_ci(
-        filepath,
-        n_bootstraps=N_BOOTSTRAPS,
-        seed=67
+    data[model_name] = model_data
+
+    print(
+        f"{model_name:<45} "
+        f"Loaded {len(model_data['log_likelihoods'])} samples"
     )
 
-    results[model_name] = result
+original_n = len(data[ORIGINAL_MODEL]["log_likelihoods"])
 
-    print(f"Samples:                {result['n_samples']}")
-    print(f"Total log-likelihood:   {result['total_log_likelihood']:.4f}")
-    print(f"Total words:            {result['total_words']:.0f}")
-    print(f"PPL:                    {result['ppl']:.6f}")
+for model_name, model_data in data.items():
+    if len(model_data["log_likelihoods"]) != original_n:
+        raise ValueError(
+            f"Sample count mismatch:\n"
+            f"Original: {original_n}\n"
+            f"{model_name}: "
+            f"{len(model_data['log_likelihoods'])}"
+        )
+
+rng = np.random.default_rng(SEED)
+
+n_samples = original_n
+
+# Store bootstrap PPL for every model
+bootstrap_ppl = {
+    model_name: np.empty(N_BOOTSTRAPS)
+    for model_name in FILES
+}
+
+# Store bootstrap delta PPL
+bootstrap_delta = {
+    model_name: np.empty(N_BOOTSTRAPS)
+    for model_name in FILES
+    if model_name != ORIGINAL_MODEL
+}
+
+results = {}
+
+for model_name, model_data in data.items():
+
+    ll = model_data["log_likelihoods"]
+    words = model_data["word_counts"]
+
+    ppl = calculate_ppl(ll, words)
+
+    results[model_name] = {
+        "n_samples": n_samples,
+        "total_log_likelihood": np.sum(ll),
+        "total_words": np.sum(words),
+        "ppl": ppl,
+    }
+
+
+# ------------------------------------------------------------
+# Paired bootstrap
+# ------------------------------------------------------------
+
+original_ll = data[ORIGINAL_MODEL]["log_likelihoods"]
+original_words = data[ORIGINAL_MODEL]["word_counts"]
+
+
+for i in range(N_BOOTSTRAPS):
+
+    # IMPORTANT:
+    # Same indices are used for ORIGINAL and every quantized model.
+    indices = rng.integers(
+        0,
+        n_samples,
+        size=n_samples
+    )
+
+    # --------------------------------------------------------
+    # Original model bootstrap PPL
+    # --------------------------------------------------------
+
+    original_sampled_ll = original_ll[indices]
+    original_sampled_words = original_words[indices]
+
+    original_bootstrap_ppl = calculate_ppl(
+        original_sampled_ll,
+        original_sampled_words
+    )
+
+    bootstrap_ppl[ORIGINAL_MODEL][i] = original_bootstrap_ppl
+
+    # --------------------------------------------------------
+    # Quantized models
+    # --------------------------------------------------------
+
+    for model_name, model_data in data.items():
+
+        if model_name == ORIGINAL_MODEL:
+            continue
+
+        sampled_ll = model_data["log_likelihoods"][indices]
+        sampled_words = model_data["word_counts"][indices]
+
+        model_bootstrap_ppl = calculate_ppl(
+            sampled_ll,
+            sampled_words
+        )
+
+        bootstrap_ppl[model_name][i] = model_bootstrap_ppl
+
+        # Paired bootstrap delta
+        bootstrap_delta[model_name][i] = (
+            model_bootstrap_ppl
+            - original_bootstrap_ppl
+        )
+
+
+# ============================================================
+# Calculate individual PPL confidence intervals
+# ============================================================
+
+for model_name in FILES:
+
+    bootstrap_values = bootstrap_ppl[model_name]
+
+    results[model_name]["ci_lower"] = np.percentile(
+        bootstrap_values,
+        2.5
+    )
+
+    results[model_name]["ci_upper"] = np.percentile(
+        bootstrap_values,
+        97.5
+    )
+
+
+# ============================================================
+# Calculate Delta PPL confidence intervals
+# ============================================================
+
+original_ppl = results[ORIGINAL_MODEL]["ppl"]
+
+for model_name in FILES:
+
+    if model_name == ORIGINAL_MODEL:
+        continue
+
+    quantized_ppl = results[model_name]["ppl"]
+
+    # Point estimate
+    delta_ppl = quantized_ppl - original_ppl
+
+    # 95% paired bootstrap CI
+    delta_bootstrap = bootstrap_delta[model_name]
+
+    delta_ci_lower = np.percentile(
+        delta_bootstrap,
+        2.5
+    )
+
+    delta_ci_upper = np.percentile(
+        delta_bootstrap,
+        97.5
+    )
+
+    results[model_name]["delta_ppl"] = delta_ppl
+    results[model_name]["delta_ci_lower"] = delta_ci_lower
+    results[model_name]["delta_ci_upper"] = delta_ci_upper
+
+
+# ============================================================
+# Print individual results
+# ============================================================
+
+print("\n\n" + "=" * 100)
+print("PPL RESULTS")
+print("=" * 100)
+
+for model_name, result in results.items():
+
+    print("\n" + "-" * 100)
+    print(model_name)
+    print("-" * 100)
+
+    print(
+        f"Samples:                "
+        f"{result['n_samples']}"
+    )
+
+    print(
+        f"Total log-likelihood:   "
+        f"{result['total_log_likelihood']:.4f}"
+    )
+
+    print(
+        f"Total words:            "
+        f"{result['total_words']:.0f}"
+    )
+
+    print(
+        f"PPL:                    "
+        f"{result['ppl']:.6f}"
+    )
+
     print(
         f"95% bootstrap CI:       "
         f"[{result['ci_lower']:.6f}, "
         f"{result['ci_upper']:.6f}]"
     )
-    print(f"Bootstrap samples:      {N_BOOTSTRAPS}")
+
+    if model_name != ORIGINAL_MODEL:
+
+        print(
+            f"Delta PPL:              "
+            f"{result['delta_ppl']:+.6f}"
+        )
+
+        print(
+            f"95% Delta PPL CI:       "
+            f"[{result['delta_ci_lower']:+.6f}, "
+            f"{result['delta_ci_upper']:+.6f}]"
+        )
 
 
-print("\n\n" + "=" * 90)
+# ============================================================
+# Summary table
+# ============================================================
+
+print("\n\n" + "=" * 120)
 print("SUMMARY")
-print("=" * 90)
+print("=" * 120)
 
 print(
-    f"{'Model':<40}"
+    f"{'Model':<45}"
     f"{'PPL':>12}"
-    f"{'95% CI':>30}"
+    f"{'95% PPL CI':>28}"
+    f"{'Delta PPL':>14}"
+    f"{'95% Delta CI':>30}"
 )
 
-print("-" * 90)
+print("-" * 120)
 
 for model_name, result in results.items():
 
-    ci = (
+    ppl_ci = (
         f"[{result['ci_lower']:.4f}, "
         f"{result['ci_upper']:.4f}]"
     )
 
+    if model_name == ORIGINAL_MODEL:
+
+        delta = "reference"
+        delta_ci = "reference"
+
+    else:
+
+        delta = f"{result['delta_ppl']:+.4f}"
+
+        delta_ci = (
+            f"[{result['delta_ci_lower']:+.4f}, "
+            f"{result['delta_ci_upper']:+.4f}]"
+        )
+
     print(
-        f"{model_name:<40}"
+        f"{model_name:<45}"
         f"{result['ppl']:>12.4f}"
-        f"{ci:>30}"
+        f"{ppl_ci:>28}"
+        f"{delta:>14}"
+        f"{delta_ci:>30}"
     )

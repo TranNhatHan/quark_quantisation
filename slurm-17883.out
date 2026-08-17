@@ -1,166 +1,0 @@
-[aiter] import [module_aiter_core] under /shared/prerelease/home/cambridge/han/Projects/quark-quantisation/.venv/lib/python3.12/site-packages/aiter/jit/module_aiter_core.so
-[32m
-[QUARK-INFO]: C++ kernel loading check start.[0m
-[32m
-[QUARK-INFO]: Compiling stable ABI hw_emulation extension via JIT. First-time compilation may take a few minutes...[0m
-[32m
-[QUARK-INFO]: Stable ABI hw_emulation JIT compilation complete.[0m
-[32m
-[QUARK-INFO]: C++ kernel loading/compilation is complete. Total time: 2.6252 seconds[0m
-[transformers] The fast path is not available because one of the required library is not installed. Falling back to torch implementation. To install follow https://github.com/fla-org/flash-linear-attention#installation and https://github.com/Dao-AILab/causal-conv1d
-[INFO] Loading model: Qwen/Qwen3.6-27B
-Loading weights:   0%|          | 0/1184 [00:00<?, ?it/s]Loading weights:  12%|█▏        | 137/1184 [00:00<00:00, 1365.14it/s]Loading weights:  59%|█████▊    | 694/1184 [00:00<00:00, 3829.14it/s]Loading weights:  91%|█████████ | 1078/1184 [00:00<00:00, 1138.24it/s]Loading weights: 100%|██████████| 1184/1184 [00:00<00:00, 1198.52it/s]
-Repo card metadata block was not found. Setting CardData to empty.
-[transformers] Token indices sequence length is longer than the specified maximum sequence length for this model (1043 > 512). Running this sequence through the model will result in indexing errors
-[33m
-[QUARK-WARNING]: Expanding exclude pattern ['lm_head'] to ['lm_head', 'lm_head.*'][0m
-[32m
-[QUARK-INFO]: Using weight quantization and activation dynamic quantization.[0m
-[32m
-[QUARK-INFO]: Quantizing with the quantization configuration:
-QConfig(
-    global_quant_config=QLayerConfig(
-        input_tensors=QTensorConfig(
-            dtype=Dtype.fp4,
-            observer_cls=<class 'quark.torch.quantization.observer.observer.PerBlockMXObserver'>,
-            is_dynamic=True,
-            qscheme=QSchemeType.per_group,
-            ch_axis=-1,
-            group_size=32,
-            block_size=None,
-            symmetric=None,
-            round_method=RoundType.half_even,
-            scale_type=ScaleType.float,
-            scale_format="e8m0",
-            scale_calculation_mode="even",
-            qat_spec=None,
-            mx_element_dtype=None,
-            zero_point_type=ZeroPointType.int32,
-            is_scale_quant=False,
-            enable_buffer_reuse=False,
-            max_input_numel=4194304,
-        ),
-        output_tensors=None,
-        weight=QTensorConfig(
-            dtype=Dtype.fp4,
-            observer_cls=<class 'quark.torch.quantization.observer.observer.PerBlockMXObserver'>,
-            is_dynamic=False,
-            qscheme=QSchemeType.per_group,
-            ch_axis=-1,
-            group_size=32,
-            block_size=None,
-            symmetric=None,
-            round_method=RoundType.half_even,
-            scale_type=ScaleType.float,
-            scale_format="e8m0",
-            scale_calculation_mode="even",
-            qat_spec=None,
-            mx_element_dtype=None,
-            zero_point_type=ZeroPointType.int32,
-            is_scale_quant=False,
-            enable_buffer_reuse=False,
-            max_input_numel=4194304,
-        ),
-        bias=None,
-        target_device=None,
-    ),
-    exclude=['lm_head.*', 'lm_head'],
-    algo_config=None,
-    log_severity_level=1,
-    version="0.12.post1",
-    layer_type_quant_config={},
-    layer_quant_config={},
-    kv_cache_quant_config={},
-    kv_cache_group=['*k_proj', '*v_proj'],
-    min_kv_scale=0.0,
-    kv_cache_post_rope=False,
-    shared_scale_groups=[
-    ],
-    softmax_quant_spec=None,
-    quant_mode=QuantizationMode.eager_mode,
-    sync_moe_expert_input_amax=False,
-    keep_prequantized_layers=True,
-)[0m
-[32m
-[QUARK-INFO]: In-place OPs replacement start.[0m
-[32m
-[QUARK-INFO]: Module exclusion from quantization summary:
-|      Exclude pattern       | Number of modules excluded |
-|         lm_head.*          |             0              |
-|          lm_head           |             1              |
-[0m
-Initializing tokenizer from Qwen/Qwen3.6-27B
-[INFO] Starting quantization...
-  0%|          | 0/1345 [00:00<?, ?it/s] 65%|██████▍   | 870/1345 [00:00<00:00, 8698.27it/s]100%|██████████| 1345/1345 [00:00<00:00, 8554.30it/s]
-[32m
-[QUARK-INFO]: Module replacement for quantization summary:
-|            Original module             |  Number original   |  Number replaced   |
-|                 Conv2d                 |         0          |         0          |
-|                 Linear                 |        607         |        606         |
-|            ConvTranspose2d             |         0          |         0          |
-|               Embedding                |         2          |         0          |
-|              EmbeddingBag              |         0          |         0          |
-|    Qwen3_5ForConditionalGeneration     |         1          |         0          |
-|              Qwen3_5Model              |         1          |         0          |
-|           Qwen3_5VisionModel           |         1          |         0          |
-|        Qwen3_5VisionPatchEmbed         |         1          |         0          |
-|                 Conv3d                 |         1          |         0          |
-|      Qwen3_5VisionRotaryEmbedding      |         1          |         0          |
-|               ModuleList               |         2          |         0          |
-|           Qwen3_5VisionBlock           |         27         |         0          |
-|               LayerNorm                |         55         |         0          |
-|         Qwen3_5VisionAttention         |         27         |         0          |
-|            Qwen3_5VisionMLP            |         27         |         0          |
-|                GELUTanh                |         27         |         0          |
-|        Qwen3_5VisionPatchMerger        |         1          |         0          |
-|                  GELU                  |         1          |         0          |
-|            Qwen3_5TextModel            |         1          |         0          |
-|          Qwen3_5DecoderLayer           |         64         |         0          |
-|          Qwen3_5GatedDeltaNet          |         48         |         0          |
-|             SiLUActivation             |        112         |         0          |
-|                 Conv1d                 |         48         |         0          |
-|           FusedRMSNormGated            |         48         |         0          |
-|               Qwen3_5MLP               |         64         |         0          |
-|             Qwen3_5RMSNorm             |        161         |         0          |
-|            Qwen3_5Attention            |         16         |         0          |
-|       Qwen3_5TextRotaryEmbedding       |         1          |         0          |
-[0m
-[32m
-[QUARK-INFO]: In-place OPs replacement end.[0m
-[32m
-[QUARK-INFO]: Weight calibration start.[0m
-Calibrating all params:   0%|          | 0/3769 [00:00<?, ?it/s]Calibrating all params:   0%|          | 13/3769 [00:02<12:11,  5.14it/s]Calibrating all params:  10%|█         | 393/3769 [00:02<00:16, 207.89it/s]Calibrating all params:  20%|██        | 758/3769 [00:02<00:06, 448.11it/s]Calibrating all params:  27%|██▋       | 1028/3769 [00:03<00:04, 567.36it/s]Calibrating all params:  33%|███▎      | 1232/3769 [00:03<00:03, 651.90it/s]Calibrating all params:  37%|███▋      | 1400/3769 [00:03<00:03, 699.72it/s]Calibrating all params:  41%|████      | 1541/3769 [00:03<00:02, 750.46it/s]Calibrating all params:  44%|████▍     | 1668/3769 [00:03<00:02, 796.57it/s]Calibrating all params:  47%|████▋     | 1787/3769 [00:03<00:02, 832.94it/s]Calibrating all params:  50%|█████     | 1899/3769 [00:03<00:02, 874.30it/s]Calibrating all params:  53%|█████▎    | 2009/3769 [00:04<00:01, 887.18it/s]Calibrating all params:  56%|█████▌    | 2116/3769 [00:04<00:01, 918.08it/s]Calibrating all params:  59%|█████▉    | 2229/3769 [00:04<00:01, 945.10it/s]Calibrating all params:  62%|██████▏   | 2333/3769 [00:04<00:01, 947.82it/s]Calibrating all params:  65%|██████▍   | 2442/3769 [00:04<00:01, 984.59it/s]Calibrating all params:  68%|██████▊   | 2550/3769 [00:04<00:01, 1006.70it/s]Calibrating all params:  71%|███████   | 2658/3769 [00:04<00:01, 1000.26it/s]Calibrating all params:  73%|███████▎  | 2761/3769 [00:04<00:01, 983.87it/s] Calibrating all params:  76%|███████▌  | 2862/3769 [00:04<00:00, 977.47it/s]Calibrating all params:  79%|███████▊  | 2966/3769 [00:04<00:00, 976.50it/s]Calibrating all params:  81%|████████▏ | 3066/3769 [00:05<00:00, 975.49it/s]Calibrating all params:  84%|████████▍ | 3179/3769 [00:05<00:00, 997.00it/s]Calibrating all params:  87%|████████▋ | 3280/3769 [00:05<00:00, 992.11it/s]Calibrating all params:  90%|████████▉ | 3380/3769 [00:05<00:00, 955.51it/s]Calibrating all params:  93%|█████████▎| 3490/3769 [00:05<00:00, 995.68it/s]Calibrating all params:  95%|█████████▌| 3592/3769 [00:05<00:00, 1000.61it/s]Calibrating all params:  98%|█████████▊| 3706/3769 [00:05<00:00, 1014.60it/s]Calibrating all params: 100%|██████████| 3769/3769 [00:05<00:00, 652.41it/s] 
-[32m
-[QUARK-INFO]: Weight calibration end.[0m
-[32m
-[QUARK-INFO]: Model quantization has been completed.[0m
-Realigning block scales:   0%|          | 0/606 [00:00<?, ?it/s]Realigning block scales: 100%|██████████| 606/606 [00:00<00:00, 877978.66it/s]
-[32m
-[QUARK-INFO]: Model post process start.[0m
-[32m
-[QUARK-INFO]: Simplifying quantized operators...[0m
-[INFO] Export Quant Model.
-Preserving pre-quantized modules: 0it [00:00, ?it/s]Preserving pre-quantized modules: 0it [00:00, ?it/s]
-[32m
-[QUARK-INFO]: Real_quantized: Doing real quantization for operators...[0m
-Converting QuantLinear for export:   0%|          | 0/606 [00:00<?, ?it/s]Converting QuantLinear for export:   0%|          | 1/606 [00:01<11:47,  1.17s/it]Converting QuantLinear for export:  15%|█▌        | 91/606 [00:01<00:05, 98.58it/s]Converting QuantLinear for export:  24%|██▍       | 144/606 [00:01<00:05, 91.54it/s]Converting QuantLinear for export:  29%|██▉       | 177/606 [00:02<00:04, 88.69it/s]Converting QuantLinear for export:  33%|███▎      | 200/606 [00:02<00:04, 82.68it/s]Converting QuantLinear for export:  36%|███▌      | 217/606 [00:02<00:04, 81.36it/s]Converting QuantLinear for export:  38%|███▊      | 231/606 [00:03<00:04, 78.16it/s]Converting QuantLinear for export:  40%|████      | 243/606 [00:03<00:04, 72.92it/s]Converting QuantLinear for export:  42%|████▏     | 256/606 [00:03<00:04, 72.37it/s]Converting QuantLinear for export:  44%|████▎     | 265/606 [00:03<00:04, 70.43it/s]Converting QuantLinear for export:  45%|████▌     | 274/606 [00:03<00:04, 71.64it/s]Converting QuantLinear for export:  47%|████▋     | 282/606 [00:03<00:04, 70.64it/s]Converting QuantLinear for export:  49%|████▊     | 294/606 [00:04<00:04, 73.18it/s]Converting QuantLinear for export:  50%|████▉     | 302/606 [00:04<00:04, 72.00it/s]Converting QuantLinear for export:  51%|█████▏    | 311/606 [00:04<00:04, 73.27it/s]Converting QuantLinear for export:  54%|█████▎    | 325/606 [00:04<00:03, 74.61it/s]Converting QuantLinear for export:  55%|█████▍    | 333/606 [00:04<00:03, 72.71it/s]Converting QuantLinear for export:  56%|█████▋    | 341/606 [00:04<00:03, 71.81it/s]Converting QuantLinear for export:  58%|█████▊    | 351/606 [00:04<00:03, 74.95it/s]Converting QuantLinear for export:  60%|██████    | 364/606 [00:04<00:03, 78.63it/s]Converting QuantLinear for export:  61%|██████▏   | 372/606 [00:05<00:03, 75.55it/s]Converting QuantLinear for export:  63%|██████▎   | 381/606 [00:05<00:02, 76.14it/s]Converting QuantLinear for export:  65%|██████▌   | 395/606 [00:05<00:02, 78.23it/s]Converting QuantLinear for export:  67%|██████▋   | 403/606 [00:05<00:02, 75.25it/s]Converting QuantLinear for export:  68%|██████▊   | 411/606 [00:05<00:02, 73.81it/s]Converting QuantLinear for export:  70%|██████▉   | 422/606 [00:05<00:02, 81.08it/s]Converting QuantLinear for export:  71%|███████   | 431/606 [00:05<00:02, 75.40it/s]Converting QuantLinear for export:  72%|███████▏  | 439/606 [00:05<00:02, 76.03it/s]Converting QuantLinear for export:  74%|███████▍  | 447/606 [00:06<00:02, 73.96it/s]Converting QuantLinear for export:  75%|███████▌  | 455/606 [00:06<00:02, 71.97it/s]Converting QuantLinear for export:  77%|███████▋  | 465/606 [00:06<00:02, 68.02it/s]Converting QuantLinear for export:  78%|███████▊  | 473/606 [00:06<00:01, 68.01it/s]Converting QuantLinear for export:  79%|███████▉  | 481/606 [00:06<00:01, 68.29it/s]Converting QuantLinear for export:  81%|████████  | 492/606 [00:06<00:01, 78.58it/s]Converting QuantLinear for export:  83%|████████▎ | 501/606 [00:06<00:01, 73.56it/s]Converting QuantLinear for export:  84%|████████▍ | 509/606 [00:06<00:01, 74.96it/s]Converting QuantLinear for export:  85%|████████▌ | 517/606 [00:07<00:01, 73.10it/s]Converting QuantLinear for export:  87%|████████▋ | 525/606 [00:07<00:01, 71.56it/s]Converting QuantLinear for export:  88%|████████▊ | 535/606 [00:07<00:01, 67.62it/s]Converting QuantLinear for export:  89%|████████▉ | 542/606 [00:07<00:01, 61.19it/s]Converting QuantLinear for export:  91%|█████████ | 551/606 [00:07<00:00, 65.42it/s]Converting QuantLinear for export:  93%|█████████▎| 562/606 [00:07<00:00, 76.34it/s]Converting QuantLinear for export:  94%|█████████▍| 570/606 [00:07<00:00, 75.25it/s]Converting QuantLinear for export:  95%|█████████▌| 578/606 [00:07<00:00, 71.38it/s]Converting QuantLinear for export:  97%|█████████▋| 586/606 [00:08<00:00, 70.71it/s]Converting QuantLinear for export:  98%|█████████▊| 594/606 [00:08<00:00, 69.69it/s]Converting QuantLinear for export: 100%|█████████▉| 604/606 [00:08<00:00, 68.78it/s]Converting QuantLinear for export: 100%|██████████| 606/606 [00:08<00:00, 73.17it/s]
-[32m
-[QUARK-INFO]: Model post process end[0m
-[32m
-[QUARK-INFO]: Start exporting huggingface_format quantized model ...[0m
-Writing model shards:   0%|          | 0/1 [00:00<?, ?it/s]Writing model shards: 100%|██████████| 1/1 [02:57<00:00, 177.33s/it]Writing model shards: 100%|██████████| 1/1 [02:57<00:00, 177.44s/it]
-[32m
-[QUARK-INFO]: [patch_missing_weights] Resolved source checkpoint to: /shared/prerelease/home/cambridge/han/.cache/huggingface/hub/models--Qwen--Qwen3.6-27B/snapshots/6a9e13bd6fc8f0983b9b99948120bc37f49c13e9[0m
-[32m
-[QUARK-INFO]: [patch_missing_weights] Found 15 weight tensor(s) present in the source checkpoint at /shared/prerelease/home/cambridge/han/.cache/huggingface/hub/models--Qwen--Qwen3.6-27B/snapshots/6a9e13bd6fc8f0983b9b99948120bc37f49c13e9 but missing from the export (restoring): ['mtp.fc.weight', 'mtp.layers.0.input_layernorm.weight', 'mtp.layers.0.mlp.down_proj.weight', 'mtp.layers.0.mlp.gate_proj.weight', 'mtp.layers.0.mlp.up_proj.weight', 'mtp.layers.0.post_attention_layernorm.weight', 'mtp.layers.0.self_attn.k_norm.weight', 'mtp.layers.0.self_attn.k_proj.weight', 'mtp.layers.0.self_attn.o_proj.weight', 'mtp.layers.0.self_attn.q_norm.weight'] ...[0m
-Restoring missing weights:   0%|          | 0/15 [00:00<?, ?it/s]Restoring missing weights:   7%|▋         | 1/15 [00:00<00:05,  2.77it/s]Restoring missing weights:  13%|█▎        | 2/15 [00:00<00:02,  4.47it/s]Restoring missing weights:  20%|██        | 3/15 [00:00<00:02,  5.72it/s]Restoring missing weights:  27%|██▋       | 4/15 [00:00<00:01,  6.46it/s]Restoring missing weights:  33%|███▎      | 5/15 [00:00<00:01,  7.11it/s]Restoring missing weights:  40%|████      | 6/15 [00:00<00:01,  7.37it/s]Restoring missing weights:  47%|████▋     | 7/15 [00:01<00:01,  7.57it/s]Restoring missing weights:  53%|█████▎    | 8/15 [00:01<00:01,  5.02it/s]Restoring missing weights:  80%|████████  | 12/15 [00:01<00:00, 11.32it/s]Restoring missing weights: 100%|██████████| 15/15 [00:01<00:00,  9.69it/s]
-[32m
-[QUARK-INFO]: [patch_missing_weights] Appended 15 weight(s) to model.safetensors.[0m
-[32m
-[QUARK-INFO]: hf_format quantized model exported to models/Qwen3.6-27B-MXFP4 successfully.[0m
-[32m
-[QUARK-INFO]: Successfully exported model to Safetensors format in quark mode: models/Qwen3.6-27B-MXFP4[0m
-[INFO] Quantization complete.
-[INFO] Simple test PPL with wikitext-2.
-  0%|          | 0/37 [00:00<?, ?it/s]  3%|▎         | 1/37 [01:13<44:23, 73.97s/it]  5%|▌         | 2/37 [01:16<18:40, 32.02s/it]  8%|▊         | 3/37 [01:20<10:54, 19.24s/it] 11%|█         | 4/37 [01:24<07:16, 13.23s/it] 14%|█▎        | 5/37 [01:28<05:17,  9.92s/it] 16%|█▌        | 6/37 [01:32<04:05,  7.92s/it] 19%|█▉        | 7/37 [01:36<03:19,  6.65s/it] 22%|██▏       | 8/37 [01:40<02:48,  5.82s/it] 24%|██▍       | 9/37 [01:44<02:27,  5.27s/it] 27%|██▋       | 10/37 [01:48<02:12,  4.89s/it] 30%|██▉       | 11/37 [01:52<02:00,  4.63s/it] 32%|███▏      | 12/37 [01:57<01:51,  4.46s/it] 35%|███▌      | 13/37 [02:01<01:43,  4.33s/it] 38%|███▊      | 14/37 [02:05<01:37,  4.25s/it] 41%|████      | 15/37 [02:09<01:32,  4.19s/it] 43%|████▎     | 16/37 [02:13<01:27,  4.15s/it] 46%|████▌     | 17/37 [02:17<01:22,  4.12s/it] 49%|████▊     | 18/37 [02:21<01:17,  4.10s/it] 51%|█████▏    | 19/37 [02:25<01:13,  4.08s/it] 54%|█████▍    | 20/37 [02:29<01:09,  4.08s/it] 57%|█████▋    | 21/37 [02:33<01:05,  4.07s/it] 59%|█████▉    | 22/37 [02:37<01:00,  4.07s/it] 62%|██████▏   | 23/37 [02:41<00:56,  4.06s/it] 65%|██████▍   | 24/37 [02:45<00:52,  4.06s/it] 68%|██████▊   | 25/37 [02:49<00:48,  4.06s/it] 70%|███████   | 26/37 [02:53<00:44,  4.06s/it] 73%|███████▎  | 27/37 [02:57<00:40,  4.06s/it] 76%|███████▌  | 28/37 [03:01<00:36,  4.06s/it] 78%|███████▊  | 29/37 [03:05<00:32,  4.06s/it] 81%|████████  | 30/37 [03:10<00:28,  4.06s/it] 84%|████████▍ | 31/37 [03:14<00:24,  4.06s/it] 86%|████████▋ | 32/37 [03:18<00:20,  4.06s/it] 89%|████████▉ | 33/37 [03:22<00:16,  4.06s/it] 92%|█████████▏| 34/37 [03:26<00:12,  4.05s/it] 95%|█████████▍| 35/37 [03:30<00:08,  4.05s/it] 97%|█████████▋| 36/37 [03:34<00:04,  4.05s/it]100%|██████████| 37/37 [03:38<00:00,  4.19s/it]100%|██████████| 37/37 [03:38<00:00,  5.91s/it]
-[INFO] Perplexity of the quantised model: 7.88427925

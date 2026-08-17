@@ -1,12 +1,18 @@
-from typing import Any
-
+import math
 import torch
 from datasets import load_dataset
-from torch.utils.data import DataLoader
 from tqdm import tqdm
+from typing import Any
+from torch.utils.data import DataLoader
 from transformers import AutoModelForImageTextToText, AutoModelForCausalLM, AutoTokenizer, PreTrainedModel, PreTrainedTokenizer
 from quark.torch.quantization.config.config import load_quant_algo_config_from_file
 from quark.torch import LLMTemplate, ModelQuantizer, export_safetensors, export_gguf
+
+from quark.torch.quantization.config.config import QTensorConfig, Int8PerTensorSpec
+from quark.torch.quantization.config.type import Dtype, QSchemeType, ScaleType, RoundType
+from quark.torch.quantization.observer.observer import PlaceholderObserver, PerTensorMinMaxObserver, PerGroupMinMaxObserver, PerTensorMSEObserver
+from quark.torch.quantization.config.config import QLayerConfig,QConfig
+from dataclasses import replace
 
 def get_pileval(
     tokenizer: PreTrainedTokenizer,
@@ -74,58 +80,109 @@ def quantize_model_pipeline(
     calib_dataloader: DataLoader,
     tokenizer: PreTrainedTokenizer,
 ) -> PreTrainedModel:
-    custom_autosmoothquant_config = load_quant_algo_config_from_file("qwen3_6_autosmoothquant_config.json")
-    template = LLMTemplate(
-        model_type="qwen3_6",
-        kv_layers_name=["*k_proj", "*v_proj"],
-        q_layer_name="*q_proj",
-        exclude_layers_name=["lm_head"],
-        algorithm_configs={"autosmoothquant": custom_autosmoothquant_config}
-    )
+    # custom_autosmoothquant_config = load_quant_algo_config_from_file("qwen3_6_autosmoothquant_config.json")
+    # template = LLMTemplate(
+    #     model_type="qwen3_6",
+    #     kv_layers_name=["*k_proj", "*v_proj"],
+    #     q_layer_name="*q_proj",
+    #     exclude_layers_name=["lm_head"],
+    #     # algorithm_configs={"autosmoothquant": custom_autosmoothquant_config}
+    # )
+    STATIC_FP8_PER_TENSOR_SPEC = QTensorConfig(dtype=Dtype.fp8_e4m3,
+                                    qscheme=QSchemeType.per_tensor,
+                                    observer_cls=PerTensorMinMaxObserver,
+                                    symmetric=True,
+                                    round_method=RoundType.half_even,
+                                    scale_type=ScaleType.float,
+                                    is_dynamic=False)
 
-    LLMTemplate.register_template(template)
-    template = LLMTemplate.get("qwen3_6")
-    quant_config = template.get_config(scheme="fp8", algorithm=["autosmoothquant"])
+    DYNAMIC_FP8_PER_TENSOR_SPEC = QTensorConfig(dtype=Dtype.fp8_e4m3,
+                                        qscheme=QSchemeType.per_tensor,
+                                        observer_cls=PerTensorMinMaxObserver,
+                                        symmetric=True,
+                                        round_method=RoundType.half_even,
+                                        scale_type=ScaleType.float,
+                                        is_dynamic=True)
+
+    W_FP8_A_FP8_PER_TENSOR_CONFIG = QLayerConfig(input_tensors=DYNAMIC_FP8_PER_TENSOR_SPEC,
+                                                weight=STATIC_FP8_PER_TENSOR_SPEC)
+
+    # ALGORITHM_CONFIG=SmoothQuantConfig(
+    # alpha=0.5,
+    # scale_clamp_min=0.001,
+    # scaling_layers=[
+    #     {'prev_op': 'input_layernorm', 'layers': ['self_attn.q_proj', 'self_attn.k_proj', 'self_attn.v_proj'], 'inp': 'self_attn.q_proj', 'module2inspect': 'self_attn'},
+    #     {'prev_op': 'self_attn.v_proj', 'layers': ['self_attn.o_proj'], 'inp': 'self_attn.o_proj'},
+    #     {'prev_op': 'post_attention_layernorm', 'layers': ['mlp.gate_proj', 'mlp.up_proj'], 'inp': 'mlp.gate_proj', 'module2inspect': 'mlp', 'help': 'linear 1'},
+    #     {'prev_op': 'mlp.up_proj', 'layers': ['mlp.down_proj'], 'inp': 'mlp.down_proj',   'help': 'linear 2'}],
+    # model_decoder_layers='model.layers')
+
+    quant_config = QConfig(global_quant_config=W_FP8_A_FP8_PER_TENSOR_CONFIG, exclude=["lm_head"])
+
+    # KV_CACHE_CFG = {
+    #     "*q_proj": QLayerConfig(
+    #         input_tensors=quant_config.global_quant_config.input_tensors,
+    #         weight=quant_config.global_quant_config.weight,
+    #     ),
+    #     "*k_proj": QLayerConfig(
+    #         input_tensors=quant_config.global_quant_config.input_tensors,
+    #         weight=quant_config.global_quant_config.weight,
+    #     ),
+    #     "*v_proj": QLayerConfig(
+    #         input_tensors=quant_config.global_quant_config.input_tensors,
+    #         weight=quant_config.global_quant_config.weight,
+    #     ),
+    # }
+    # quant_config = replace(quant_config, layer_quant_config=KV_CACHE_CFG)
+
+    # LLMTemplate.register_template(template)
+    # template = LLMTemplate.get("qwen3_6")
+    # quant_config = template.get_config(scheme="ptpc_fp8", kv_cache_scheme="fp8")
 
     quantizer = ModelQuantizer(quant_config, multi_device=True)
     quantized_model: PreTrainedModel = quantizer.quantize_model(model, calib_dataloader)
 
     print("[INFO] Export Quant Model.")
-    quantized_model_dir = "models/Qwen3.6-27B-FP8-ASQ"
+    quantized_model_dir = "models/Qwen3.6-27B-CFP8-SWDA"
     export_safetensors(model=quantized_model, output_dir=quantized_model_dir)
     tokenizer.save_pretrained(quantized_model_dir)
 
     return quantized_model
 
 @torch.no_grad()
-def ppl_eval(
-    model: PreTrainedModel,
-    tokenizer: PreTrainedTokenizer,
-    device: str | None,
-    seqlen_for_eval: int = 2048,
-    eval_batch_size: int = 4,
-) -> torch.Tensor:
-    testdata = load_dataset("Salesforce/wikitext", "wikitext-2-raw-v1", split="test")
-    testenc = tokenizer("\n\n".join(testdata["text"]),return_tensors="pt").input_ids.to(device)
+def ppl_eval(model, tokenizer, device: str | None, max_length: int = 4096, stride: int = 512) -> float:
+    test = load_dataset("Salesforce/wikitext", "wikitext-2-raw-v1", split="test")
+    encodings = tokenizer("\n\n".join(test["text"]), return_tensors="pt")
 
-    nsamples = testenc.numel() // seqlen_for_eval
-    total_nll = 0.0
-    total_tokens = 0
-    for start_idx in tqdm(range(0, nsamples, eval_batch_size)):
-        end_idx = min(start_idx + eval_batch_size, nsamples)
-        batch = torch.cat([testenc[:,i * seqlen_for_eval : (i + 1) * seqlen_for_eval] for i in range(start_idx, end_idx)],dim=0)
-        logits = model(batch).logits
-        shift_logits = logits[:, :-1, :].contiguous()
-        shift_labels = batch[:, 1:].contiguous()
-        loss = torch.nn.functional.cross_entropy(
-            shift_logits.view(-1, shift_logits.size(-1)),
-            shift_labels.view(-1),
-            reduction="mean",
-        )
-        num_tokens = shift_labels.numel()
-        total_nll += loss.float() * num_tokens
-        total_tokens += num_tokens
-    ppl = torch.exp(total_nll / total_tokens)
+    seq_len = encodings.input_ids.size(1)
+
+    nll_sum = 0.0
+    n_tokens = 0
+    prev_end_loc = 0
+
+    for begin_loc in tqdm(range(0, seq_len, stride)):
+        end_loc = min(begin_loc + max_length, seq_len)
+        trg_len = end_loc - prev_end_loc
+        input_ids = encodings.input_ids[:, begin_loc:end_loc].to(device)
+        target_ids = input_ids.clone()
+        target_ids[:, :-trg_len] = -100
+
+        outputs = model(input_ids, labels=target_ids)
+        neg_log_likelihood = outputs.loss
+        num_valid_tokens = (target_ids != -100).sum().item()
+
+        batch_size = target_ids.size(0)
+        num_loss_tokens = num_valid_tokens - batch_size
+
+        nll_sum += (neg_log_likelihood.item() * num_loss_tokens)
+        n_tokens += num_loss_tokens
+        prev_end_loc = end_loc
+        if end_loc == seq_len:
+            break
+
+    avg_nll = nll_sum / n_tokens
+    ppl = math.exp(avg_nll)
+
     return ppl
 
 def run_quark_fp8_example() -> None:
@@ -141,9 +198,9 @@ def run_quark_fp8_example() -> None:
     print("[INFO] Starting quantization...")
     quantized_model = quantize_model_pipeline(model, calib_dataloader, tokenizer)
     print("[INFO] Quantization complete.")
-    print("[INFO] Simple test PPL with wikitext-2.")
-    quantized_ppl = ppl_eval(quantized_model, tokenizer, device)
-    print(f"[INFO] Perplexity of the quantised model: {quantized_ppl.item():.8f}")
+    # print("[INFO] Simple test PPL with wikitext-2.")
+    # quantized_ppl = ppl_eval(quantized_model, tokenizer, device)
+    # print(f"[INFO] Perplexity of the quantised model: {quantized_ppl:.8f}")
 
 if __name__ == "__main__":
     with torch.no_grad():
