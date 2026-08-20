@@ -42,3 +42,115 @@
 
 
 [transformers] Token indices sequence length is longer than the specified maximum sequence length for this model (14252 > 512). Running this sequence through the model will result in indexing errors
+[transformers] Token indices sequence length is longer than the specified maximum sequence length for this model (14178 > 512). Running this sequence through the model will result in indexing errors
+[transformers] Token indices sequence length is longer than the specified maximum sequence length for this model (14206 > 512). Running this sequence through the model will result in indexing errors
+[transformers] Token indices sequence length is longer than the specified maximum sequence length for this model (14232 > 512). Running this sequence through the model will result in indexing errors
+[transformers] Token indices sequence length is longer than the specified maximum sequence length for this model (14220 > 512). Running this sequence through the model will result in indexing errors
+[transformers] Token indices sequence length is longer than the specified maximum sequence length for this model (14100 > 512). Running this sequence through the model will result in indexing errors
+
+╭─ Benchmarks ─────────────────────────────────────────────────────────────────╮
+│ [1… sync… (… Req:    0.0 req/s,   73.64s Lat,     1.0 Conc,      70 Comp,  … │
+│              Tok:   20.4 gen/s,  156.5 tot/s, 1300.8ms TTFT,   48.3ms ITL, … │
+│ [2… thro… (… Req:    0.1 req/s,   88.96s Lat,    10.0 Conc,      70 Comp,  … │
+│              Tok:  168.9 gen/s, 1295.8 tot/s, 5566.5ms TTFT,   55.6ms ITL, … │
+│ [2… cons… (… Req:    0.0 req/s,   81.04s Lat,     3.0 Conc,      70 Comp,  … │
+│              Tok:   55.9 gen/s,  429.0 tot/s, 1559.3ms TTFT,   53.0ms ITL, … │
+│ [2… cons… (… Req:    0.1 req/s,   86.16s Lat,     5.1 Conc,      69 Comp,  … │
+│              Tok:   89.3 gen/s,  685.5 tot/s, 1715.5ms TTFT,   56.3ms ITL, … │
+│ [2… cons… (… Req:    0.1 req/s,   85.75s Lat,     6.9 Conc,      70 Comp,  … │
+│              Tok:  121.7 gen/s,  934.1 tot/s, 1597.9ms TTFT,   56.1ms ITL, … │
+│ [2… cons… (… Req:    0.0 req/s,    0.00s Lat,     0.0 Conc,       0 Comp,  … │
+│              Tok:    0.0 gen/s,    0.0 tot/s,   0.0ms TTFT,    0.0ms ITL,  … │
+╰──────────────────────────────────────────────────────────────────────────────╯
+Generating... ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ (6/6) [ 2:53:03 < 0:00:00 ]
+
+ℹ Run Summary Info
+|=============|==========|==========|========|======|======|==========|=====|==========|==========|=====|========|
+| Benchmark   | Timings                                ||||| Input Tokens            ||| Output Tokens         |||
+| Strategy    | Start    | End      | Dur    | Warm | Cool | Comp     | Inc | Err      | Comp     | Inc | Err    |
+|             |          |          | Sec    | Sec  | Sec  | Tot      | Tot | Tot      | Tot      | Tot | Tot    |
+|-------------|----------|----------|--------|------|------|----------|-----|----------|----------|-----|--------|
+| synchronous | 18:45:39 | 20:11:33 | 5154.7 | 0.0  | 0.0  | 700692.0 | 0.0 | 0.0      | 105000.0 | 0.0 | 0.0    |
+| throughput  | 20:11:35 | 20:21:58 | 623.0  | 0.0  | 0.0  | 700695.0 | 0.0 | 0.0      | 105000.0 | 0.0 | 0.0    |
+| constant    | 20:22:27 | 20:53:46 | 1879.3 | 0.0  | 0.0  | 700697.0 | 0.0 | 0.0      | 105000.0 | 0.0 | 0.0    |
+| constant    | 20:54:04 | 21:13:24 | 1159.8 | 0.0  | 0.0  | 690683.0 | 0.0 | 0.0      | 103500.0 | 0.0 | 0.0    |
+| constant    | 21:13:51 | 21:28:15 | 863.8  | 0.0  | 0.0  | 700697.0 | 0.0 | 0.0      | 105000.0 | 0.0 | 0.0    |
+| constant    | 21:28:26 | 21:38:40 | 614.2  | 0.0  | 0.0  | 0.0      | 0.0 | 700000.0 | 0.0      | 0.0 | 7518.0 |
+|=============|==========|==========|========|======|======|==========|=====|==========|==========|=====|========|
+
+
+ℹ Text Metrics Statistics (Completed Requests)
+|=============|=========|=========|=======|========|========|========|=======|========|=========|=========|========|========|
+| Benchmark   | Input Tokens                    |||| Input Words                   |||| Input Characters                 ||||
+| Strategy    | Per Request      || Per Second    || Per Request    || Per Second    || Per Request      || Per Second     ||
+|             | Mdn     | p95     | Mdn   | Mean   | Mdn    | p95    | Mdn   | Mean   | Mdn     | p95     | Mdn    | Mean   |
+|-------------|---------|---------|-------|--------|--------|--------|-------|--------|---------|---------|--------|--------|
+| synchronous | 10010.0 | 10010.0 | 135.8 | 138.0  | 7888.0 | 7914.0 | 107.1 | 108.8  | 52996.0 | 53287.0 | 720.0  | 730.8  |
+| throughput  | 10010.0 | 10010.0 | 253.9 | 1315.8 | 7889.0 | 7908.0 | 200.1 | 1037.0 | 52990.0 | 53337.0 | 1339.5 | 6964.5 |
+| constant    | 10010.0 | 10010.0 | 383.2 | 388.8  | 7888.0 | 7923.0 | 301.9 | 306.5  | 52997.0 | 53303.0 | 2028.7 | 2058.1 |
+| constant    | 10010.0 | 10010.0 | 630.2 | 640.6  | 7889.0 | 7908.0 | 496.7 | 504.8  | 53010.0 | 53289.0 | 3337.1 | 3392.9 |
+| constant    | 10010.0 | 10010.0 | 877.7 | 898.7  | 7887.0 | 7914.0 | 691.6 | 708.2  | 53062.0 | 53373.0 | 4651.1 | 4760.0 |
+| constant    | 0.0     | 0.0     | 0.0   | 0.0    | 0.0    | 0.0    | 0.0   | 0.0    | 0.0     | 0.0     | 0.0    | 0.0    |
+|=============|=========|=========|=======|========|========|========|=======|========|=========|=========|========|========|
+| Benchmark   | Output Tokens                   |||| Output Words                  |||| Output Characters                ||||
+| Strategy    | Per Request      || Per Second    || Per Request    || Per Second    || Per Request      || Per Second     ||
+|             | Mdn     | p95     | Mdn   | Mean   | Mdn    | p95    | Mdn   | Mean   | Mdn     | p95     | Mdn    | Mean   |
+|-------------|---------|---------|-------|--------|--------|--------|-------|--------|---------|---------|--------|--------|
+| synchronous | 1500.0  | 1500.0  | 20.4  | 20.7   | 1000.0 | 1068.0 | 13.6  | 13.3   | 6227.0  | 6480.0  | 84.8   | 83.4   |
+| throughput  | 1500.0  | 1500.0  | 38.0  | 197.2  | 1001.0 | 1060.0 | 25.3  | 129.1  | 6241.0  | 6464.0  | 157.9  | 806.0  |
+| constant    | 1500.0  | 1500.0  | 57.4  | 58.3   | 999.0  | 1059.0 | 38.2  | 38.1   | 6221.0  | 6542.0  | 238.4  | 238.4  |
+| constant    | 1500.0  | 1500.0  | 94.4  | 96.0   | 1014.0 | 1071.0 | 63.5  | 63.5   | 6277.0  | 6548.0  | 395.8  | 399.9  |
+| constant    | 1500.0  | 1500.0  | 131.5 | 134.7  | 1014.0 | 1082.0 | 89.6  | 88.4   | 6233.0  | 6773.0  | 548.4  | 551.1  |
+| constant    | --      | --      | --    | --     | --     | --     | --    | --     | --      | --      | --     | --     |
+|=============|=========|=========|=======|========|========|========|=======|========|=========|=========|========|========|
+
+
+ℹ Request Token Statistics (Completed Requests)
+|=============|=========|=========|========|========|=========|=========|========|========|=========|========|
+| Benchmark   | Input Tok        || Output Tok     || Total Tok        || Stream Iter    || Output Tok      ||
+| Strategy    | Per Req          || Per Req        || Per Req          || Per Req        || Per Stream Iter ||
+|             | Mdn     | p95     | Mdn    | p95    | Mdn     | p95     | Mdn    | p95    | Mdn     | p95    |
+|-------------|---------|---------|--------|--------|---------|---------|--------|--------|---------|--------|
+| synchronous | 10010.0 | 10010.0 | 1500.0 | 1500.0 | 11510.0 | 11510.0 | 1503.0 | 1503.0 | 1.0     | 1.1    |
+| throughput  | 10010.0 | 10010.0 | 1500.0 | 1500.0 | 11510.0 | 11510.0 | 1503.0 | 1503.0 | 1.0     | 1.1    |
+| constant    | 10010.0 | 10010.0 | 1500.0 | 1500.0 | 11510.0 | 11510.0 | 1503.0 | 1503.0 | 1.0     | 1.1    |
+| constant    | 10010.0 | 10010.0 | 1500.0 | 1500.0 | 11510.0 | 11510.0 | 1503.0 | 1503.0 | 1.0     | 1.0    |
+| constant    | 10010.0 | 10010.0 | 1500.0 | 1500.0 | 11510.0 | 11510.0 | 1503.0 | 1503.0 | 1.0     | 1.1    |
+| constant    | 0.0     | 0.0     | 0.0    | 0.0    | 0.0     | 0.0     | 0.0    | 0.0    | 0.0     | 0.0    |
+|=============|=========|=========|========|========|=========|=========|========|========|=========|========|
+
+
+ℹ Request Latency Statistics (Completed Requests)
+|=============|=========|========|========|=========|========|=========|======|======|======|======|
+| Benchmark   | Request Latency || TTFT            || TTFOT           || ITL        || TPOT       ||
+| Strategy    | Sec             || ms              || ms              || ms         || ms         ||
+|             | Mdn     | p95    | Mdn    | p95     | Mdn    | p95     | Mdn  | p95  | Mdn  | p95  |
+|-------------|---------|--------|--------|---------|--------|---------|------|------|------|------|
+| synchronous | 73.7    | 73.8   | 1224.7 | 1232.0  | 1224.7 | 1232.0  | 48.3 | 48.4 | 49.1 | 49.2 |
+| throughput  | 88.7    | 96.7   | 5026.3 | 12906.1 | 5026.3 | 12906.1 | 55.8 | 58.1 | 59.1 | 64.5 |
+| constant    | 81.2    | 81.3   | 1567.5 | 1588.8  | 1567.5 | 1588.8  | 53.1 | 53.2 | 54.2 | 54.2 |
+| constant    | 86.5    | 86.6   | 1735.7 | 1764.9  | 1735.7 | 1764.9  | 56.6 | 56.6 | 57.7 | 57.7 |
+| constant    | 86.3    | 86.4   | 1613.5 | 1642.1  | 1613.5 | 1642.1  | 56.5 | 56.6 | 57.6 | 57.6 |
+| constant    | 0.0     | 0.0    | 0.0    | 0.0     | 0.0    | 0.0     | 0.0  | 0.0  | 0.0  | 0.0  |
+|=============|=========|========|========|=========|========|=========|======|======|======|======|
+
+
+ℹ Server Throughput Statistics (All Requests)
+|=============|=======|======|=========|==============|===============|==============|
+| Benchmark   | Requests             ||| Input Tokens | Output Tokens | Total Tokens |
+| Strategy    | Concurrency || Per Sec | Per Sec      | Per Sec       | Per Sec      |
+|             | Mdn   | Mean | Mean                                               ||||
+|-------------|-------|------|---------|--------------|---------------|--------------|
+| synchronous | 1.0   | 1.0  | 0.0     | 138.0        | 20.4          | 156.5        |
+| throughput  | 10.0  | 10.0 | 0.1     | 1280.7       | 168.9         | 1295.8       |
+| constant    | 3.0   | 3.0  | 0.0     | 388.6        | 55.9          | 429.0        |
+| constant    | 5.0   | 5.1  | 0.1     | 639.3        | 89.3          | 685.5        |
+| constant    | 7.0   | 6.9  | 0.1     | 889.8        | 121.7         | 934.1        |
+| constant    | 0.0   | 0.7  | 0.1     | 1142.0       | 12.3          | 1154.2       |
+|=============|=======|======|=========|==============|===============|==============|
+
+
+
+✔ Benchmarking complete, generated 6 benchmark(s)
+…   csv     : results/benchmark-mxfp4.csv
+…   html    : results/benchmark-mxfp4.html

@@ -1,15 +1,11 @@
-import torch
-from transformers import AutoModelForImageTextToText
+from transformers import AutoTokenizer, AutoModelForImageTextToText
 
-device = "cuda" if torch.cuda.is_available() else "cpu"
-model = AutoModelForImageTextToText.from_pretrained("Qwen/Qwen3.6-27B", dtype="auto", attn_implementation="sdpa").eval().to(device)
-print(model.config)
-print(model.config.to_dict().keys())
+model_path = "models/Qwen3.6-27B-CFP8-SWDA" 
+tokenizer = AutoTokenizer.from_pretrained(model_path)
+model = AutoModelForImageTextToText.from_pretrained(model_path, device_map="auto", dtype="auto")
 
-print("language model config:")
-print(model.config.language_model)
+from transformers import pipeline
 
-layer = model.model.language_model.layers[0]
-
-print(type(layer))
-print(layer)
+generator = pipeline("text-generation", model=model, tokenizer=tokenizer)
+output = generator("Once upon a time,")
+print(output)

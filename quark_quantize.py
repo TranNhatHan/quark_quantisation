@@ -10,7 +10,7 @@ from quark.torch import LLMTemplate, ModelQuantizer, export_safetensors, export_
 
 from quark.torch.quantization.config.config import QTensorConfig, Int8PerTensorSpec
 from quark.torch.quantization.config.type import Dtype, QSchemeType, ScaleType, RoundType
-from quark.torch.quantization.observer.observer import PlaceholderObserver, PerTensorMinMaxObserver, PerGroupMinMaxObserver, PerTensorMSEObserver
+from quark.torch.quantization.observer.observer import PlaceholderObserver, PerTensorMinMaxObserver, PerGroupMinMaxObserver, PerTensorMSEObserver, PerChannelMinMaxObserver
 from quark.torch.quantization.config.config import QLayerConfig,QConfig
 from dataclasses import replace
 
@@ -96,15 +96,18 @@ def quantize_model_pipeline(
                                     scale_type=ScaleType.float,
                                     is_dynamic=False)
 
-    DYNAMIC_FP8_PER_TENSOR_SPEC = QTensorConfig(dtype=Dtype.fp8_e4m3,
-                                        qscheme=QSchemeType.per_tensor,
-                                        observer_cls=PerTensorMinMaxObserver,
-                                        symmetric=True,
-                                        round_method=RoundType.half_even,
-                                        scale_type=ScaleType.float,
-                                        is_dynamic=True)
+    DYNAMIC_FP8_PER_CHANNEL_SPEC = QTensorConfig(
+        dtype=Dtype.fp8_e4m3,
+        qscheme=QSchemeType.per_channel,
+        ch_axis=0,
+        observer_cls=PerChannelMinMaxObserver,
+        symmetric=True,
+        round_method=RoundType.half_even,
+        scale_type=ScaleType.float,
+        is_dynamic=True,
+    )
 
-    W_FP8_A_FP8_PER_TENSOR_CONFIG = QLayerConfig(input_tensors=DYNAMIC_FP8_PER_TENSOR_SPEC,
+    W_FP8_A_FP8_PER_TENSOR_CONFIG = QLayerConfig(input_tensors=DYNAMIC_FP8_PER_CHANNEL_SPEC,
                                                 weight=STATIC_FP8_PER_TENSOR_SPEC)
 
     # ALGORITHM_CONFIG=SmoothQuantConfig(
