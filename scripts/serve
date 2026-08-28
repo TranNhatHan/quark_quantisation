@@ -4,10 +4,11 @@ module load rocm/7.2.3
 source .venv/bin/activate
 # export HIP_VISIBLE_DEVICES=0,1
 
-vllm --version
-
-# vllm serve Qwen3.6-27B-mxfp4 --language-model-only
-# vllm serve Qwen3.6-27B-fp8_no_kv_cache --language-model-only
-# vllm serve Qwen/Qwen3.6-27B --language-model-only
-# vllm serve Qwen3.6-27B-FP8-KVFP8-ATFP8 --language-model-only
-# vllm serve Qwen/Qwen3.6-27B-FP8 --language-model-only
+# vllm serve models/Qwen3.6-27B-FP8 --language-model-only --tensor-parallel-size 2 --gpu-memory-utilization 0.6
+# vllm serve models/Qwen3.6-27B-FP8-KVFP8 --language-model-only
+# vllm serve models/Qwen3.6-27B-FP8-KVFP8-ATFP8 --language-model-only
+# vllm serve models/Qwen3.6-27B-FP8 --language-model-only --port 8003
+# vllm serve Qwen/Qwen3.6-27B-FP8 --language-model-only --port 8000
+# vllm serve models/Qwen3.6-27B-MXFP4 --language-model-only --port 8000
+vllm serve Qwen/Qwen3.6-27B --language-model-only
+# vllm serve models/Qwen3.6-27B-CFP8-SWDA --language-model-only

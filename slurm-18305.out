@@ -1,165 +1,0 @@
-[aiter] import [module_aiter_core] under /shared/prerelease/home/cambridge/han/Projects/quark-quantisation/.venv/lib/python3.12/site-packages/aiter/jit/module_aiter_core.so
-[32m
-[QUARK-INFO]: C++ kernel loading check start.[0m
-[32m
-[QUARK-INFO]: Compiling stable ABI hw_emulation extension via JIT. First-time compilation may take a few minutes...[0m
-[92mSuccessfully preprocessed all matching files.[0m
-[32m
-[QUARK-INFO]: Stable ABI hw_emulation JIT compilation complete.[0m
-[32m
-[QUARK-INFO]: C++ kernel loading/compilation is complete. Total time: 1.1416 seconds[0m
-[transformers] The fast path is not available because one of the required library is not installed. Falling back to torch implementation. To install follow https://github.com/fla-org/flash-linear-attention#installation and https://github.com/Dao-AILab/causal-conv1d
-[INFO] Loading model: Qwen/Qwen3.6-27B
-Loading weights:   0%|          | 0/1184 [00:00<?, ?it/s]Loading weights:   7%|▋         | 78/1184 [00:00<00:01, 664.35it/s]Loading weights:  12%|█▏        | 145/1184 [00:00<00:02, 476.33it/s]Loading weights:  17%|█▋        | 202/1184 [00:00<00:02, 469.03it/s]Loading weights:  21%|██        | 251/1184 [00:00<00:02, 374.41it/s]Loading weights:  25%|██▍       | 291/1184 [00:00<00:02, 370.66it/s]Loading weights:  30%|███       | 358/1184 [00:00<00:01, 437.06it/s]Loading weights:  34%|███▍      | 404/1184 [00:00<00:01, 430.64it/s]Loading weights:  39%|███▉      | 466/1184 [00:01<00:01, 482.39it/s]Loading weights:  44%|████▎     | 516/1184 [00:01<00:01, 407.79it/s]Loading weights:  52%|█████▏    | 613/1184 [00:01<00:01, 532.30it/s]Loading weights:  57%|█████▋    | 670/1184 [00:01<00:01, 491.65it/s]Loading weights:  61%|██████    | 722/1184 [00:01<00:01, 458.04it/s]Loading weights:  65%|██████▌   | 770/1184 [00:01<00:01, 386.45it/s]Loading weights:  74%|███████▍  | 882/1184 [00:01<00:00, 547.00it/s]Loading weights:  81%|████████  | 954/1184 [00:01<00:00, 586.16it/s]Loading weights:  87%|████████▋ | 1029/1184 [00:02<00:00, 618.42it/s]Loading weights:  93%|█████████▎| 1104/1184 [00:02<00:00, 649.23it/s]Loading weights: 100%|██████████| 1184/1184 [00:02<00:00, 524.87it/s]
-Repo card metadata block was not found. Setting CardData to empty.
-[transformers] Token indices sequence length is longer than the specified maximum sequence length for this model (1043 > 512). Running this sequence through the model will result in indexing errors
-[33m
-[QUARK-WARNING]: Expanding exclude pattern ['lm_head'] to ['lm_head', 'lm_head.*'][0m
-[32m
-[QUARK-INFO]: Using weight quantization and activation dynamic quantization.[0m
-[32m
-[QUARK-INFO]: Quantizing with the quantization configuration:
-QConfig(
-    global_quant_config=QLayerConfig(
-        input_tensors=QTensorConfig(
-            dtype=Dtype.fp8_e4m3,
-            observer_cls=<class 'quark.torch.quantization.observer.observer.PerChannelMinMaxObserver'>,
-            is_dynamic=True,
-            qscheme=QSchemeType.per_channel,
-            ch_axis=0,
-            group_size=None,
-            block_size=None,
-            symmetric=True,
-            round_method=RoundType.half_even,
-            scale_type=ScaleType.float,
-            scale_format=None,
-            scale_calculation_mode=None,
-            qat_spec=None,
-            mx_element_dtype=None,
-            zero_point_type=ZeroPointType.int32,
-            is_scale_quant=False,
-            enable_buffer_reuse=False,
-            max_input_numel=4194304,
-        ),
-        output_tensors=None,
-        weight=QTensorConfig(
-            dtype=Dtype.fp8_e4m3,
-            observer_cls=<class 'quark.torch.quantization.observer.observer.PerTensorMinMaxObserver'>,
-            is_dynamic=False,
-            qscheme=QSchemeType.per_tensor,
-            ch_axis=None,
-            group_size=None,
-            block_size=None,
-            symmetric=True,
-            round_method=RoundType.half_even,
-            scale_type=ScaleType.float,
-            scale_format=None,
-            scale_calculation_mode=None,
-            qat_spec=None,
-            mx_element_dtype=None,
-            zero_point_type=ZeroPointType.int32,
-            is_scale_quant=False,
-            enable_buffer_reuse=False,
-            max_input_numel=4194304,
-        ),
-        bias=None,
-        target_device=None,
-    ),
-    exclude=['lm_head.*', 'lm_head'],
-    algo_config=None,
-    log_severity_level=1,
-    version="0.12.post1",
-    layer_type_quant_config={},
-    layer_quant_config={},
-    kv_cache_quant_config={},
-    kv_cache_group=[
-    ],
-    min_kv_scale=0.0,
-    kv_cache_post_rope=False,
-    shared_scale_groups=[
-    ],
-    softmax_quant_spec=None,
-    quant_mode=QuantizationMode.eager_mode,
-    sync_moe_expert_input_amax=False,
-    keep_prequantized_layers=True,
-)[0m
-[32m
-[QUARK-INFO]: In-place OPs replacement start.[0m
-[32m
-[QUARK-INFO]: Module exclusion from quantization summary:
-|      Exclude pattern       | Number of modules excluded |
-|         lm_head.*          |             0              |
-|          lm_head           |             1              |
-[0m
-Initializing tokenizer from Qwen/Qwen3.6-27B
-[INFO] Starting quantization...
-  0%|          | 0/1345 [00:00<?, ?it/s] 46%|████▌     | 622/1345 [00:00<00:00, 6216.46it/s] 92%|█████████▏| 1244/1345 [00:00<00:00, 6042.17it/s]100%|██████████| 1345/1345 [00:00<00:00, 6069.75it/s]
-[32m
-[QUARK-INFO]: Module replacement for quantization summary:
-|            Original module             |  Number original   |  Number replaced   |
-|                 Conv2d                 |         0          |         0          |
-|                 Linear                 |        607         |        606         |
-|            ConvTranspose2d             |         0          |         0          |
-|               Embedding                |         2          |         0          |
-|              EmbeddingBag              |         0          |         0          |
-|    Qwen3_5ForConditionalGeneration     |         1          |         0          |
-|              Qwen3_5Model              |         1          |         0          |
-|           Qwen3_5VisionModel           |         1          |         0          |
-|        Qwen3_5VisionPatchEmbed         |         1          |         0          |
-|                 Conv3d                 |         1          |         0          |
-|      Qwen3_5VisionRotaryEmbedding      |         1          |         0          |
-|               ModuleList               |         2          |         0          |
-|           Qwen3_5VisionBlock           |         27         |         0          |
-|               LayerNorm                |         55         |         0          |
-|         Qwen3_5VisionAttention         |         27         |         0          |
-|            Qwen3_5VisionMLP            |         27         |         0          |
-|                GELUTanh                |         27         |         0          |
-|        Qwen3_5VisionPatchMerger        |         1          |         0          |
-|                  GELU                  |         1          |         0          |
-|            Qwen3_5TextModel            |         1          |         0          |
-|          Qwen3_5DecoderLayer           |         64         |         0          |
-|          Qwen3_5GatedDeltaNet          |         48         |         0          |
-|             SiLUActivation             |        112         |         0          |
-|                 Conv1d                 |         48         |         0          |
-|           FusedRMSNormGated            |         48         |         0          |
-|               Qwen3_5MLP               |         64         |         0          |
-|             Qwen3_5RMSNorm             |        161         |         0          |
-|            Qwen3_5Attention            |         16         |         0          |
-|       Qwen3_5TextRotaryEmbedding       |         1          |         0          |
-[0m
-[32m
-[QUARK-INFO]: In-place OPs replacement end.[0m
-[32m
-[QUARK-INFO]: Weight calibration start.[0m
-Calibrating all params:   0%|          | 0/3769 [00:00<?, ?it/s]Calibrating all params:   0%|          | 13/3769 [00:01<06:36,  9.47it/s]Calibrating all params:  19%|█▉        | 713/3769 [00:01<00:04, 667.87it/s]Calibrating all params:  30%|██▉       | 1120/3769 [00:01<00:02, 913.17it/s]Calibrating all params:  38%|███▊      | 1417/3769 [00:01<00:02, 1092.26it/s]Calibrating all params:  44%|████▍     | 1671/3769 [00:02<00:01, 1184.95it/s]Calibrating all params:  50%|█████     | 1888/3769 [00:02<00:01, 1279.17it/s]Calibrating all params:  55%|█████▌    | 2088/3769 [00:02<00:01, 1377.99it/s]Calibrating all params:  61%|██████    | 2281/3769 [00:02<00:01, 1468.60it/s]Calibrating all params:  66%|██████▌   | 2471/3769 [00:02<00:00, 1540.94it/s]Calibrating all params:  70%|███████   | 2657/3769 [00:02<00:00, 1564.60it/s]Calibrating all params:  75%|███████▌  | 2836/3769 [00:02<00:00, 1541.88it/s]Calibrating all params:  80%|███████▉  | 3006/3769 [00:02<00:00, 1535.08it/s]Calibrating all params:  84%|████████▍ | 3171/3769 [00:02<00:00, 1559.23it/s]Calibrating all params:  88%|████████▊ | 3335/3769 [00:03<00:00, 1561.88it/s]Calibrating all params:  93%|█████████▎| 3497/3769 [00:03<00:00, 1563.23it/s]Calibrating all params:  98%|█████████▊| 3680/3769 [00:03<00:00, 1629.69it/s]Calibrating all params: 100%|██████████| 3769/3769 [00:03<00:00, 1139.01it/s]
-[32m
-[QUARK-INFO]: Weight calibration end.[0m
-[32m
-[QUARK-INFO]: Model quantization has been completed.[0m
-Realigning block scales:   0%|          | 0/606 [00:00<?, ?it/s]Realigning block scales: 100%|██████████| 606/606 [00:00<00:00, 1067064.75it/s]
-[32m
-[QUARK-INFO]: Model post process start.[0m
-[32m
-[QUARK-INFO]: Simplifying quantized operators...[0m
-[INFO] Export Quant Model.
-Preserving pre-quantized modules: 0it [00:00, ?it/s]Preserving pre-quantized modules: 0it [00:00, ?it/s]
-[32m
-[QUARK-INFO]: Real_quantized: Doing real quantization for operators...[0m
-Converting QuantLinear for export:   0%|          | 0/606 [00:00<?, ?it/s]Converting QuantLinear for export:   0%|          | 1/606 [00:00<01:48,  5.56it/s]Converting QuantLinear for export:  20%|██        | 124/606 [00:00<00:00, 518.93it/s]Converting QuantLinear for export:  31%|███       | 189/606 [00:00<00:00, 492.80it/s]Converting QuantLinear for export:  41%|████      | 246/606 [00:00<00:00, 471.94it/s]Converting QuantLinear for export:  49%|████▉     | 298/606 [00:00<00:00, 465.35it/s]Converting QuantLinear for export:  57%|█████▋    | 348/606 [00:00<00:00, 457.67it/s]Converting QuantLinear for export:  65%|██████▌   | 396/606 [00:00<00:00, 451.19it/s]Converting QuantLinear for export:  73%|███████▎  | 443/606 [00:01<00:00, 433.57it/s]Converting QuantLinear for export:  81%|████████  | 492/606 [00:01<00:00, 445.48it/s]Converting QuantLinear for export:  89%|████████▉ | 538/606 [00:01<00:00, 437.87it/s]Converting QuantLinear for export:  96%|█████████▌| 583/606 [00:01<00:00, 424.09it/s]Converting QuantLinear for export: 100%|██████████| 606/606 [00:01<00:00, 436.08it/s]
-[32m
-[QUARK-INFO]: Model post process end[0m
-[32m
-[QUARK-INFO]: Start exporting huggingface_format quantized model ...[0m
-Writing model shards:   0%|          | 0/1 [00:00<?, ?it/s]Writing model shards: 100%|██████████| 1/1 [04:48<00:00, 288.97s/it]Writing model shards: 100%|██████████| 1/1 [04:48<00:00, 288.97s/it]
-[32m
-[QUARK-INFO]: [patch_missing_weights] Resolved source checkpoint to: /shared/prerelease/home/cambridge/han/.cache/huggingface/hub/models--Qwen--Qwen3.6-27B/snapshots/6a9e13bd6fc8f0983b9b99948120bc37f49c13e9[0m
-[32m
-[QUARK-INFO]: [patch_missing_weights] Found 15 weight tensor(s) present in the source checkpoint at /shared/prerelease/home/cambridge/han/.cache/huggingface/hub/models--Qwen--Qwen3.6-27B/snapshots/6a9e13bd6fc8f0983b9b99948120bc37f49c13e9 but missing from the export (restoring): ['mtp.fc.weight', 'mtp.layers.0.input_layernorm.weight', 'mtp.layers.0.mlp.down_proj.weight', 'mtp.layers.0.mlp.gate_proj.weight', 'mtp.layers.0.mlp.up_proj.weight', 'mtp.layers.0.post_attention_layernorm.weight', 'mtp.layers.0.self_attn.k_norm.weight', 'mtp.layers.0.self_attn.k_proj.weight', 'mtp.layers.0.self_attn.o_proj.weight', 'mtp.layers.0.self_attn.q_norm.weight'] ...[0m
-Restoring missing weights:   0%|          | 0/15 [00:00<?, ?it/s]Restoring missing weights: 100%|██████████| 15/15 [00:00<00:00, 1985.00it/s]
-[32m
-[QUARK-INFO]: [patch_missing_weights] Appended 15 weight(s) to model.safetensors.[0m
-[32m
-[QUARK-INFO]: hf_format quantized model exported to models/Qwen3.6-27B-CFP8-SWDA successfully.[0m
-[32m
-[QUARK-INFO]: Successfully exported model to Safetensors format in quark mode: models/Qwen3.6-27B-CFP8-SWDA[0m
-[INFO] Quantization complete.

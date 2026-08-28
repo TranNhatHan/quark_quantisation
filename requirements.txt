@@ -1,2 +1,0 @@
-amd-quark==0.12.post1
-torch==2.11.0+gitd0c8b1f

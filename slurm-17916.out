@@ -1,6 +1,0 @@
-vllm ({'pretrained': 'models/Qwen3.6-27B-FP8', 'language_model_only': True}), gen_kwargs: ({}), limit: None, num_fewshot: None, batch_size: 8
-|Tasks|Version|     Filter     |n-shot|  Metric   |   |Value |   |Stderr|
-|-----|------:|----------------|-----:|-----------|---|-----:|---|-----:|
-|gsm8k|      3|flexible-extract|     5|exact_match|↑  |0.4845|±  |0.0138|
-|     |       |strict-match    |     5|exact_match|↑  |0.4723|±  |0.0138|
-
