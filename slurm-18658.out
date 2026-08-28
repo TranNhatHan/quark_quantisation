@@ -1,0 +1,119 @@
+✔ OpenAIHTTPBackend backend validated with model Qwen/Qwen3.6-27B-FP8
+  {'kind': 'openai_http', 'target': 'http://ppac-pl1-s24-30:8000', 'model':     
+  'Qwen/Qwen3.6-27B-FP8', 'request_format': '/v1/chat/completions', 'api_key':  
+  None, 'api_routes': {'/health': 'health', '/v1/models': 'v1/models',          
+  '/v1/completions': 'v1/completions', '/v1/chat/completions':                  
+  'v1/chat/completions', '/v1/embeddings': 'v1/embeddings', '/v1/responses':    
+  'v1/responses', '/v1/audio/transcriptions': 'v1/audio/transcriptions',        
+  '/v1/audio/translations': 'v1/audio/translations', '/pooling': 'pooling'},    
+  'timeout': None, 'timeout_connect': 5.0, 'http2': True, 'follow_redirects':   
+  True, 'verify': False, 'validate_backend': True, 'stream': True, 'extras':    
+  None, 'max_tokens': None, 'server_history': False,                            
+  'tool_call_missing_behavior': 'error_stop', 'multiturn_reasoning': False}     
+✔ Tokenizer resolved, using model 'Qwen/Qwen3.6-27B-FP8' as tokenizer
+  {'kind': 'huggingface_auto', 'model': 'Qwen/Qwen3.6-27B-FP8', 'load_kwargs':  
+  {}}                                                                           
+✔ 1 datasets resolved
+  [{'kind': 'synthetic_text', 'load_kwargs': {}, 'prompt_tokens': 10000,        
+  'prompt_tokens_stdev': None, 'prompt_tokens_min': None, 'prompt_tokens_max':  
+  None, 'output_tokens': 1500, 'output_tokens_stdev': None, 'output_tokens_min':
+  None, 'output_tokens_max': None, 'delay': None, 'delay_stdev': None,          
+  'delay_min': None, 'delay_max': None, 'turns': 1, 'tool_call_turns': [],      
+  'tools': None, 'tool_response_tokens': None, 'tool_response_tokens_stdev':    
+  None, 'tool_response_tokens_min': None, 'tool_response_tokens_max': None,     
+  'server_tool_call_turns': [], 'prefix_buckets': None}]                        
+✔ 2 preprocessors resolved
+  [{'kind': 'generative_column_mapper', 'column_mappings': None}, {'kind':      
+  'encode_media', 'audio_kwargs': {}, 'image_kwargs': {}, 'video_kwargs': {}}]  
+✔ Finalizer resolved
+  {'kind': 'generative', 'tool_call_mode': 'client'}                            
+✔ Request loader resolved with inf unique requests
+  {'kind': 'pytorch', 'samples': -1, 'shuffle': False, 'num_workers': 1}        
+✔ SweepProfile profile resolved
+  {'kind': 'sweep', 'rampup_duration': 0.0, 'warmup': {'percent': None, 'value':
+  None, 'mode': 'prefer_duration'}, 'cooldown': {'percent': None, 'value': None,
+  'mode': 'prefer_duration'}, 'sweep_size': 2, 'strategy_type': 'constant',     
+  'max_concurrency': 10}                                                        
+✔ Output formats resolved
+  [{'kind': 'csv', 'path': 'results/benchmark-ofp8.csv'}, {'kind': 'html',      
+  'path': 'results/benchmark-ofp8.html'}]                                       
+✔ Setup complete, starting benchmarks...
+
+
+
+(null): _log_init: Unable to open logfile `/var/log/slurm-llnl/slurmd.log': No such file or directory
+
+╭─ Benchmarks ─────────────────────────────────────────────────────────────────╮
+│ [0… sync… (… Req:    0.0 req/s,   88.87s Lat,     1.0 Conc,      50 Comp,  … │
+│              Tok:   16.9 gen/s,  129.7 tot/s, 5997.4ms TTFT,   55.3ms ITL, … │
+│ [0… thro… (… Req:    0.1 req/s,  185.70s Lat,    10.0 Conc,      50 Comp,  … │
+│              Tok:   81.7 gen/s,  627.3 tot/s, 27554.8ms TTFT,  105.3ms ITL,… │
+╰──────────────────────────────────────────────────────────────────────────────╯
+Generating... ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ (2/2) [ 1:29:35 < 0:00:00 ]
+
+ℹ Run Summary Info
+|=============|==========|==========|========|======|======|==========|=====|=====|=========|=====|=====|
+| Benchmark   | Timings                                ||||| Input Tokens       ||| Output Tokens     |||
+| Strategy    | Start    | End      | Dur    | Warm | Cool | Comp     | Inc | Err | Comp    | Inc | Err |
+|             |          |          | Sec    | Sec  | Sec  | Tot      | Tot | Tot | Tot     | Tot | Tot |
+|-------------|----------|----------|--------|------|------|----------|-----|-----|---------|-----|-----|
+| synchronous | 08:03:16 | 09:17:20 | 4443.8 | 0.0  | 0.0  | 500495.0 | 0.0 | 0.0 | 75000.0 | 0.0 | 0.0 |
+| throughput  | 09:17:22 | 09:32:51 | 928.9  | 0.0  | 0.0  | 500496.0 | 0.0 | 0.0 | 75000.0 | 0.0 | 0.0 |
+|=============|==========|==========|========|======|======|==========|=====|=====|=========|=====|=====|
+
+
+ℹ Text Metrics Statistics (Completed Requests)
+|=============|=========|=========|=======|=======|========|========|=======|=======|=========|=========|=======|========|
+| Benchmark   | Input Tokens                   |||| Input Words                  |||| Input Characters                ||||
+| Strategy    | Per Request      || Per Second   || Per Request    || Per Second   || Per Request      || Per Second    ||
+|             | Mdn     | p95     | Mdn   | Mean  | Mdn    | p95    | Mdn   | Mean  | Mdn     | p95     | Mdn   | Mean   |
+|-------------|---------|---------|-------|-------|--------|--------|-------|-------|---------|---------|-------|--------|
+| synchronous | 10010.0 | 10010.0 | 112.7 | 115.0 | 7887.0 | 7913.0 | 88.8  | 90.6  | 52996.0 | 53373.0 | 597.0 | 608.7  |
+| throughput  | 10010.0 | 10010.0 | 154.8 | 670.4 | 7893.0 | 7907.0 | 122.1 | 528.4 | 53009.0 | 53347.0 | 818.7 | 3550.6 |
+|=============|=========|=========|=======|=======|========|========|=======|=======|=========|=========|=======|========|
+| Benchmark   | Output Tokens                  |||| Output Words                 |||| Output Characters               ||||
+| Strategy    | Per Request      || Per Second   || Per Request    || Per Second   || Per Request      || Per Second    ||
+|             | Mdn     | p95     | Mdn   | Mean  | Mdn    | p95    | Mdn   | Mean  | Mdn     | p95     | Mdn   | Mean   |
+|-------------|---------|---------|-------|-------|--------|--------|-------|-------|---------|---------|-------|--------|
+| synchronous | 1500.0  | 1500.0  | 16.9  | 17.2  | 995.0  | 1036.0 | 11.2  | 11.3  | 6146.0  | 6486.0  | 69.2  | 70.2   |
+| throughput  | 1500.0  | 1500.0  | 23.2  | 100.5 | 989.0  | 1081.0 | 15.0  | 66.4  | 6160.0  | 6472.0  | 95.2  | 411.4  |
+|=============|=========|=========|=======|=======|========|========|=======|=======|=========|=========|=======|========|
+
+
+ℹ Request Token Statistics (Completed Requests)
+|=============|=========|=========|========|========|=========|=========|========|========|=========|========|
+| Benchmark   | Input Tok        || Output Tok     || Total Tok        || Stream Iter    || Output Tok      ||
+| Strategy    | Per Req          || Per Req        || Per Req          || Per Req        || Per Stream Iter ||
+|             | Mdn     | p95     | Mdn    | p95    | Mdn     | p95     | Mdn    | p95    | Mdn     | p95    |
+|-------------|---------|---------|--------|--------|---------|---------|--------|--------|---------|--------|
+| synchronous | 10010.0 | 10010.0 | 1500.0 | 1500.0 | 11510.0 | 11510.0 | 1503.0 | 1503.0 | 1.0     | 1.1    |
+| throughput  | 10010.0 | 10010.0 | 1500.0 | 1500.0 | 11510.0 | 11510.0 | 1503.0 | 1503.0 | 1.0     | 1.1    |
+|=============|=========|=========|========|========|=========|=========|========|========|=========|========|
+
+
+ℹ Request Latency Statistics (Completed Requests)
+|=============|=========|========|=========|=========|=========|=========|=======|=======|=======|=======|
+| Benchmark   | Request Latency || TTFT             || TTFOT            || ITL          || TPOT         ||
+| Strategy    | Sec             || ms               || ms               || ms           || ms           ||
+|             | Mdn     | p95    | Mdn     | p95     | Mdn     | p95     | Mdn   | p95   | Mdn   | p95   |
+|-------------|---------|--------|---------|---------|---------|---------|-------|-------|-------|-------|
+| synchronous | 88.8    | 89.0   | 5957.8  | 6046.9  | 5957.8  | 6046.9  | 55.3  | 55.4  | 59.2  | 59.3  |
+| throughput  | 186.5   | 220.4  | 25311.1 | 62828.8 | 25311.1 | 62828.8 | 107.3 | 115.1 | 124.4 | 146.9 |
+|=============|=========|========|=========|=========|=========|=========|=======|=======|=======|=======|
+
+
+ℹ Server Throughput Statistics (All Requests)
+|=============|=======|======|=========|==============|===============|==============|
+| Benchmark   | Requests             ||| Input Tokens | Output Tokens | Total Tokens |
+| Strategy    | Concurrency || Per Sec | Per Sec      | Per Sec       | Per Sec      |
+|             | Mdn   | Mean | Mean                                               ||||
+|-------------|-------|------|---------|--------------|---------------|--------------|
+| synchronous | 1.0   | 1.0  | 0.0     | 115.0        | 16.9          | 129.7        |
+| throughput  | 10.0  | 10.0 | 0.1     | 618.6        | 81.7          | 627.3        |
+|=============|=======|======|=========|==============|===============|==============|
+
+
+
+✔ Benchmarking complete, generated 2 benchmark(s)
+…   csv     : results/benchmark-ofp8.csv
+…   html    : results/benchmark-ofp8.html
